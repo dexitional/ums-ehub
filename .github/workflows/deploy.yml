@@ -1,8 +1,20 @@
-name: mlk-ehub-deploy
-on: push
+name: mlk-frontend-deploy
+on: 
+  push:
+    branches: [main]
 jobs:
   sample-job:
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello World!"
+      - name: Deploy Frontend
+        uses: appleboy/ssh-action@v0.1.2
+        with: 
+          host: ${{secrets.MLK_HOST}}
+          key: ${{secrets.MLK_KEY}}
+          username: ${{secrets.MLK_USER}}
+
+          script: |
+            mkdir test
+            cd test
+            git clone https://github.com/dexitional/ums-ehub.git
+            echo 'Deployment Succesful to Digital Ocean'
