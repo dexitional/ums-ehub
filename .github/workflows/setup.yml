@@ -1,14 +1,13 @@
 name: mlk-frontend-setup
 on: 
-  push:
-    branches: [master]
+  workflow_dispatch:
 jobs:
   stage-frontend:
     env:
       GITHUB_TOKEN: ${{ secrets.PRODUCT_DEPLOY_SECRET }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Frontend
+      - name: Stage Frontend
         uses: appleboy/ssh-action@v0.1.2
         with: 
           host: ${{secrets.MLK_HOST}}
@@ -17,8 +16,7 @@ jobs:
 
           script: |
             cd /var/www/html/ums/frontend
-            git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./
-            cd frontend
+            git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ../frontend
             npm i 
             echo 'Deployment Succesful to Digital Ocean' 
               
