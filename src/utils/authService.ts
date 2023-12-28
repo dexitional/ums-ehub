@@ -1,0 +1,112 @@
+import axios from "axios";
+import { JwtPayload, jwtDecode } from "jwt-decode"
+import { StoreState } from "./typings";
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
+import Cookies from 'universal-cookie';
+import Service from '../utils/evsService'
+
+const cookies = new Cookies(null, { path: '/' });
+const { REACT_APP_API_URL } = import.meta.env;
+
+export const useUserStore = create<StoreState>()(
+  persist(
+    (set, get) => ({
+        user: null,
+        message: null, 
+        loading: false,
+        isLoggedIn : !!get()?.user,
+        isAuthenticated : () => !!get()?.user,
+        lasChosen: null,
+        search: '',
+
+        loadUserData: async() => {  
+          const storageToken = cookies.get("@Auth:token")
+          if (storageToken) {
+            const userData = await jwtDecode<JwtPayload>(storageToken)
+            set({ user: userData })
+          } else {
+            set({ user: get().user })
+          }
+        },
+
+        loadStudentVote: async() => {  
+           const user =  get().user;
+           const data = await Service.fetchVote(user?.user?.tag);
+           if(data?.length) set({ lasChosen: data && data[0] })
+           else set({ lasChosen: null })
+        },
+
+        lasChoose: async (data) => {  
+          set({ lasChosen: data })
+        },
+
+        setSearch: async (data) => {  
+          set({ search: data })
+        },
+
+        logout: () => {
+          cookies.remove("@Auth:token");
+          set({ user:null, lasChosen: null })
+        }, 
+
+        withCredential : async (username, password) => {
+            try {
+              set({ message:null, loading: true })
+              const res = await axios.post(`${REACT_APP_API_URL}/auth/credential`, {
+                username: username,
+                password: password,
+              });
+              const resp = res.data
+              if(resp.success){
+                // localStorage.setItem("@Auth:token", resp.token);
+                cookies.set("@Auth:token", resp.token)
+                set({ user:resp.data, loading: false })
+              } else {
+                set({ message:resp.message, loading: false })
+                setTimeout( async() => set({ message:null }), 4000)
+              }
+              
+            } catch (err) {
+              set({ message:err.message, loading: false })
+              setTimeout( async() => set({ message:null }), 4000)
+            }
+        },
+
+        
+        withGoogle : async (providerId,email) => {
+          try {
+            set({ message:null, loading: true })
+            const res = await axios.post(`${REACT_APP_API_URL}/auth/google`, {
+              providerId,
+              email,
+            });
+            
+            const resp = res.data
+            if(resp.success){
+              // localStorage.setItem("@Auth:token", resp.token);
+              cookies.set("@Auth:token", resp.token)
+              set({ user:resp.data, loading: false })
+             
+            } else {
+              set({ message:resp.message, loading: false })
+              setTimeout( async() => set({ message:null }), 4000)
+            }
+            
+          } catch (err) {
+            set({ message:err.message, loading: false })
+            setTimeout( async() => set({ message:null }), 4000)
+          }
+        } 
+
+      }),
+    {
+      name: '@Auth', // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+    },
+  ),
+)
+
+
+
+
