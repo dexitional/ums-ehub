@@ -21,6 +21,8 @@ jobs:
             git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./frontend
             cd frontend
             npm i --force
+            npm build
+            NODE_ENV=production pm2 start npm --name ums-ehub -- run start -- -p 5020
             echo 'Deployment Succesful to Digital Ocean' 
               
             
