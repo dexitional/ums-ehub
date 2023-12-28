@@ -1,7 +1,7 @@
 name: mlk-frontend-deploy
 on: 
   push:
-    branches: [main]
+    branches: [master]
 jobs:
   sample-job:
     runs-on: ubuntu-latest
