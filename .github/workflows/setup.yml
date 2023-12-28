@@ -15,8 +15,9 @@ jobs:
           username: ${{secrets.MLK_USER}}
 
           script: |
-            cd /var/www/html/ums/frontend
-            git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ../frontend
+            cd /var/www/html/ums
+            git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./frontend
+            cd frontend
             npm i 
             echo 'Deployment Succesful to Digital Ocean' 
               
