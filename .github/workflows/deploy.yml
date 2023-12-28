@@ -16,5 +16,6 @@ jobs:
           script: |
             mkdir test
             cd test
-            git clone https://github.com/dexitional/ums-ehub.git
-            echo 'Deployment Succesful to Digital Ocean'
+            git clone git+https://${{secrets.PRODUCT_DEPLOY_SECRET}}@github.com/dexitional/ums-ehub.git@master#egg=ums-ehub
+            echo 'Deployment Succesful to Digital Ocean' 
+            
