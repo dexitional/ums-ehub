@@ -16,9 +16,11 @@ jobs:
 
           script: |
             cd /var/www/html/ums
+            rm -rf frontend.bak
+            mv frontend frontend.bak
             git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./frontend
             cd frontend
-            npm i 
+            npm i --force
             echo 'Deployment Succesful to Digital Ocean' 
               
             
