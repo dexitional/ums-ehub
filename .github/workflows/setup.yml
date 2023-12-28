@@ -3,7 +3,7 @@ on:
   push:
     branches: [master]
 jobs:
-  deploy-job:
+  stage-frontend:
     env:
       GITHUB_TOKEN: ${{ secrets.PRODUCT_DEPLOY_SECRET }}
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
 
           script: |
             cd /var/www/html/ums/frontend
-            git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./frontend
+            git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./
             cd frontend
             npm i 
             echo 'Deployment Succesful to Digital Ocean' 

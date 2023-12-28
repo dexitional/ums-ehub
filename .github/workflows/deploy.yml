@@ -1,7 +1,7 @@
 name: mlk-frontend-deploy
 on: 
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   deploy-job:
     env:
@@ -21,4 +21,3 @@ jobs:
             git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./test
             echo 'Deployment Succesful to Digital Ocean' 
               
-            
