@@ -3,7 +3,9 @@ on:
   push:
     branches: [master]
 jobs:
-  sample-job:
+  deploy-job:
+    env:
+      GITHUB_TOKEN: ${{ secrets.PRODUCT_DEPLOY_SECRET }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Frontend
@@ -16,6 +18,6 @@ jobs:
           script: |
             mkdir test
             cd test
-            git clone https://${{secrets.PRODUCT_DEPLOY_SECRET}}@github.com/dexitional/ums-ehub.git@master#egg=ums-ehub
+            git clone https://dexitional:$GITHUB_TOKEN@github.com/ums-ehub.git
             echo 'Deployment Succesful to Digital Ocean' 
             
