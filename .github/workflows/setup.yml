@@ -22,6 +22,7 @@ jobs:
             cd frontend
             npm i --force
             export NODE_OPTIONS=--max-old-space-size=2048
+            npm run build
             nginx -s reload
             echo 'Frontend Deployment Succesful!' 
               
