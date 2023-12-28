@@ -20,4 +20,5 @@ jobs:
             cd test
             git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./test
             echo 'Deployment Succesful to Digital Ocean' 
+              
             
