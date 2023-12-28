@@ -78,7 +78,7 @@ function Login() {
                 <img src={Logo} alt="" className="h-[8rem]"/>
             </div>
             <div className="pl-10 text-white space-y-10">
-                <h2 className="text-[1.24rem] font-bold text-primary-accent tracking-wider">All College Services placed in one location for easy access.</h2>
+                <h2 className="px-4 py-1 text-[1.24rem] font-bold rounded-md bg-primary-dark/70 text-primary-accent/90 tracking-wider">All College Services placed in one location for easy access.</h2>
                 <ul className="space-y-4 text-white">
                     <li className="flex items-center space-x-2">
                         <img src={Adinkra} alt="" className="h-4"/>
