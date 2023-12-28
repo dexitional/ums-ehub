@@ -22,6 +22,7 @@ jobs:
             cd frontend
             npm i --force
             npm run build
+            nginx -s reload
             echo 'Frontend Deployment Succesful!' 
               
             

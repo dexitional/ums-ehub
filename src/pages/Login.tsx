@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 // import Logo from '../assets/img/logo_portalbr_.png'
 import Logo from '../assets/img/logo/mlk/logo.png'
 // @ts-ignore
-import Adinkra from '../assets/img/adinkra-bullet.png'
+// import Adinkra from '../assets/img/adinkra-bullet.png'
+import Adinkra from '../assets/img/logo/mlk/logo.png'
 // @ts-ignore
 import SafeGuard from '../assets/img/icon-national-id.png'
 import { FcGoogle, FcLock, FcSupport } from 'react-icons/fc';
@@ -81,19 +82,19 @@ function Login() {
                 <h2 className="px-4 py-1 text-[1.24rem] font-bold rounded-md bg-primary-dark/70 text-primary-accent/90 tracking-wider">All College Services placed in one location for easy access.</h2>
                 <ul className="space-y-4 text-white">
                     <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-4"/>
+                        <img src={Adinkra} alt="" className="h-6"/>
                         <span className="text-[1.2rem] font-bold">Easy access to Admission Management System.</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-4"/>
+                        <img src={Adinkra} alt="" className="h-6"/>
                         <span className="text-[1.2rem] font-bold">Easy access to Academic Management System.</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-4"/>
+                        <img src={Adinkra} alt="" className="h-6"/>
                         <span className="text-[1.2rem] font-bold">Easy access to Financial Management System.</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                        <img src={Adinkra} alt="" className="h-4"/>
+                        <img src={Adinkra} alt="" className="h-6"/>
                         <span className="text-[1.2rem] font-bold">Easy access to Student Portal Services.</span>
                     </li>
                     
