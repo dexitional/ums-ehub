@@ -21,7 +21,7 @@ jobs:
             git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./frontend
             cd frontend
             npm i --force
-            npm run build
+            export NODE_OPTIONS=--max-old-space-size=2048
             nginx -s reload
             echo 'Frontend Deployment Succesful!' 
               
