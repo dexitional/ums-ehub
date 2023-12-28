@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // @ts-ignore
-import Logo from '../assets/img/logo_portalbr_.png'
+// import Logo from '../assets/img/logo_portalbr_.png'
+import Logo from '../assets/img/logo/mlk/logo.png'
 // @ts-ignore
 import Adinkra from '../assets/img/adinkra-bullet.png'
 // @ts-ignore
@@ -69,40 +70,50 @@ function Login() {
   },[])
   
   return (
-    <div className="w-full h-full bg-[#263876]">
+    <div className="w-full h-full bg-primary">
       <main className="mx-auto h-screen w-full md:max-w-7xl flex flex-col justify-center md:flex-row">
         <section className="md:py-8 flex-1 hidden md:flex flex-col items-start justify-start md:space-y-28">
             <div>
-                <img src={Logo} alt="" className="h-[6.5rem]"/>
+                {/* <img src={Logo} alt="" className="h-[6.5rem]"/> */}
+                <img src={Logo} alt="" className="h-[8rem]"/>
             </div>
             <div className="pl-10 text-white space-y-10">
-                <h2 className="text-[1.24rem] font-bold text-white tracking-wider">All University Services placed in one location for easy access.</h2>
-                <ul className="space-y-4 text-[#ffee1f]">
+                <h2 className="text-[1.24rem] font-bold text-primary-accent tracking-wider">All College Services placed in one location for easy access.</h2>
+                <ul className="space-y-4 text-white">
                     <li className="flex items-center space-x-2">
                         <img src={Adinkra} alt="" className="h-4"/>
-                        <span className="text-[1.2rem] font-bold">Easy access to ELECTA Voting Services.</span>
+                        <span className="text-[1.2rem] font-bold">Easy access to Admission Management System.</span>
                     </li>
                     <li className="flex items-center space-x-2">
                         <img src={Adinkra} alt="" className="h-4"/>
-                        <span className="text-[1.2rem] font-bold">Easy access to HR Management Services.</span>
+                        <span className="text-[1.2rem] font-bold">Easy access to Academic Management System.</span>
                     </li>
                     <li className="flex items-center space-x-2">
+                        <img src={Adinkra} alt="" className="h-4"/>
+                        <span className="text-[1.2rem] font-bold">Easy access to Financial Management System.</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                        <img src={Adinkra} alt="" className="h-4"/>
+                        <span className="text-[1.2rem] font-bold">Easy access to Student Portal Services.</span>
+                    </li>
+                    
+                   {/* <li className="flex items-center space-x-2">
                         <img src={Adinkra} alt="" className="h-4"/>
                         <span className="text-[1.2rem] font-bold">Easy access to Helpdesk & Support Management Services.</span>
                     </li>
                     <li className="flex items-center space-x-2">
                         <img src={Adinkra} alt="" className="h-4"/>
                         <span className="text-[1.2rem] font-bold">Easy access to UCC Artificial Intelligence ( AI )</span>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </section>
-        <section className="mx-2 my-1 py-2 shadow rounded-t-xl border-[3px] border-blue-50/20 backdrop-blur-lg bg-blue-950/50 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-bottom flex md:hidden items-center justify-center">
+        <section className="mx-2 my-1 py-2 shadow rounded-t-xl border-[3px] border-primary/20 backdrop-blur-lg bg-primary-dark/50 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-bottom flex md:hidden items-center justify-center">
            <img src={Logo} alt="" className="h-10 w-fit"/>
         </section>
-        <section className="m-2 my-1 md:my-10 md:mx-4 md:w-[28rem] shadow rounded-b-xl md:rounded-xl border-[3px] border-blue-50/20 backdrop-blur-lg bg-blue-950/50 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-bottom flex flex-col justify-between overflow-y-scroll scrollbar-hide">
+        <section className="m-2 my-1 md:my-10 md:mx-4 md:w-[28rem] rounded-b-xl md:rounded-xl border-[3px] border-primary-dark/20 backdrop-blur-lg bg-primary-dark/20 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-bottom flex flex-col justify-between overflow-y-scroll scrollbar-hide">
             <div className="p-6 flex-1 flex flex-col items-center">
-                <h1 className="my-4 md:my-10 text-3xl md:text-4xl text-white">Single-Sign-On</h1>
+                <h1 className="my-4 md:my-10 text-3xl md:text-4xl text-white">MLK Unified Portal</h1>
                 <img src={SafeGuard} alt="" className="h-20 md:h-24" />
                 <div className="my-6 md:my-14 w-full space-y-8">
                     {/* Message */}
@@ -120,7 +131,7 @@ function Login() {
                             render={renderProps => (
                               <button onClick={renderProps.onClick} disabled={renderProps.disabled} className={`${showStudentForm || showSSOForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-white font-bold tracking-wider`}>
                                 <FcGoogle className="h-6 w-6"/>
-                                <span className="text-sm md:text-base">Sign In with UCC Staff Email</span>
+                                <span className="text-sm md:text-base">Sign In with MLK Staff Email</span>
                               </button>
                             )}
                             onSuccess={authenticateGoogle}
@@ -129,23 +140,23 @@ function Login() {
                             hostedDomain={'ucc.edu.gh'}
                         />
                         
-                        <button onClick={()=> setShowSSOForm(true)} className={`${showSSOForm || showStudentForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full items-center space-x-4 shadow rounded bg-blue-200 font-bold tracking-wider`}>
+                        <button onClick={()=> setShowSSOForm(true)} className={`${showSSOForm || showStudentForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
                             <FcLock className="h-6 w-6"/>
                             <span className="text-sm md:text-base">Sign In with SSO Credentials</span>
                         </button>
-                        <button onClick={()=> setShowStudentForm(true)} className={`${showSSOForm || showStudentForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full items-center space-x-4 shadow rounded bg-blue-200 font-bold tracking-wider`}>
-                            <ImProfile className="h-6 w-6 text-blue-950"/>
+                        <button onClick={()=> setShowStudentForm(true)} className={`${showSSOForm || showStudentForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
+                            <ImProfile className="h-6 w-6 text-primary-dark"/>
                             <span className="text-sm md:text-base">Sign In with Student Access</span>
                         </button>
                     </div>
 
                     {/* Forms */}
-                    <form onSubmit={authenticateCredential} className={`${showStudentForm || showSSOForm ? 'flex':'hidden'} mx-auto py-4 px-3 md:p-4 md:w-[90%] rounded-xl border-[3px] border-blue-50/20 bg-blue-50/5 flex-col space-y-4 text-white text-lg`}>
+                    <form onSubmit={authenticateCredential} className={`${showStudentForm || showSSOForm ? 'flex':'hidden'} mx-auto py-4 px-3 md:p-4 md:w-[90%] rounded-xl border-[3px] border-primary/20 bg-primary/5 flex-col space-y-4 text-white text-lg`}>
                         <div>
-                           <input type="text" name="username" value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Registration Number' : 'Identity' }`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-blue-50/20 focus:border-blue-50/20 bg-blue-950/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-blue-50/60 placeholder:uppercase" />
+                           <input type="text" name="username" value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Registration Number' : 'Identity' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-primary/60 placeholder:uppercase" />
                         </div>
                         <div>
-                           <input type="password" name="password" value={form.password} onChange={onChange} placeholder={`Password`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-blue-50/20 focus:border-blue-50/20 bg-blue-950/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-blue-50/60 placeholder:uppercase" />
+                           <input type="password" name="password" value={form.password} onChange={onChange} placeholder={`Password`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-primary/60 placeholder:uppercase" />
                         </div>
                         <button type="submit" className="py-2.5 px-4 md:px-10 w-full flex items-center justify-center space-x-4 shadow rounded bg-[#c9bc24] font-bold tracking-wider">
                             <FaLock className="h-4 w-4 text-gray-800"/>
@@ -160,7 +171,7 @@ function Login() {
                 
             </div>
             <div className="h-14 w-full flex items-center justify-center">
-                <p className="text-white text-xs font-medium">Copyright © {new Date().getFullYear()} UCC.</p>
+                <p className="text-white text-xs font-medium">Copyright © {new Date().getFullYear()} MLK.</p>
             </div>
         </section>
       </main>

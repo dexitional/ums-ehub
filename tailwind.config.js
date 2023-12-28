@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 export default {
   content: [
     "./index.html",
@@ -6,15 +9,19 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#008e46',
+          dark: '#045B16',
+          accent: '#e67f37'
+        },
+      }
     },
     fontFamily: {
       'poppins': ["'Poppins'", 'sans-serif'],
       'roboto': ["'Roboto'", 'sans-serif'],
       'noto': ["'Noto Sans'", 'sans-serif'],
     },
-    colors: {
-      'primary': 'blue-900'
-    }
   },
   plugins: [
     require('@tailwindcss/typography'),
