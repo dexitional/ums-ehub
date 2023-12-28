@@ -16,7 +16,7 @@ jobs:
           username: ${{secrets.MLK_USER}}
 
           script: |
-            mkdir test
+            mkdir -r test
             cd test
             git clone https://dexitional:$GITHUB_TOKEN@github.com/dexitional/ums-ehub.git ./test
             echo 'Deployment Succesful to Digital Ocean' 
