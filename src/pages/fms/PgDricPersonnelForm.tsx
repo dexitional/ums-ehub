@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SubPageTitle from '../../components/dric/SubPageTitle'
+import SubPageTitle from '../../components/hrs/SubPageTitle'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import Service from '../../utils/fmsService'

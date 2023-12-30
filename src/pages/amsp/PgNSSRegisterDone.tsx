@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react'
 import { useUserStore } from '../../utils/authService'
 import { BsArrowUpRightCircle } from 'react-icons/bs'
 import { Link, useLoaderData } from 'react-router-dom'
-import NSSInstructCard from '../../components/nss/NSSInstructCard'
+import NSSInstructCard from '../../components/aisp/AISPInstructCard'
 import Service from '../../utils/hrsService'
 
 type Props = {}
