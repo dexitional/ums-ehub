@@ -1,13 +1,13 @@
 import React from 'react'
 import { FaEnvelope, FaGlobe, FaNewspaper, FaPhone } from 'react-icons/fa'
 import { MdLocationOn } from 'react-icons/md'
-import SubPageTitle from '../../components/dric/SubPageTitle'
+import SubPageTitle from '../../components/hrs/SubPageTitle'
 // @ts-ignore
 import Logo from '../../assets/img/logo/ucc/logo.png'
 import { FcDepartment } from 'react-icons/fc'
 import { Link, useLoaderData } from 'react-router-dom'
 import { TbEdit } from 'react-icons/tb'
-import Service from '../../utils/dricService'
+import Service from '../../utils/aisService'
 import moment from 'moment'
 
 type Props = {}

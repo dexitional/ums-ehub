@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/dric/PageTitle'
-import PersonnelCardItem from '../../components/dric/PersonnelCardItem'
-import PersonnelListView from '../../components/dric/PersonnelListView'
-import Service from '../../utils/dricService'
+import PageTitle from '../../components/hrs/PageTitle'
+import PersonnelCardItem from '../../components/hrs/PersonnelCardItem'
+import PersonnelListView from '../../components/hrs/PersonnelListView'
+import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
 
 type Props = {}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SubPageTitle from '../../components/dric/SubPageTitle'
+import SubPageTitle from '../../components/hrs/SubPageTitle'
 // @ts-ignore
 import Logo from '../../assets/img/logo/ucc/logo.png'
 import { MdEditDocument, MdLocalActivity, MdLocationOn, MdOutlineNumbers } from 'react-icons/md'
@@ -9,7 +9,7 @@ import { VscGroupByRefType } from 'react-icons/vsc'
 import { FcViewDetails } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
 import { TbEdit } from 'react-icons/tb'
-import Service from '../../utils/dricService'
+import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
 import moment from 'moment'
 

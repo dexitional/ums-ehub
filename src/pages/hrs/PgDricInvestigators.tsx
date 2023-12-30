@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/dric/PageTitle'
-import FunderCardItem from '../../components/dric/FunderCardItem'
-import FunderListView from '../../components/dric/FunderListView'
-import InvestigatorCardItem from '../../components/dric/InvestigatorCardItem'
-import InvestigatorListView from '../../components/dric/InvestigatorListView'
-import Service from '../../utils/dricService'
+import PageTitle from '../../components/hrs/PageTitle'
+import FunderCardItem from '../../components/hrs/FunderCardItem'
+import FunderListView from '../../components/hrs/FunderListView'
+import InvestigatorCardItem from '../../components/hrs/InvestigatorCardItem'
+import InvestigatorListView from '../../components/hrs/InvestigatorListView'
+import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
 
 type Props = {}

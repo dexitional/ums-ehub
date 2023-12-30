@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import PageTitle from '../../components/dric/PageTitle'
-import RoleListView from '../../components/dric/RoleListView'
-import Service from '../../utils/dricService'
+import PageTitle from '../../components/hrs/PageTitle'
+import RoleListView from '../../components/hrs/RoleListView'
+import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
 
 type Props = {}

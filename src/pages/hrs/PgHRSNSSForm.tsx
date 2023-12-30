@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, redirect, useLoaderData, useNavigate, useNavigation } from 'react-router-dom'
 import Service from '../../utils/hrsService'
-import Asterix from '../../components/nss/Asterix'
+import Asterix from '../../components/hrsp/Asterix'
 import moment from 'moment'
 
 type Props = {}

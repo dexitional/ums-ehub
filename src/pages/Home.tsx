@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react'
 // @ts-ignore
 import Logo from '../assets/img/logo_portalbr_.png'
-import { MdBallot, MdContactSupport, MdGroup, MdGroups2, MdMeetingRoom, MdOutlineSupportAgent, MdPermIdentity } from 'react-icons/md'
-import { GiArtificialIntelligence, GiChart, GiHamburger, GiHamburgerMenu, GiHouseKeys, GiLetterBomb, GiLockSpy, GiLockedDoor, GiRamProfile, GiVote } from 'react-icons/gi'
+import { MdMeetingRoom, MdOutlineSupportAgent } from 'react-icons/md'
+import { GiHouseKeys, GiHumanTarget, GiLetterBomb, GiLockedDoor, GiVote } from 'react-icons/gi'
 import AppCard from '../components/AppCard'
 import { ImProfile } from 'react-icons/im'
-import { FcCustomerSupport, FcOnlineSupport } from 'react-icons/fc'
-import { FaChartArea, FaFileContract, FaShopify } from 'react-icons/fa'
+import { FaFileContract } from 'react-icons/fa'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ServiceCard from '../components/ServiceCard'
-import { IoStatsChart } from 'react-icons/io5'
 import { LiaVoteYeaSolid } from "react-icons/lia";
 // import { useAuth } from '../utils/authService'
-import { useNavigate } from 'react-router'
 import { useUserStore } from '../utils/authService'
-import { FaUsersBetweenLines, FaUsersViewfinder } from 'react-icons/fa6'
+import { FaUsersViewfinder } from 'react-icons/fa6'
+import { IoStatsChart } from 'react-icons/io5'
+import { SiCashapp } from 'react-icons/si'
+import { HiAcademicCap } from "react-icons/hi2";
+import { PiStudentFill } from 'react-icons/pi'
 
 function Home() {
   
@@ -27,14 +28,13 @@ function Home() {
         <Header />
         <main className="w-full flex-1 flex flex-col overflow-y-scroll">
           <section className="mx-auto py-6 w-full max-w-6xl space-y-2">
-             <h1 className="px-6 md:px-0 text-zinc-500 font-medium md:font-semibold md:text-xl">Browse By Services</h1>
+             <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Services</h1>
              <div className="p-3 md:p-0 w-full bg-blue-50/50 md:bg-transparent grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-4">
-                { user?.user?.group_id == 1 && <ServiceCard title="Voting | Best UCC Lecturer" Icon={LiaVoteYeaSolid} link="/las/dash" /> }
-                { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'evs') && <ServiceCard title="General Elections Portal" Icon={GiVote} link="" /> }
-                { [3].includes(user?.user?.group_id) && <ServiceCard title="National Service Portal" Icon={FaUsersViewfinder} link="/nss/dash" /> }
-                {/* <ServiceCard title="Office keys reports & logs" Icon={GiHouseKeys} link="" />
-                <ServiceCard title="Data Statistics Request" Icon={IoStatsChart} link="" />
-                <ServiceCard title="Staff Attendance Report" Icon={FaChartArea} link="" /> */}
+                {/* <ServiceCard title="General Elections Portal" Icon={GiVote} link="" />  */}
+                <ServiceCard title="Student Portal System" Icon={FaUsersViewfinder} link="/aisp" />
+                {/* <ServiceCard title="Staff Portal System" Icon={FaUsersViewfinder} link="#" /> */}
+                <ServiceCard title="Admission Portal System" Icon={FaUsersViewfinder} link="" />
+                <ServiceCard title="Single-Sign-On (SSO)" Icon={MdOutlineSupportAgent} link="" />
                 <ServiceCard title="Support tickets & Request" Icon={MdOutlineSupportAgent} link="" />
                 {/* <ServiceCard title="Setup SSO on Account" Icon={GiLockedDoor} link="" />
                 <ServiceCard title="Community Marketplace" Icon={FaShopify} link="" />
@@ -42,7 +42,7 @@ function Home() {
              </div>
           </section>
           <section className="mx-auto py-6 w-full max-w-6xl space-y-4">
-             <h1 className="px-6 md:px-0 text-zinc-500 font-medium md:font-semibold md:text-xl">Browse By Apps</h1>
+             <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Apps</h1>
              <div className="p-3 md:p-6 w-full bg-slate-50 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                  
                   { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'evs') &&
@@ -53,29 +53,6 @@ function Home() {
                       links={[
                         { title:'General Elections Portal', url:'#'},
                         // { title:'New Setup', url:'#'},
-                      ]} 
-                  />
-                  }
-
-                  { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'las') &&
-                  <AppCard 
-                      title="BexLecturer System"
-                      desc="Elect Best University Lecturer & Staff for the year by shortlisting and voting." 
-                      Icon={LiaVoteYeaSolid} 
-                      links={[
-                        { title:'Voting | Best UCC Lecturer', url:'/las/dash'},
-                        // { title:'Goto Application', url:'/las/dash'},
-                      ]} 
-                  />
-                  }
-
-                  { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'hrs') &&
-                  <AppCard 
-                      title="HRMS Admin System"
-                      desc="Manage staff records, leave, promotions & reports." 
-                      Icon={ImProfile} 
-                      links={[
-                        { title:'Goto application', url:'/hrs/nss'},
                       ]} 
                   />
                   }
@@ -102,63 +79,53 @@ function Home() {
                   />
                   }
                   
-                  { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'key') &&
-                  <AppCard 
-                      title="Keys Management system"
-                      desc="Manage office key profiles, their requests and submissions." 
-                      Icon={GiHouseKeys} 
-                      links={[
-                        { title:'Goto application', url:'#'},
-                      ]} 
-                  />
-                  }
-
-                  {/* 
-                  <AppCard 
-                      title="UCC AI"
-                      desc="Intelligent personal assistant for staff and students." 
-                      Icon={GiArtificialIntelligence} 
-                      links={[
-                        { title:'Meet Nii !!', url:'#'},
-                      ]} 
-                  />
-
-                   */}
-
-                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'sso') &&
+                
                  <AppCard 
+                    title="Admission Management System &reg;"
+                    desc="Manage new admission applications and new enrolments." 
+                    Icon={PiStudentFill} 
+                    links={[
+                      { title:'Goto Application', url:'#'},
+                    ]} 
+                 />
+
+                 <AppCard 
+                    title="Academic Management System &reg;"
+                    desc="Manage academic records, registration, assessment & graduation." 
+                    Icon={HiAcademicCap} 
+                    links={[
+                      { title:'Goto Application', url:'#'},
+                    ]} 
+                 />
+
+                 <AppCard 
+                    title="Finance Management System &reg;"
+                    desc="Manage student financial records, payments, bills, charges and other transactions." 
+                    Icon={SiCashapp} 
+                    links={[
+                      { title:'Goto Application', url:'#'},
+                    ]} 
+                 />
+
+                 <AppCard 
+                    title="HR Management System &reg;"
+                    desc="Manage staff records, leave, promotions & reports." 
+                    Icon={ImProfile} 
+                    links={[
+                      { title:'Goto Application', url:'#'},
+                    ]} 
+                 />
+
+                
+                {/* <AppCard 
                     title="Single-Sign-On System"
                     desc="Manage user accounts and application access controls." 
                     Icon={GiLockedDoor} 
                     links={[
                       { title:'Goto Application', url:''},
                     ]} 
-                 />
-                 }
+                 /> */}
 
-                
-                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'vet') &&
-                 <AppCard 
-                    title="SRC Nomination & Vetting System"
-                    desc="Manage election nomination filings and vetting processes." 
-                    Icon={FaFileContract} 
-                    links={[
-                      { title:'View admin console', url:'#'},
-                    ]} 
-                 />
-                 }
-
-
-                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'dric') &&
-                 <AppCard 
-                    title="DRIC Project+ &reg;"
-                    desc="Manage DRIC Projects and business processes and concerns." 
-                    Icon={FaFileContract} 
-                    links={[
-                      { title:'Goto Application', url:'/dric/dash'},
-                    ]} 
-                 />
-                 }
 
                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'leta') &&
                  <AppCard 

@@ -1,5 +1,5 @@
 import React from 'react'
-import PageTitle from '../../components/dric/PageTitle'
+import PageTitle from '../../components/hrs/PageTitle'
 import ReportListView from '../../components/hrs/ReportListView'
 
 type Props = {}

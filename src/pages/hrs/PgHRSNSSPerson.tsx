@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SubPageTitle from '../../components/dric/SubPageTitle'
+import SubPageTitle from '../../components/hrs/SubPageTitle'
 // @ts-ignore
 import Logo from '../../assets/img/logo/ucc/logo.png'
 import { MdLocationOn, MdOutlineFiberPin, MdOutlineMarkEmailUnread } from 'react-icons/md'
@@ -9,7 +9,7 @@ import { useLoaderData } from 'react-router'
 import { Link } from 'react-router-dom'
 import { TbEdit, TbHomeCheck } from 'react-icons/tb'
 import moment from 'moment'
-import NSSBioCard from '../../components/nss/NSSBioCard'
+import AISPBioCard from '../../components/aisp/AISPBioCard'
 import { ImProfile } from 'react-icons/im'
 import { FaRegAddressCard } from 'react-icons/fa6'
 import { BsCalendarRange } from 'react-icons/bs'
@@ -66,19 +66,19 @@ function PgHRSNSSPerson({}: Props) {
              <div className="p-2 md:py-4 md:px-6 flex flex-col space-y-3 md:space-y-6 border rounded-md md:rounded-xl bg-white">
                <div className="md:pl-6 space-y-4">
                   <div className="space-y-2">
-                    <NSSBioCard label="Full Name" value={`${data.fname} ${data.mname && data.mname+' '}${data.lname}`} Icon={ImProfile} />
-                    <NSSBioCard label="Gender" value={data.gender == 'M' ? 'MALE':'FEMALE'} Icon={FaTransgender} />
-                    <NSSBioCard label="Date of Birth" value={data.dob && moment(data.dob).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
-                    <NSSBioCard label="Hometown" value={data.hometown || 'Not Set'} Icon={TbHomeCheck} />
-                    <NSSBioCard label="Phone Number" value={data.mobile || 'Not Set'} Icon={FaPhoneAlt} />
-                    <NSSBioCard label="Email Address" value={data.email?.toUpperCase() || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
-                    <NSSBioCard label="Residential Address" value={data.address.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
-                    <NSSBioCard label="NSS Number" value={data.nss_no} Icon={MdOutlineFiberPin} />
-                    <NSSBioCard label="NSS Start Period" value={data.start_date && moment(data.start_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />
-                    <NSSBioCard label="NSS End Period" value={data.end_date && moment(data.end_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />
-                    <NSSBioCard label="Assigned Department" value={data.department || 'Not Set'} Icon={RiCommunityLine} />
-                    <NSSBioCard label="Ezwich Number" value={data.ezwich_no || 'Not Set'} Icon={BiMoneyWithdraw} />
-                    <NSSBioCard label="Emergency Contact Information" value={data.emergency_contact || 'Not Set'} Icon={BiMoneyWithdraw} />
+                    <AISPBioCard label="Full Name" value={`${data.fname} ${data.mname && data.mname+' '}${data.lname}`} Icon={ImProfile} />
+                    <AISPBioCard label="Gender" value={data.gender == 'M' ? 'MALE':'FEMALE'} Icon={FaTransgender} />
+                    <AISPBioCard label="Date of Birth" value={data.dob && moment(data.dob).format('MMMM DD, YYYY').toUpperCase() || 'Not Set'} Icon={FaRegCalendar} />
+                    <AISPBioCard label="Hometown" value={data.hometown || 'Not Set'} Icon={TbHomeCheck} />
+                    <AISPBioCard label="Phone Number" value={data.mobile || 'Not Set'} Icon={FaPhoneAlt} />
+                    <AISPBioCard label="Email Address" value={data.email?.toUpperCase() || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
+                    <AISPBioCard label="Residential Address" value={data.address.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
+                    <AISPBioCard label="NSS Number" value={data.nss_no} Icon={MdOutlineFiberPin} />
+                    <AISPBioCard label="NSS Start Period" value={data.start_date && moment(data.start_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />
+                    <AISPBioCard label="NSS End Period" value={data.end_date && moment(data.end_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />
+                    <AISPBioCard label="Assigned Department" value={data.department || 'Not Set'} Icon={RiCommunityLine} />
+                    <AISPBioCard label="Ezwich Number" value={data.ezwich_no || 'Not Set'} Icon={BiMoneyWithdraw} />
+                    <AISPBioCard label="Emergency Contact Information" value={data.emergency_contact || 'Not Set'} Icon={BiMoneyWithdraw} />
                   </div>
                 </div>
              </div>

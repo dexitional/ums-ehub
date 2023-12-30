@@ -1,9 +1,6 @@
 import React from 'react'
-import FunderListItem from './FunderListItem'
-import ProjectListItem from './ProjectListItem'
-import RoleListItem from './RoleListItem'
 import { SiMicrosoftexcel } from "react-icons/si";
-import Service from '../../utils/dricService';
+import Service from '../../utils/aisService';
 import { exportToExcel } from 'react-json-to-excel';
 import toast from 'react-hot-toast';
 import moment from 'moment'

@@ -9,7 +9,7 @@ function Footer() {
             <div>Privacy Policy</div>
             <div>Terms of Use</div>
             <div>Security</div>
-            <div>&copy;2023 UCC</div>
+            <div>&copy;2023 MLK</div>
         </div>
         </div>
     </footer>
