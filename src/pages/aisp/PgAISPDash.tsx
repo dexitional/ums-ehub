@@ -55,7 +55,7 @@ function PgAISPDash({}: Props) {
       <Link to={`/nss/notices`}>
         <div className="relative px-6  h-1 mx-auto rounded-full bg-gradient-to-l from-primary/90 via-primary/50 to-white shadow-lg">
             <p className="px-2 py-0.5 md:px-3 md:py-1 absolute top-1 right-1 rounded-b-md bg-primary/80 text-white text-xs md:text-sm font-bold tracking-widest flex items-center space-x-2">
-              <span>MLK NOTICES MESSAGES</span>
+              <span>MLK NOTICES</span>
               <BsArrowUpRightCircle className="h-5 w-5"/>
             </p>
         </div>
