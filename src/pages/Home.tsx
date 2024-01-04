@@ -94,7 +94,7 @@ function Home() {
                     desc="Manage academic records, registration, assessment & graduation." 
                     Icon={HiAcademicCap} 
                     links={[
-                      { title:'Goto Application', url:'#'},
+                      { title:'Goto Application', url:'/ais/students'},
                     ]} 
                  />
 

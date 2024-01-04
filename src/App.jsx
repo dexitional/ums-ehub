@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import { Toaster } from 'react-hot-toast';
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { useUserStore } from './utils/authService';
-import PgLASSettings from './pages/las/PgLASSettings';
 import AISPPager from './components/aisp/AISPPager';
 import AISPLayout from './components/aisp/AISPLayout';
 import PgAISPProfile,{ loader as nssProfileLoader} from './pages/aisp/PgAISPProfile';
@@ -18,6 +17,15 @@ import PgAISPService, { loader as nssServiceLoader } from './pages/aisp/PgAISPSe
 import PgAISPServiceForm, { loader as nssServiceFormLoader, action as nssServiceFormAction } from './pages/aisp/PgAISPServiceForm';
 import PgAISPPasswordForm, { action as nssPasswordFormAction } from './pages/aisp/PgAISPPasswordForm';
 import PgAISPDash, { loader as nssDashLoader } from './pages/aisp/PgAISPDash';
+import PgAISPFees from './pages/aisp/PgAISPFees';
+
+import AISLayout from './components/ais/AISLayout';
+import PgAISDash from './pages/ais/PgAISDash';
+import PgAISRoles from './pages/ais/PgAISRoles';
+import PgAISReport from './pages/ais/PgAISReport';
+import PgAISStudents, { loader as studentsLoader } from './pages/ais/PgAISStudents';
+import PgAISStudentForm, { loader as studentFormLoader } from './pages/ais/PgAISStudentForm';
+import PgAISStudent, { loader as studentLoader } from './pages/ais/PgAISStudent';
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 
@@ -84,6 +92,19 @@ function App() {
                   element: <PgAISPNotice />,
                   loader: nssNoticeLoader
                },
+               
+               // Fees & Charges
+               {  path:'fees', 
+                  element: <PgAISPFees />,
+                  loader: nssNoticesLoader,
+               },
+               { 
+                  path:'fees/:noticeId', 
+                  element: <PgAISPNotice />,
+                  loader: nssNoticeLoader
+               },
+
+
 
                // Services
                {  path:'services', 
@@ -121,6 +142,59 @@ function App() {
 
             ]
          },
+
+         {
+            path: "ais",
+            element: <AISLayout />,
+            // action: chosenAction,
+            children: [
+               {  element: <PgAISDash />,
+                  // children: [
+                  //    {  
+                  //       path:'dash',
+                  //       element: <LASByGroup />, 
+                  //    }
+                  // ] 
+               },
+               {  path:'roles', 
+                  element: <PgAISRoles />,
+               },
+               {  path:'reports', 
+                  element: <PgAISReport />,
+                  //loader: lasRoleLoader,
+                  index:true
+               },
+
+               // Student Module 
+               { 
+                  path:'students', 
+                  element: <PgAISStudents />,
+                  loader: studentsLoader,
+               },
+               { 
+                  path:'students/create', 
+                  element: <PgAISStudentForm />,
+                  loader: studentFormLoader,
+                  // action: nssMainFormAction
+               },
+               { 
+                  path:'students/:studentId', 
+                  element: <PgAISStudent />,
+                  loader: studentLoader
+               },
+               { 
+                  path:'students/:studentId/destroy', 
+                  // action: nssMainDestroy,
+               },
+               { 
+                  path:'students/:studentId/edit', 
+                  element: <PgAISStudentForm />, 
+                  // loader: nssMainFormLoader,
+                  // action: nssMainFormAction
+               },
+            ]
+         },
+
 
          
       ]

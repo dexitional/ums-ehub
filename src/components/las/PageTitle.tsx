@@ -15,7 +15,7 @@ type Props = {
 function PageTitle({ title,createtext,createlink, setView,view }: Props) {
   return (
     <div className="flex items-center justify-between">
-        <h1 className="text-sm md:text-xl text-blue-950/70 font-medium uppercase tracking-widest">{title}</h1>
+        <h1 className="text-sm md:text-xl text-primary/70 font-medium uppercase tracking-widest">{title}</h1>
         <div className="flex items-center space-x-2">
         <div></div>
         { view ? (

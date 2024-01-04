@@ -26,9 +26,6 @@ type Props = {}
   const [ view, setView ] = useState('card')
   const { data: { data, totalPages,totalData }, page, search }: any = useLoaderData()
   
-  //const { search,setSearch } = useUserStore(state =>state )
-  console.log(totalData,totalPages,page,search)
-  
   return (
     <div className="md:pl-10 p-4 md:p-6 space-y-4 md:space-y-10">
       <PageTitle title="NSS Module" createtext="New" createlink="create" pages={totalPages} setView={setView} view={view} />
