@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import PageTitle from '../../components/las/PageTitle'
-import Service from '../../utils/hrsService'
+import Service from '../../utils/aisService'
 import { redirect, useLoaderData } from 'react-router'
-import NoticeListView from '../../components/aisp/NoticeListView'
 import FeeListView from '../../components/aisp/FeeListView'
+import { useUserStore } from '../../utils/authService'
 
 type Props = {}
 
 export async function loader() {
-  const data = await Service.fetchNSSNotices();
+  const user = useUserStore.getState().user;
+  const data = await Service.fetchStudentFinance(user?.user?.tag);
   return { data }
 }
 
 function PgAISPFees({}: Props) {
   const { data }: any = useLoaderData()
+  console.log(data)
 
   return (
     <div className="md:pl-10 p-4 md:p-6 space-y-4 md:space-y-10">

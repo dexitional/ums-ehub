@@ -22,7 +22,7 @@ function Home() {
   
   // const { user } = useAuth();
   const { user } = useUserStore(state => state)
-  
+  console.log(user)
   return (
     <div className="w-full h-screen flex flex-col justify-between">
         <Header />
@@ -31,16 +31,18 @@ function Home() {
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Services</h1>
              <div className="p-3 md:p-0 w-full bg-blue-50/50 md:bg-transparent grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-4">
                 {/* <ServiceCard title="General Elections Portal" Icon={GiVote} link="" />  */}
-                <ServiceCard title="Student Portal System" Icon={FaUsersViewfinder} link="/aisp" />
+                { [1].includes(user?.user?.group_id) && <ServiceCard title="Student Portal System" Icon={FaUsersViewfinder} link="/aisp" />}
                 {/* <ServiceCard title="Staff Portal System" Icon={FaUsersViewfinder} link="#" /> */}
-                <ServiceCard title="Admission Portal System" Icon={FaUsersViewfinder} link="" />
-                <ServiceCard title="Single-Sign-On (SSO)" Icon={MdOutlineSupportAgent} link="" />
+                {[3].includes(user?.user?.group_id) && <ServiceCard title="Admission Portal System" Icon={FaUsersViewfinder} link="" />}
+                { [4,2].includes(user?.user?.group_id) && <ServiceCard title="Single-Sign-On (SSO)" Icon={MdOutlineSupportAgent} link="" /> }
                 <ServiceCard title="Support tickets & Request" Icon={MdOutlineSupportAgent} link="" />
                 {/* <ServiceCard title="Setup SSO on Account" Icon={GiLockedDoor} link="" />
                 <ServiceCard title="Community Marketplace" Icon={FaShopify} link="" />
                 <ServiceCard title="UCC Alumni Network" Icon={MdGroups2} link="" /> */}
              </div>
           </section>
+
+          { [2,4].includes(user?.user?.group_id) && 
           <section className="mx-auto py-6 w-full max-w-6xl space-y-4">
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Apps</h1>
              <div className="p-3 md:p-6 w-full bg-slate-50 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
@@ -79,16 +81,20 @@ function Home() {
                   />
                   }
                   
-                
-                 <AppCard 
+                  { ([4].includes(user?.user?.group_id) ||
+                     user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ams')) &&
+                  <AppCard 
                     title="Admission Management System &reg;"
                     desc="Manage new admission applications and new enrolments." 
                     Icon={PiStudentFill} 
                     links={[
                       { title:'Goto Application', url:'#'},
                     ]} 
-                 />
+                  />
+                  }
 
+                  { ([4].includes(user?.user?.group_id) ||
+                    user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')) &&
                  <AppCard 
                     title="Academic Management System &reg;"
                     desc="Manage academic records, registration, assessment & graduation." 
@@ -97,7 +103,10 @@ function Home() {
                       { title:'Goto Application', url:'/ais/students'},
                     ]} 
                  />
+                 }
 
+                 { ([4].includes(user?.user?.group_id) ||
+                   user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'fms')) &&
                  <AppCard 
                     title="Finance Management System &reg;"
                     desc="Manage student financial records, payments, bills, charges and other transactions." 
@@ -106,7 +115,9 @@ function Home() {
                       { title:'Goto Application', url:'#'},
                     ]} 
                  />
+                 }
 
+                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'hrs') &&
                  <AppCard 
                     title="HR Management System &reg;"
                     desc="Manage staff records, leave, promotions & reports." 
@@ -115,18 +126,8 @@ function Home() {
                       { title:'Goto Application', url:'#'},
                     ]} 
                  />
-
+                 }
                 
-                {/* <AppCard 
-                    title="Single-Sign-On System"
-                    desc="Manage user accounts and application access controls." 
-                    Icon={GiLockedDoor} 
-                    links={[
-                      { title:'Goto Application', url:''},
-                    ]} 
-                 /> */}
-
-
                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'leta') &&
                  <AppCard 
                     title="LetaCabin &reg;"
@@ -139,12 +140,10 @@ function Home() {
                  />
                  }
 
-                
-                 
-                
-
              </div>
           </section>
+          }
+
         </main>
         <Footer />
     </div>

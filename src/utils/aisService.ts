@@ -30,6 +30,42 @@ class DricService {
         }
     }
 
+    async fetchStudentFinance(studentId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/students/${encodeURIComponent(studentId)}/finance`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async fetchStudentTranscript(studentId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/students/${encodeURIComponent(studentId)}/transcript`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async fetchStudentActivity(studentId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/students/${encodeURIComponent(studentId)}/activity`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     async postStudent(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/ais/students`, data,{
@@ -75,6 +111,8 @@ class DricService {
             toast.error(error.message)
         }
     }
+
+
 
     
 }

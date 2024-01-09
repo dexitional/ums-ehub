@@ -1,7 +1,4 @@
 import React from 'react'
-import { FiEdit } from "react-icons/fi";
-import { useUserStore } from '../../utils/authService';
-import { FcViewDetails } from 'react-icons/fc';
 import { IconType } from 'react-icons';
 
 type Props = {
@@ -20,9 +17,9 @@ function AISPBioCard({ label, value, Icon }: Props) {
           <Icon className="h-4 w-4 text-primary-accent/70" />
         </div>
       </div>
-      <div className="md:space-y-0.5">
+      <div className="md:space-y-0.5 flex-1">
           <span className="text-xs md:text-sm font-noto text-gray-500 tracking-wider">{label}</span>
-          <p className="text-xs md:text-[0.85rem] font-roboto font-medium text-primary/60 tracking-wider">{value.toUpperCase()}</p>
+          <p className="text-xs md:text-[0.85rem] font-roboto font-medium text-primary/60 tracking-wider">{value?.toUpperCase()}</p>
       </div>
     </div>
   )

@@ -41,11 +41,11 @@ function StudentListItem({ data }: Props) {
         <div className="flex flex-col space-y-2">
             <ListHeading title="Action" />
             <div className="px-2 md:ml-6 w-fit flex items-center justify-evenly space-x-2">
-                <Link to={`${data?.id}`} className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
+                <Link to={`${encodeURIComponent(data?.id)}/profile`} className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
                     <FcViewDetails className="h-4 w-4 text-white"/>
                     <span className="hidden text-sm text-white font-semibold">View</span>
                 </Link>
-                <Link to={`${encodeURIComponent(data?.id)}`}  className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
+                <Link to={`${encodeURIComponent(data?.id)}/edit`}  className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
                     <MdEditDocument className="h-4 w-4 text-green-100"/>
                     <span className="hidden text-sm text-white font-semibold">Edit</span>
                 </Link>

@@ -15,7 +15,7 @@ function FeeListView({ data }: Props) {
           <div>Reference</div>
           <div>Date</div>
       </div>
-      <div className="grid grid-cols-1 gap-y-4  text-sm text-slate-600 font-noto font-medium">
+      <div className="grid grid-cols-1 text-[0.75rem] text-slate-600 font-roboto font-medium tracking-wider">
         { data && data?.map((row:any) => (<FeeListItem key={row.id} data={row} />))}
         { !data && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Record ...</h1>)}
       </div>

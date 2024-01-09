@@ -17,7 +17,7 @@ export async function action({ request }){
     const loadStudentVote = useUserStore.getState().loadStudentVote;
     loadStudentVote();
   }
-  return redirect(`/hrs/nss/dash`);
+  return redirect(`/aisp/dash`);
 } 
 
 // Load Data of Single 
@@ -38,17 +38,19 @@ function PgAISPDash({}: Props) {
       {/* Banner */}
       <div className="min-h-fit p-3 md:py-6 md:px-4 bg-primary-dark/90 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-center  rounded-xl text-white ">
           <div className="w-5/6 mx-auto md:space-y-1">
-            <h1 className="md:text-2xl font-noto">Welcome to the portal, <span className="capitalize">{user?.user?.fname.toLowerCase()}</span> !</h1>
-            <div className="font-noto">
-              <p>Dashboard of the MLK Student Portal.</p>
+            <h1 className="text-lg md:text-2xl font-noto">Welcome to the portal, <span className="capitalize">{user?.user?.fname.toLowerCase()}</span> !</h1>
+            <div className="font-roboto flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 text-xs md:text-sm">
+              {/* <p>Dashboard of the MLK Student Portal.</p> */}
+              <p className="px-2 py-0.5 w-fit rounded bg-primary-accent/90">STUDENT NUMBER:&nbsp;&nbsp;<b>{user?.user?.tag}</b></p>
+              <p className="px-2 py-0.5 w-fit rounded bg-primary/90">INDEX NUMBER:&nbsp;&nbsp;<b>{user?.user?.tag}</b></p>
             </div>
           </div>
       </div>
 
       {/* Notice */}
-      <div className="relative px-6 py-2 min-h-fit mx-auto rounded-md  border border-lime-200 bg-lime-100 shadow-lg">
-          <p className="px-1 md:px-2 md:py-0.5 absolute top-0 right-3 bg-primary-accent/50 text-primary-dark text-[0.55rem] md:text-xs font-bold tracking-widest">DEPARTMENT</p>
-          <p className="text-xs md:text-sm font-bold tracking-widest text-primary/70">{user?.user?.department}</p>
+      <div className="relative px-6 py-2 pt-3 md:pt-2 min-h-fit mx-auto rounded-md  border border-lime-200 bg-lime-100 shadow-lg">
+          <p className="px-1 md:px-2 md:py-0.5 absolute top-0 right-3 bg-primary-accent/50 text-primary-dark text-[0.55rem] md:text-xs font-bold tracking-widest">PROGRAM</p>
+          <p className="text-xs md:text-sm font-bold tracking-widest text-primary/70">{user?.user?.descriptor}</p>
       </div>
       
       {/* Circular Messages */}

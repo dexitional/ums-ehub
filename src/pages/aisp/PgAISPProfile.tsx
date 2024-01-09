@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 import { useLoaderData } from 'react-router'
 import { useUserStore } from '../../utils/authService'
-import Service from '../../utils/hrsService'
+import Service from '../../utils/aisService'
 import { ImProfile } from 'react-icons/im'
 import { BsCalendarRange } from 'react-icons/bs'
 import { FaPhoneAlt, FaRegAddressCard, FaTransgender } from 'react-icons/fa'
@@ -19,13 +19,12 @@ type Props = {}
 // Load Data of Single 
 export async function loader({ params }){
   const user = useUserStore.getState().user;
-  let data = await Service.fetchNSSByPin(user?.user?.tag);
+  const data = await Service.fetchStudent(user?.user?.tag)
   return { data }
 }
 
 
 function PgAISPProfile({}: Props) {
-  
   const { data }: any = useLoaderData();
   console.log(data)
 
@@ -40,23 +39,21 @@ function PgAISPProfile({}: Props) {
         </div>
         {/* Circular Messages */}
         <div className="space-y-2">
-          <AISPBioCard label="Full Name" value={`${data?.fname} ${data?.mname && data?.mname+' '}${data?.lname}`} Icon={ImProfile} />
+          <AISPBioCard label="Full Name" value={`${data?.title && data?.title.label+'.'} ${data?.fname} ${data?.mname && data?.mname+' '}${data?.lname}`} Icon={ImProfile} />
           <AISPBioCard label="Gender" value={data?.gender == 'M' ? 'Male':'Female'} Icon={FaTransgender} />
           <AISPBioCard label="Date of Birth" value={data?.dob && moment(data.dob).format('MMMM DD, YYYY') || 'Not Set'} Icon={FaRegCalendar} />
           <AISPBioCard label="Hometown" value={data?.hometown || 'Not Set'} Icon={TbHomeCheck} />
-          <AISPBioCard label="Phone Number" value={data?.mobile || 'Not Set'} Icon={FaPhoneAlt} />
+          <AISPBioCard label="Phone Number" value={data?.phone || 'Not Set'} Icon={FaPhoneAlt} />
           <AISPBioCard label="Email Address" value={data?.email || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
           <AISPBioCard label="Residential Address" value={data?.address || 'Not Set'} Icon={FaRegAddressCard} />
-          <AISPBioCard label="Residential Country" value={data?.address || 'Not Set'} Icon={FaRegAddressCard} />
-          <AISPBioCard label="Nationality" value={data?.address || 'Not Set'} Icon={FaRegAddressCard} />
-          <AISPBioCard label="Ghana Card Number" value={data?.ezwich_no || 'Not Set'} Icon={BiMoneyWithdraw} />
-          <AISPBioCard label="Guardian Name & Contact" value={data?.emergency_contact || 'Not Set'} Icon={BiMoneyWithdraw} />
-        
-          <AISPBioCard label="Student Number" value={data?.nss_no} Icon={MdOutlineFiberPin} />
-          <AISPBioCard label="Index Number" value={data?.nss_no} Icon={MdOutlineFiberPin} />
-          <AISPBioCard label="Programme" value={data?.start_date && moment(data?.start_date).format('MMMM, YYYY') || 'Not Set'} Icon={BsCalendarRange} />
-          <AISPBioCard label="Department" value={data?.department || 'Not Set'} Icon={RiCommunityLine} />
-          <AISPBioCard label="MLK Student Email" value={data?.department || 'Not Set'} Icon={RiCommunityLine} />
+          <AISPBioCard label="Residential Country" value={data?.country?.longName || 'Not Set'} Icon={FaRegAddressCard} />
+          <AISPBioCard label="Ghana Card Number" value={data?.ghcardNo || 'Not Set'} Icon={BiMoneyWithdraw} />
+          <AISPBioCard label="Guardian Name & Contact" value={data?.guardianName? (data?.guardianName+' - '+data?.guardianPhone) : 'Not Set'} Icon={BiMoneyWithdraw} />
+          <AISPBioCard label="Student Number" value={data?.id} Icon={MdOutlineFiberPin} />
+          <AISPBioCard label="Index Number" value={data?.indexno} Icon={MdOutlineFiberPin} />
+          <AISPBioCard label="Programme" value={data?.program?.longName || 'Not Set'} Icon={BsCalendarRange} />
+          <AISPBioCard label="Department" value={data?.program?.department?.title || 'Not Set'} Icon={RiCommunityLine} />
+          <AISPBioCard label="MLK Student Email" value={data?.instituteEmail || 'Not Set'} Icon={RiCommunityLine} />
         </div>
         {/* Documents & Latest Updates */}
       </div>

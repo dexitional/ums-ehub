@@ -64,7 +64,7 @@ function StudentCardItem({ data }: Props) {
           </div>
         </div>
         <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center md:justify-between space-x-2 group">
-          <Link to={`${encodeURIComponent(data?.id)}`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
+          <Link to={`${encodeURIComponent(data?.id)}/profile`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             {/* <FcViewDetails className="h-4 w-4 text-white"/> */}
             <FaFolder className="h-4 w-4 text-amber-200"/>
             <span className="text-sm text-white font-semibold">View</span>

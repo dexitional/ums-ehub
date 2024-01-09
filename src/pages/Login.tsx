@@ -38,8 +38,15 @@ function Login() {
        e.preventDefault();
        const { username,password } = form;
        await withCredential(username,password);
-       navigate('/dash',{ replace: true })
-     
+       console.log(user)
+       if(user.user.group_id == 1){
+         navigate('/aisp',{ replace: true })
+       } else if(user.user.group_id == 3){
+         navigate('/amsp',{ replace: true })
+       } else {
+         navigate('/dash',{ replace: true })
+       }
+
     } catch (error) {
       console.log(error)
       
