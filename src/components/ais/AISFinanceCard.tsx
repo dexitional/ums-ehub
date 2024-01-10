@@ -16,14 +16,17 @@ function AISFinanceCard({ data }: Props) {
 
   return (
     <div className="w-full space-y-3 rounded">
-    <div className="w-full rounded-lg shadow-md text-xs overflow-x-scroll md:overflow-hidden">
+    <div className={`${data.length ? 'shadow-md':''} w-full rounded-lg text-xs overflow-x-scroll md:overflow-hidden`}>
+          { data.length ? (
           <div className="px-3 py-2 bg-primary/20 text-primary-dark/80 font-bold grid grid-cols-7 tracking-wider">
             <span>DATE</span>
             <span className="col-span-4">NARRATIVE</span>
             <span>TYPE</span>
             <span>AMOUNT</span>
           </div>
-          {  data.map((row:any) => (
+          ): null}
+
+          { data.map((row:any) => (
           <div key={row.id} className="px-3 py-2 border-b grid grid-cols-7 font-medium text-xs text-primary/90">
             <span>{row.createdAt && moment(row.createdAt).format('DD MMM YYYY')?.toUpperCase()}</span>
             <span className="col-span-4 font-medium">{row.narrative?.toUpperCase()}</span>
@@ -41,7 +44,7 @@ function AISFinanceCard({ data }: Props) {
             <span>&nbsp;</span>
           </div>
           ): null}
-          { !data.length ? (<div className="p-3 "><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Transaction Records ...</h1></div>) : null}
+          { !data.length ? (<div className="p-3 "><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Financial Statement ...</h1></div>) : null}
           
           
     </div>

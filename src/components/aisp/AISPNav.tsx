@@ -17,7 +17,7 @@ function AISPNav({}: Props) {
         <AISPNavItem title="Dashboard" url="dash" Icon={MdOutlineDashboard} />
         <AISPNavItem title="My Profile" url="profile" Icon={CiUser} />
         <AISPNavItem title="Fees & Charges" url="fees" Icon={MdOutlineAddTask} />
-        <AISPNavItem title="Result Statement" url="result" Icon={MdOutlineAddTask} />
+        <AISPNavItem title="Results Statement" url="results" Icon={MdOutlineAddTask} />
         <AISPNavItem title="Registration" url="registration" Icon={MdOutlineAddTask} />
         {/* <AISPNavItem title="MLK Circulars" url="notices" Icon={MdOutlineAddTask} /> */}
         {/* <NSSNavItem title="Discipline Cases" url="disciplinary" Icon={GoBriefcase} /> */}

@@ -51,7 +51,7 @@ function PgAISStudentProfile({}: Props) {
       <AISPBioCard label="Student Category" value={data?.entryGroup == 'GH' ? 'GHANAIAN': 'INTERNATIONAL'} Icon={MdOutlineFiberPin} />
       <AISPBioCard label="Academic Status" value={data?.completeStatus ? 'COMPLETED': 'ACTIVE STUDENT'} Icon={MdOutlineFiberPin} />
     </div>
-  </div>
+    </div>
   )
 }
 

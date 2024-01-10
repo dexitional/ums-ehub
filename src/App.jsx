@@ -24,12 +24,13 @@ import PgAISDash from './pages/ais/PgAISDash';
 import PgAISRoles from './pages/ais/PgAISRoles';
 import PgAISReport from './pages/ais/PgAISReport';
 import PgAISStudents, { loader as studentsLoader } from './pages/ais/PgAISStudents';
-import PgAISStudentForm, { loader as studentFormLoader } from './pages/ais/PgAISStudentForm';
+import PgAISStudentForm, { loader as aisStudentFormLoader, action as aisStudentFormAction } from './pages/ais/PgAISStudentForm';
 import PgAISStudent, { loader as studentLoader } from './pages/ais/PgAISStudent';
 import PgAISStudentProfile from './pages/ais/PgAISStudentProfile';
 import PgAISStudentTranscript, { loader as aisStudentTranscriptLoader } from './pages/ais/PgAISStudentTranscript';
 import PgAISStudentFinance, { loader as aisStudentFinanceLoader } from './pages/ais/PgAISStudentFinance';
 import PgAISStudentActivity from './pages/ais/PgAISStudentActivity';
+import PgAISPResults, { loader as aispResultsLoader } from './pages/aisp/PgAISPResults';
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 
@@ -67,25 +68,22 @@ function App() {
                         element: <PgAISPDash />, 
                         loader: studentLoader,
                         index: true,
-                     },
-                     {  path:'profile', 
-                        element: <PgAISPProfile />,
-                        loader: aispProfileLoader,
-                     },
-                     { 
-                        path:'profile/create', 
-                        element: <PgAISPProfileForm />,
-                        loader: aispProfileFormLoader,
-                        action: aispProfileAction
-                     },
-                     { 
-                        path:'profile/:pin/edit', 
-                        element: <PgAISPProfileForm />, 
-                        loader: aispProfileFormLoader,
-                        action: aispProfileAction
-                     },
+                     }
                   ] 
                },
+               
+               // Profile
+               {  path:'profile', 
+                  element: <PgAISPProfile />,
+                  loader: aispProfileLoader,
+               },
+               { 
+                  path:'profile/:pin/edit', 
+                  element: <PgAISPProfileForm />, 
+                  loader: aispProfileFormLoader,
+                  action: aispProfileAction
+               },
+
                // Notices
                {  path:'notices', 
                   element: <PgAISPNotices />,
@@ -101,6 +99,17 @@ function App() {
                {  path:'fees', 
                   element: <PgAISPFees />,
                   loader: aispFeesLoader,
+               },
+               { 
+                  path:'fees/:noticeId', 
+                  element: <PgAISPNotice />,
+                  loader: nssNoticeLoader
+               },
+
+               // Results
+               {  path:'results', 
+                  element: <PgAISPResults />,
+                  loader: aispResultsLoader,
                },
                { 
                   path:'fees/:noticeId', 
@@ -170,8 +179,8 @@ function App() {
                   index:true
                },
 
-               /* Student Module */
                
+               /* Student Module */
                { 
                   path:'students', 
                   element: <PgAISStudents />,
@@ -180,8 +189,8 @@ function App() {
                { 
                   path:'students/create', 
                   element: <PgAISStudentForm />,
-                  loader: studentFormLoader,
-                  // action: nssMainFormAction
+                  loader: aisStudentFormLoader,
+                  action: aisStudentFormAction
                },
                { 
                   path:'students/:studentId', 
@@ -223,8 +232,8 @@ function App() {
                { 
                   path:'students/:studentId/edit', 
                   element: <PgAISStudentForm />, 
-                  // loader: nssMainFormLoader,
-                  // action: nssMainFormAction
+                  loader: aisStudentFormLoader,
+                  action: aisStudentFormAction
                },
             ]
          },

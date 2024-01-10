@@ -112,6 +112,95 @@ class DricService {
         }
     }
 
+     /* COURSES */
+     async fetchcourseList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/courselist`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     /* PROGRAMS */
+     async fetchProgramList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/programs/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+     /* DEPARTMENTS */
+     /* FACULTIES */
+
+
+     /* HELPERS */
+     async fetchCountries(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/countries`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchRegions(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/regions`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchReligions(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/religions`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchDisabilities(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/disabilities`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchTitles(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/titles`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
 
 
     

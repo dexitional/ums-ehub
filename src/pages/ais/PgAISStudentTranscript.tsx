@@ -38,9 +38,10 @@ function PgAISStudentTranscript({}: Props) {
   
   return (
   <div className="flex w-full flex-1 flex-col space-y-8 md:space-y-10 ">
-    { Array.from(data).map(([title,row]:any,i: number) => (
+    { data && Array.from(data).map(([title,row]:any,i: number) => (
       <AISResultCard index={i} cgpa={cgpa} key={title} title={title.toUpperCase()} data={row} />
     ))}
+    { !data.length ? (<div className="p-3 "><h1 className="w-full text-center text-gray-400/70 text-[0.65rem] font-semibold tracking-widest uppercase">No Academic Statement ...</h1></div>) : null}
   </div>
   )
 }

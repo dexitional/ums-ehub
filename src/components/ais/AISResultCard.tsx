@@ -18,7 +18,7 @@ function AISResultCard({ title,data,index,cgpa }: Props) {
     <div className="w-full space-y-3 rounded">
     <h1 className="text-sm font-bold font-roboto tracking-wider text-primary-dark/60 flex flex-col md:flex-row justify-between">
       <span>{title}</span>
-      <span className="px-3 py-0.5 bg-primary/70 text-xs text-white font-bold">LEVEL {data && Math.ceil((data[0].semesterNum/2) * 100) || 'NONEj'}</span>
+      <span className="px-3 py-0.5 bg-primary/70 text-xs text-white font-bold">LEVEL {data && Math.ceil((data[0].semesterNum/2) * 100) || 'NONE'}</span>
     </h1>
     <div className="w-full rounded-lg shadow-md text-xs overflow-x-scroll md:overflow-hidden">
           <div className="px-3 py-2 bg-primary/10 text-primary-dark/70 font-bold grid grid-cols-8 tracking-wider">

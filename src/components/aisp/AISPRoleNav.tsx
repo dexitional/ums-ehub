@@ -40,7 +40,7 @@ function AISPRoleNav({}: Props) {
             <Menu.Item as={AISPNavItem} title="Dashboard" url="dash" Icon={MdOutlineDashboard}></Menu.Item>
             <Menu.Item as={AISPNavItem} title="My Profile" url="profile" Icon={CiUser}></Menu.Item>
             <Menu.Item as={AISPNavItem} title="Fees & Charges" url="fees" Icon={MdOutlineAddTask}></Menu.Item>
-            <Menu.Item as={AISPNavItem} title="Result Statement" url="result" Icon={MdOutlineAddTask}></Menu.Item>
+            <Menu.Item as={AISPNavItem} title="Results Statement" url="results" Icon={MdOutlineAddTask}></Menu.Item>
             <Menu.Item as={AISPNavItem} title="Registration" url="registration" Icon={MdOutlineAddTask}></Menu.Item>
             {/* <Menu.Item as={AISPNavItem} title="MLK Circulars" url="notices" Icon={MdOutlineAddTask}></Menu.Item> */}
             {/* <Menu.Item as={AISPNavItem} title="Service Requests" url="services" Icon={MdOutlineAddTask}></Menu.Item> */}
