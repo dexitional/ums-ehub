@@ -13,9 +13,9 @@ export async function action({ request, params }){
    let data = Object.fromEntries(formData)
        data.dob = moment(data.dob)
        data.entryDate = moment(data.entryDate)
-       data.completeStatus = !data.completeStatus
-       data.deferStatus = !data.deferStatus
-       data.graduateStatus = !data.graduateStatus
+       data.completeStatus = data.completeStatus == 1
+       data.deferStatus = data.deferStatus == 1
+       data.graduateStatus = data.graduateStatus == 1
     
    let resp;
     if(id != 0) 

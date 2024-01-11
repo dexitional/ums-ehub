@@ -11,47 +11,46 @@ type Props = {
     data: any;
 }
 
-function StudentListItem({ data }: Props) {
+function CourseListItem({ data }: Props) {
   return (
     <div className="px-3 md:px-6 pb-4 grid md:grid-cols-7 gap-y-4 md:gap-y-0 md:gap-x-2 md:place-items-center text-gray-500 border-b border-slate-200 hover:bg-slate-50/50 group">
         <div className="md:col-span-2 md:place-self-start flex flex-col space-y-2">
-            <ListHeading title="Project" />
+            <ListHeading title="Course" />
             <div className="px-2 flex items-center space-x-3 md:space-x-4">
-                <img src={Logo} className="h-5 w-5 object-contain"/>
-                <span>{(data.fname+' '+(data.mname && data.mname+' ')+data.lname).toUpperCase()}</span>
+                <span>{(data.title)}</span>
             </div>
         </div>
         <div className="capitalize flex flex-col space-y-2">
-            <ListHeading title="Index Number" />
-            <span className="px-2">{data?.indexno}</span>
+            <ListHeading title="Code" />
+            <span className="px-2">{data?.id}</span>
         </div>
         <div className="capitalize flex flex-col space-y-2">
-            <ListHeading title="Department" />
-            <span className="px-2 md:pl-6">{data?.program?.longName}</span>
+            <ListHeading title="Credits" />
+            <span className="px-2">{data?.creditHour}</span>
         </div>
         <div className="capitalize flex flex-col space-y-2">
-            <ListHeading title="Level" />
-            <span className="px-2">{Math.ceil(data?.semesterNum/2) * 100}</span>
+            <ListHeading title="Practicals" />
+            <span className="px-2">{data?.practicalHour}</span>
         </div>
         <div className="capitalize flex flex-col space-y-2">
-            <ListHeading title="Contact" />
-            <span className="px-2">{data?.phone}</span>
+            <ListHeading title="Theory" />
+            <span className="px-2">{data?.theoryHour}</span>
         </div>
         
         <div className="flex flex-col space-y-2">
             <ListHeading title="Action" />
             <div className="px-2 md:ml-6 w-fit flex items-center justify-evenly space-x-2">
-                <Link to={`${encodeURIComponent(data?.id)}/profile`} className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
+                {/* <Link to={`${encodeURIComponent(data?.id)}/profile`} className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
                     <FcViewDetails className="h-4 w-4 text-white"/>
                     <span className="hidden text-sm text-white font-semibold">View</span>
-                </Link>
+                </Link> */}
                 <Link to={`${encodeURIComponent(data?.id)}/edit`}  className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
                     <MdEditDocument className="h-4 w-4 text-green-100"/>
                     <span className="hidden text-sm text-white font-semibold">Edit</span>
                 </Link>
                 <Form method="post" action={`${encodeURIComponent(data?.id)}/destroy`} onSubmit={(e)=> { if(!confirm("Do you want to delete")) e.preventDefault(); return false; }} className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
-                    <FaTrash className="h-4 w-4 text-pink-100" />
-                    <button type="submit" className="hidden text-sm text-white font-semibold">Delete</button>
+                   <FaTrash className="h-4 w-4 text-pink-100" />
+                   <button type="submit" className="hidden text-sm text-white font-semibold">Delete</button>
                 </Form>
             </div>
         </div>
@@ -59,4 +58,4 @@ function StudentListItem({ data }: Props) {
   )
 }
 
-export default StudentListItem
+export default CourseListItem

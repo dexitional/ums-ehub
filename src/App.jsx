@@ -31,6 +31,17 @@ import PgAISStudentTranscript, { loader as aisStudentTranscriptLoader } from './
 import PgAISStudentFinance, { loader as aisStudentFinanceLoader } from './pages/ais/PgAISStudentFinance';
 import PgAISStudentActivity from './pages/ais/PgAISStudentActivity';
 import PgAISPResults, { loader as aispResultsLoader } from './pages/aisp/PgAISPResults';
+import PgAISCourses, { action as aisCourseDestroy, loader as coursesLoader } from './pages/ais/PgAISCourses';
+import PgAISCourseForm, { loader as aisCourseFormLoader, action as aisCourseFormAction } from './pages/ais/PgAISCourseForm';
+import PgAISProgramForm, { action as aisProgramFormAction, loader as aisProgramFormLoader} from './pages/ais/PgAISProgramForm';
+import PgAISPrograms, { action as aisProgramDestroy,loader as aisProgramsLoader } from './pages/ais/PgAISPrograms';
+import PgAISProgram, { loader as aisProgramLoader } from './pages/ais/PgAISProgram';
+import PgAISProgramStructure, { loader as aisProgramStructureLoader } from './pages/ais/PgAISProgramStructure';
+import PgAISProgramStudent, { loader as aisProgramStudentLoader } from './pages/ais/PgAISProgramStudent';
+import PgAISProgramStatistics, { loader as aisProgramStatisticsLoader } from './pages/ais/PgAISProgramStatistics';
+import PgAISDepartments, { loader as departmentsLoader } from './pages/ais/PgAISDepartments';
+import PgAISFaculties, { loader as facultiesLoader } from './pages/ais/PgAISFaculties';
+
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 
@@ -162,14 +173,7 @@ function App() {
             element: <AISLayout />,
             // action: chosenAction,
             children: [
-               {  element: <PgAISDash />,
-                  // children: [
-                  //    {  
-                  //       path:'dash',
-                  //       element: <LASByGroup />, 
-                  //    }
-                  // ] 
-               },
+               {  element: <PgAISDash />},
                {  path:'roles', 
                   element: <PgAISRoles />,
                },
@@ -235,6 +239,125 @@ function App() {
                   loader: aisStudentFormLoader,
                   action: aisStudentFormAction
                },
+
+               /* Course Module */
+               { 
+                  path:'courses', 
+                  element: <PgAISCourses />,
+                  loader: coursesLoader,
+               },
+               { 
+                  path:'courses/create', 
+                  element: <PgAISCourseForm />,
+                  loader: aisCourseFormLoader,
+                  action: aisCourseFormAction
+               },
+               { 
+                  path:'courses/:courseId/destroy', 
+                  action: aisCourseDestroy,
+               },
+               { 
+                  path:'courses/:courseId/edit', 
+                  element: <PgAISCourseForm />, 
+                  loader: aisCourseFormLoader,
+                  action: aisCourseFormAction
+               },
+
+               /* Program Module */
+               { 
+                  path:'programs', 
+                  element: <PgAISPrograms />,
+                  loader: aisProgramsLoader,
+               },
+               { 
+                  path:'programs/create', 
+                  element: <PgAISProgramForm />,
+                  loader: aisProgramFormLoader,
+                  action: aisProgramFormAction
+               },
+               { 
+                  path:'programs/:programId', 
+                  element: <PgAISProgram />,
+                  loader: aisProgramLoader,
+                  children: [
+                     {
+                        index: true,
+                        path:'curriculum', 
+                        element: <PgAISProgramStructure />,
+                        loader: aisProgramStructureLoader,
+                     },
+                     {
+                        path:'students', 
+                        element: <PgAISProgramStudent />,
+                        loader: aisProgramStudentLoader,
+                     },
+                     {
+                        path:'statistics', 
+                        element: <PgAISProgramStatistics />,
+                        loader: aisProgramStatisticsLoader,
+                     }
+                  ]
+               },
+               { 
+                  path:'programs/:programId/destroy', 
+                  action: aisProgramDestroy,
+               },
+               { 
+                  path:'programs/:programId/edit', 
+                  element: <PgAISProgramForm />, 
+                  loader: aisProgramFormLoader,
+                  action: aisProgramFormAction
+               },
+
+                /* Faculty Module */
+                { 
+                  path:'faculties', 
+                  element: <PgAISFaculties />,
+                  loader: facultiesLoader,
+               },
+               { 
+                  path:'departments/create', 
+                  element: <PgAISCourseForm />,
+                  loader: aisCourseFormLoader,
+                  action: aisCourseFormAction
+               },
+               { 
+                  path:'departments/:departmentId/destroy', 
+                  action: aisCourseDestroy,
+               },
+               { 
+                  path:'departments/:departmentId/edit', 
+                  element: <PgAISCourseForm />, 
+                  loader: aisCourseFormLoader,
+                  action: aisCourseFormAction
+               },
+
+               /* Department Module */
+               { 
+                  path:'departments', 
+                  element: <PgAISDepartments />,
+                  loader: departmentsLoader,
+               },
+               { 
+                  path:'departments/create', 
+                  element: <PgAISCourseForm />,
+                  loader: aisCourseFormLoader,
+                  action: aisCourseFormAction
+               },
+               { 
+                  path:'departments/:departmentId/destroy', 
+                  action: aisCourseDestroy,
+               },
+               { 
+                  path:'departments/:departmentId/edit', 
+                  element: <PgAISCourseForm />, 
+                  loader: aisCourseFormLoader,
+                  action: aisCourseFormAction
+               },
+
+
+
+
             ]
          },
 
