@@ -113,9 +113,9 @@ class DricService {
     }
 
      /* COURSES */
-     async fetchcourseList(){
+     async fetchCourseList(){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/ais/courselist`)
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/courses/list`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
@@ -314,6 +314,78 @@ class DricService {
         }
     }
 
+    /* CURRICULUMS */
+   
+     async fetchCurriculums(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/curriculums?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchCurriculum(curriculumId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/curriculums/${encodeURIComponent(curriculumId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+     }
+
+     async postCurriculum(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/curriculums`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async updateCurriculum(curriculumId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/curriculums/${encodeURIComponent(curriculumId)}`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async deleteCurriculum(curriculumId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/curriculums/${encodeURIComponent(curriculumId)}`)
+            if(res.status == 200){
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
 
     /* Schemes */
     async fetchSchemeList(){
@@ -370,7 +442,7 @@ class DricService {
 
      async updateScheme(schemeId,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/ais/courses/${encodeURIComponent(schemeId)}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/schemes/${encodeURIComponent(schemeId)}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
@@ -387,6 +459,106 @@ class DricService {
      async deleteScheme(schemeId){
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/ais/schemes/${encodeURIComponent(schemeId)}`)
+            if(res.status == 200){
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+      /* Registrations */
+    async fetchRegistrationList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/registrations/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchRegistrations(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/registrations?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchRegistration(registrationId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/registrations/${encodeURIComponent(registrationId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+     }
+
+     async fetchRegistrationMount(registrationId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/registrations/mount/${encodeURIComponent(registrationId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+     }
+
+     async postRegistration(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/registrations`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            console.log(res.data)
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else if(res.status == 202){
+                console.log(res)
+                toast.success(res.data?.message)
+            } 
+            else throw(res.data.message)
+        
+        } catch (error) { 
+            toast.success(error.message)
+        }
+     }
+
+     async updateRegistration(registrationId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/registrations/${encodeURIComponent(registrationId)}`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async deleteRegistration(registrationId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/registrations/${encodeURIComponent(registrationId)}`)
             if(res.status == 200){
                toast.success("Record deleted!")
                return res.data

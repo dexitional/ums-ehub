@@ -31,7 +31,7 @@ function ResultListView({ title,data,index,cgpa }: Props) {
             <div>GD</div>
             <div>GP</div>
         </div>
-        <div className="grid grid-cols-1 text-sm text-slate-600 font-roboto font-medium tracking-wider">
+        <div className="grid grid-cols-1 text-xs text-slate-600 font-roboto font-medium tracking-widest">
           { data && data?.map((row:any) => (<ResultListItem key={row.id} row={row} />))}
           { !data && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Record ...</h1>)}
         </div>

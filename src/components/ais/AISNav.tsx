@@ -21,11 +21,14 @@ function AISNav({}: Props) {
         <AISNavItem title="Program Module" url="programs" Icon={GrDashboard} /> 
         <AISNavItem title="Department Module" url="departments" Icon={GrDashboard} /> 
         <AISNavItem title="Faculty Module" url="faculties" Icon={GrDashboard} /> 
-        <AISNavItem title="Structure Module" url="structures" Icon={GrDashboard} /> 
+        <AISNavItem title="Curriculum Module" url="curriculums" Icon={GrDashboard} /> 
         <AISNavItem title="Scheme Module" url="schemes" Icon={GrDashboard} /> 
         <AISNavItem title="Registration Module" url="registrations" Icon={GrDashboard} /> 
         <AISNavItem title="Progression Module" url="progression" Icon={GrDashboard} /> 
+        <AISNavItem title="Scoresheets Module" url="deferments" Icon={GrDashboard} /> 
+        <AISNavItem title="MySheets&reg; Module" url="deferments" Icon={GrDashboard} /> 
         {/* 
+        
         <AISNavItem title="Deferment Module" url="deferments" Icon={GrDashboard} /> 
         <AISNavItem title="Transwift Module" url="transwift" Icon={GrDashboard} /> 
         <AISNavItem title="Circular Module" url="notices" Icon={GrDashboard} /> 

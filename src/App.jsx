@@ -18,6 +18,8 @@ import PgAISPServiceForm, { loader as nssServiceFormLoader, action as nssService
 import PgAISPPasswordForm, { action as nssPasswordFormAction } from './pages/aisp/PgAISPPasswordForm';
 import PgAISPDash, { loader as nssDashLoader } from './pages/aisp/PgAISPDash';
 import PgAISPFees,{ loader as aispFeesLoader } from './pages/aisp/PgAISPFees';
+import PgAISPRegistrations,{ loader as aispRegistrationsLoader } from './pages/aisp/PgAISPRegistrations';
+
 
 import AISLayout from './components/ais/AISLayout';
 import PgAISDash from './pages/ais/PgAISDash';
@@ -41,6 +43,13 @@ import PgAISProgramStudent, { loader as aisProgramStudentLoader } from './pages/
 import PgAISProgramStatistics, { loader as aisProgramStatisticsLoader } from './pages/ais/PgAISProgramStatistics';
 import PgAISDepartments, { loader as departmentsLoader } from './pages/ais/PgAISDepartments';
 import PgAISFaculties, { loader as facultiesLoader } from './pages/ais/PgAISFaculties';
+import PgAISStructures, { action as aisCurriculumDestroy, loader as curriculumsLoader } from './pages/ais/PgAISStructures';
+import PgAISStructureForm, { action as aisCurriculumFormAction, loader as aisCurriculumFormLoader } from './pages/ais/PgAISStructureForm';
+import PgAISSchemes, { action as aisSchemeDestroy, loader as schemesLoader } from './pages/ais/PgAISSchemes';
+import PgAISSchemeForm, { action as aisSchemeFormAction, loader as aisSchemeFormLoader } from './pages/ais/PgAISSchemeForm';
+import PgAISScheme, { loader as aisSchemeLoader } from './pages/ais/PgAISScheme';
+import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registrationsLoader} from './pages/ais/PgAISRegistrations';
+import PgAISRegsitration, { loader as aisRegistrationLoader } from './pages/ais/PgAISRegsitration';
 
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
@@ -122,11 +131,17 @@ function App() {
                   element: <PgAISPResults />,
                   loader: aispResultsLoader,
                },
-               { 
-                  path:'fees/:noticeId', 
-                  element: <PgAISPNotice />,
-                  loader: nssNoticeLoader
+               // { 
+               //    path:'results/:resultsId', 
+               //    element: <PgAISPNotice />,
+               //    loader: aispResultLoader
+               // },
+                // Results
+               {  path:'registration', 
+                  element: <PgAISPRegistrations />,
+                  loader: aispRegistrationsLoader,
                },
+
 
 
 
@@ -353,6 +368,86 @@ function App() {
                   element: <PgAISCourseForm />, 
                   loader: aisCourseFormLoader,
                   action: aisCourseFormAction
+               },
+
+               /* Curriculum & Structure Module */
+               { 
+                  path:'curriculums', 
+                  element: <PgAISStructures />,
+                  loader: curriculumsLoader,
+               },
+               { 
+                  path:'curriculums/create', 
+                  element: <PgAISStructureForm />,
+                  loader: aisCurriculumFormLoader,
+                  action: aisCurriculumFormAction
+               },
+               { 
+                  path:'curriculums/:curriculumId/destroy', 
+                  action: aisCurriculumDestroy,
+               },
+               { 
+                  path:'curriculums/:curriculumId/edit', 
+                  element: <PgAISStructureForm />, 
+                  loader: aisCurriculumFormLoader,
+                  action: aisCurriculumFormAction
+               },
+
+               /* Scheme Module */
+               { 
+                  path:'schemes', 
+                  element: <PgAISSchemes />,
+                  loader: schemesLoader,
+               },
+               { 
+                  path:'schemes/create', 
+                  element: <PgAISSchemeForm />,
+                  loader: aisSchemeFormLoader,
+                  action: aisSchemeFormAction
+               },
+               { 
+                  path:'schemes/:schemeId', 
+                  element: <PgAISScheme />,
+                  loader: aisSchemeLoader,
+               },
+               { 
+                  path:'schemes/:schemeId/destroy', 
+                  action: aisSchemeDestroy,
+               },
+               { 
+                  path:'schemes/:schemeId/edit', 
+                  element: <PgAISSchemeForm />, 
+                  loader: aisSchemeFormLoader,
+                  action: aisSchemeFormAction
+               },
+
+
+               /* Registrations Module */
+               { 
+                  path:'registrations', 
+                  element: <PgAISRegistrations />,
+                  loader: registrationsLoader,
+               },
+               { 
+                  path:'registrations/create', 
+                  element: <PgAISSchemeForm />,
+                  loader: aisSchemeFormLoader,
+                  action: aisSchemeFormAction
+               },
+               { 
+                  path:'registrations/:registrationId', 
+                  element: <PgAISRegsitration />,
+                  loader: aisRegistrationLoader,
+               },
+               { 
+                  path:'registrations/:registrationId/destroy', 
+                  action: aisRegistrationDestroy,
+               },
+               { 
+                  path:'registrations/:registrationId/edit', 
+                  element: <PgAISSchemeForm />, 
+                  loader: aisSchemeFormLoader,
+                  action: aisSchemeFormAction
                },
 
 

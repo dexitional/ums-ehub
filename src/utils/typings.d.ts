@@ -29,6 +29,7 @@ export interface StoreState {
     message: string|null;
     search: any;
     loading: boolean;
+    courses: any;
     isLoggedIn: boolean;
     isAuthenticated : () => boolean;
     lasChosen: any|null;
