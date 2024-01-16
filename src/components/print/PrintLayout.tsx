@@ -4,6 +4,8 @@ import Footer from '../Footer'
 import { Outlet, useNavigation } from 'react-router'
 import Loader from '../Loader'
 import { useReactToPrint } from 'react-to-print';
+import { IoArrowBackCircle, IoPrint } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 
 type Props = {
     children: React.ReactNode
@@ -27,8 +29,9 @@ function PrintLayout({ children }: Props) {
       <section className="md:mx-auto w-full md:max-w-7xl flex">
          <div ref={printRef} className={`${loading && 'overflow-hidden'} flex-1`}>
            { loading && <Loader /> }
-           <div className="mx-auto mt-6 w-full max-w-6xl print:hidden">
-              <button className="px-4 py-1 bg-primary-accent text-black font-bold" onClick={handlePrint}>Print</button>
+           <div className="mx-auto mt-6 w-full max-w-6xl print:hidden flex items-center space-x-3">
+              <Link to=".." className="px-4 py-1 rounded bg-primary-accent text-white font-bold flex items-center space-x-2"><IoArrowBackCircle className="h-5 w-5 text-white" /><span>Go Back</span></Link>
+              <button className="px-4 py-1 rounded bg-primary text-white font-bold flex items-center space-x-2" onClick={handlePrint}><IoPrint className="h-5 w-5" /><span>Print</span></button>
            </div>
            <Outlet />
          </div>

@@ -38,12 +38,10 @@ function PrintRegisterSlip({}: Props) {
                     { !data.length && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Courses</h1>)}
                     </div>
                     
-                    <div className="px-6 pb-4 grid grid-cols-1 md:grid-cols-5 print:grid-cols-6 gap-y-4 md:place-items-center border-slate-200 text-xs text-primary/70 font-roboto font-semibold uppercase tracking-widest">
-                        <div className="col-span-2 place-self-start flex items-center justify-between">
-                        
-                        </div>
-                        <div className="md:col-span-2 flex items-center justify-between"><span>Total Credits:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">{totalCredit}</span></span></div>
-                        <div className="md:col-span-2 flex items-center justify-between"><span>Date of Registration:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">{moment().format("MMM DD, YYYY") || 'Not Set'}</span></span></div>
+                    <div className="px-6 pb-4 grid grid-cols-1 md:grid-cols-5 print:grid-cols-5 gap-y-4 md:place-items-center print:place-items-center border-slate-200 text-xs text-primary/70 font-roboto font-semibold uppercase tracking-widest">
+                        <div className="">&nbsp;</div>
+                        <div className="md:col-span-2 print:md:col-span-2 flex items-center justify-between"><span>Total Credits:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">{totalCredit}</span></span></div>
+                        <div className="md:col-span-2 print:md:col-span-2 flex items-center justify-between"><span>Date of Registration:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">{moment().format("MMM DD, YYYY") || 'Not Set'}</span></span></div>
                     </div>
                 
                 </div>
