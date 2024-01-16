@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { Outlet, useNavigation } from 'react-router'
+import { Outlet, useNavigation, useNavigate } from 'react-router'
 import Loader from '../Loader'
 import { useReactToPrint } from 'react-to-print';
 import { IoArrowBackCircle, IoPrint } from 'react-icons/io5'
@@ -14,6 +14,7 @@ type Props = {
 function PrintLayout({ children }: Props) {
 
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const loading = navigation.state === "loading";
   const printRef:any = useRef();
   
@@ -30,7 +31,7 @@ function PrintLayout({ children }: Props) {
          <div ref={printRef} className={`${loading && 'overflow-hidden'} flex-1`}>
            { loading && <Loader /> }
            <div className="mx-auto mt-6 w-full max-w-6xl print:hidden flex items-center space-x-3">
-              <Link to=".." className="px-4 py-1 rounded bg-primary-accent text-white font-bold flex items-center space-x-2"><IoArrowBackCircle className="h-5 w-5 text-white" /><span>Go Back</span></Link>
+              <button onClick={() => navigate(-1)} className="px-4 py-1 rounded bg-primary-accent text-white font-bold flex items-center space-x-2"><IoArrowBackCircle className="h-5 w-5 text-white" /><span>Go Back</span></button>
               <button className="px-4 py-1 rounded bg-primary text-white font-bold flex items-center space-x-2" onClick={handlePrint}><IoPrint className="h-5 w-5" /><span>Print</span></button>
            </div>
            <Outlet />
