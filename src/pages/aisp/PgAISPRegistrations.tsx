@@ -17,7 +17,6 @@ export async function loader() {
 
 function PgAISPRegistrations({}: Props) {
   const { data,slip } :any = useLoaderData();
-  console.log(slip);
   return (
     <div className="md:pl-10 p-4 md:p-6 space-y-4 md:space-y-10">
       <div className="space-y-6">

@@ -1,39 +1,42 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import { Outlet, useNavigation } from 'react-router'
-import AISNav from './AISNav'
-import AISRoleNav from './AISRoleNav'
-import AISLogoBox from './AISLogoBox'
 import Loader from '../Loader'
+import { useReactToPrint } from 'react-to-print';
 
 type Props = {
     children: React.ReactNode
 }
 
-function AISLayout({ children }: Props) {
+function PrintLayout({ children }: Props) {
+
   const navigation = useNavigation();
   const loading = navigation.state === "loading";
+  const printRef:any = useRef();
+  
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  });
+
+
   return (
     <div className="w-full h-screen flex flex-col justify-between">
     <Header />
-    <AISRoleNav/>
     <main className="w-full flex-1 flex flex-col md:overflow-y-scroll">
       <section className="md:mx-auto w-full md:max-w-7xl flex">
-         <div className="z-20 w-56 h-full bg-gradient-to-r from-white to-primary/5 bg-opacity-5 hidden md:flex flex-col space-y-1">
-            <AISLogoBox />
-            <AISNav />
-         </div>
-         <div className={`${loading && 'overflow-hidden'} flex-1`}>
+         <div ref={printRef} className={`${loading && 'overflow-hidden'} flex-1`}>
            { loading && <Loader /> }
+           <div className="mx-auto mt-6 w-full max-w-6xl print:hidden">
+              <button className="px-4 py-1 bg-primary-accent text-black font-bold" onClick={handlePrint}>Print</button>
+           </div>
            <Outlet />
          </div>
       </section>
-      
     </main>
     <Footer />
 </div>
   )
 }
 
-export default AISLayout
+export default PrintLayout

@@ -51,6 +51,9 @@ import PgAISScheme, { loader as aisSchemeLoader } from './pages/ais/PgAISScheme'
 import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registrationsLoader} from './pages/ais/PgAISRegistrations';
 import PgAISRegsitration, { loader as aisRegistrationLoader } from './pages/ais/PgAISRegsitration';
 
+import PrintLayout from './components/print/PrintLayout';
+import PrintRegisterSlip, { loader as printRegLoader } from './components/print/PrintRegisterSlip';
+
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 
@@ -74,7 +77,8 @@ function App() {
          // { path: "evsmain", element: <EVSDashPage /> },
          // { path: "service/:module", element: <Home /> },
          
-        
+         
+
          /* STUDENT PORTAL SYSTEM ROUTE */
          {
             path: "aisp",
@@ -182,7 +186,7 @@ function App() {
             ]
          },
 
-          /* ACADEMIC SYSTEM ROUTE */
+         /* ACADEMIC SYSTEM ROUTE */
          {
             path: "ais",
             element: <AISLayout />,
@@ -455,6 +459,20 @@ function App() {
 
             ]
          },
+
+         /* PRINT LAYOUT & ROUTE */
+         {
+            path: "print",
+            element: <PrintLayout />,
+            children: [
+               // Registration Slip
+               {  path:'registration', 
+                  element: <PrintRegisterSlip />,
+                  loader: printRegLoader
+               },
+            ]
+         }
+
 
 
          

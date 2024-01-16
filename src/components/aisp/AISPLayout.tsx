@@ -1,17 +1,20 @@
 import React from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { Outlet } from 'react-router'
+import { Outlet, useNavigation } from 'react-router'
 import NSSRoleNav from './AISPRoleNav'
 import NSSLogoBox from './AISPLogoBox'
 import NSSNav from './AISPNav'
+import Loading from '../Loader'
+import Loader from '../Loader'
 
 type Props = {
     children: React.ReactNode
 }
 
 function AISPLayout({ children }: Props) {
-  
+  const navigation = useNavigation();
+  const loading = navigation.state === "loading";
   return (
     <div className="w-full h-screen flex flex-col justify-between">
     <Header />
@@ -22,7 +25,8 @@ function AISPLayout({ children }: Props) {
            <NSSLogoBox />
            <NSSNav />
          </div>
-         <div className="flex-1">
+         <div className={`${loading && 'overflow-hidden'} flex-1`}>
+           { loading && <Loader /> }
            <Outlet />
          </div>
       </section>

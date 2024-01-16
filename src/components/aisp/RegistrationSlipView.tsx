@@ -4,6 +4,8 @@ import { useUserStore } from '../../utils/authService';
 import toast from 'react-hot-toast';
 import RegistrationSlipItem from './RegistrationSlipItem';
 import moment from 'moment';
+import { IoPrint, IoRefreshSharp } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 type Props = { 
   data?: any;
@@ -34,7 +36,11 @@ function RegistrationSlipView({ title,data }: Props) {
     <div className="flex flex-col space-y-4">
       <h1 className="w-full text-sm md:text-base font-bold font-roboto tracking-wider text-primary-accent/80 flex flex-col md:flex-row justify-between">
         <span>{title}</span>
-        <button onClick={reset} className="px-3 py-0.5 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold">REVOKE REGISTRATION</button>
+        <div className="flex space-x-2">
+           <Link to="/print/registration" className="px-3 py-1 bg-primary/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoPrint className="h-6 w-6 text-white"/><span>PRINT SLIP</span></Link>
+           <button onClick={reset} className="px-3 py-1 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoRefreshSharp className="h-6 w-6 text-white"/><span>REVOKE REGISTRATION</span></button>
+        </div>
+        
       </h1>
       <div className="pt-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
         <div className="px-6 pb-4  hidden md:grid grid-cols-5 place-items-center border-b border-slate-200 text-xs text-primary font-sans font-semibold uppercase tracking-widest">
