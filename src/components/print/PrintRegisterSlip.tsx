@@ -11,7 +11,7 @@ type Props = {}
 
 export async function loader({ params }) {
     const user = useUserStore.getState().user;
-    const data = await Service.fetchRegistration(params.registrationId || user?.user?.tag );
+    const data = await Service.fetchRegistration(params?.registrationId || user?.user?.tag );
     return { data }
   }
 
