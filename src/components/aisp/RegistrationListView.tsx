@@ -3,6 +3,7 @@ import RegistrationListItem from './RegistrationListItem';
 import Service from '../../utils/aisService'
 import { useUserStore } from '../../utils/authService';
 import toast from 'react-hot-toast';
+import { redirect, useNavigate } from 'react-router';
 
 type Props = { 
   data?: any;
@@ -13,6 +14,7 @@ type Props = {
 
 function RegistrationListView({ title,data }: Props) {
   
+  const navigate = useNavigate()
   const courses  = useUserStore(state => state.courses)
   
   const chosenCredit = data?.courses?.reduce((sum,cur) => {
@@ -33,7 +35,8 @@ function RegistrationListView({ title,data }: Props) {
 
      if(cdata.length){
         const resp = await Service.postRegistration(cdata)
-        console.log(resp);
+        if(resp?.totalCourses) navigate("/print/registration")
+        console.log(resp?.totalCourses);
      } else{
        toast.error("Please select your courses")
      }

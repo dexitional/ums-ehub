@@ -526,7 +526,7 @@ class DricService {
             })
             console.log(res.data)
             if(res.status == 200){
-               toast.success("Record created!")
+               toast.success("Registration completed!")
                return res.data
             } 
             else if(res.status == 202){
