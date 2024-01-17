@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import SubPageTitle from '../../components/aisp/SubPageTitle'
 import { Form, redirect, useNavigate } from 'react-router-dom'
-import Service from '../../utils/hrsService'
+// import Service from '../../utils/authService'
 import { useUserStore } from '../../utils/authService'
+import toast from 'react-hot-toast'
 
 type Props = {}
 
 // Save Form
 export async function action({ request, params }){
   const formData = await request.formData()
-  const logout = useUserStore.getState().logout;
-  
   let data = Object.fromEntries(formData)
-  let resp = await Service.postNSSPassword(data);
-  if(resp){
-     await logout();
-     return redirect(`/login`)
-   }
+  
+  if(data.newpassword != data.rnewpassword){
+     toast.error("Password mismatch !");
+     return false;
+  }
+  const changePassword = useUserStore.getState().changePassword;
+  await changePassword(data.tag,data.oldpassword,data.newpassword);
+  return redirect(`/aisp/profile`)
+  
 } 
 
 function PgAISPPasswordForm({}: Props) {
@@ -31,7 +34,7 @@ function PgAISPPasswordForm({}: Props) {
       <div className="p-2 md:p-6 border bg-slate-50/50 rounded-xl space-y-6">
          <section className="flex md:space-x-6">
            <div className="flex-1 flex flex-col space-y-1 md:space-y-3">
-              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-blue-950/70">Change of Password</h1>
+              <h1 className="text-lg md:text-2xl tracking-wide font-semibold text-primary/70">Change of Password</h1>
               <div className="flex items-center space-x-2 text-zinc-400 text-base">
                  <span className="text-xs md:tracking-wider">Please provide neccessary information</span>
               </div>
@@ -46,24 +49,24 @@ function PgAISPPasswordForm({}: Props) {
                       <div className="text-sm md:text-base text-gray-500 font-medium flex items-center justify-between">
                         <span>Enter Old Password</span>
                       </div>
-                      <input arial-label="oldpassword" type="password" name="oldpassword" required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base disabled:text-gray-400 text-gray-500 rounded-md" />
+                      <input arial-label="oldpassword" type="password" name="oldpassword" required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-primary/5 text-sm md:text-base disabled:text-gray-400 text-gray-500 rounded-md" />
                   </label>
                   <label className="flex flex-col space-y-2">
                       <div className="text-sm md:text-base text-gray-500 font-medium flex items-center justify-between">
                         <span>Enter New Password</span>
                       </div>
-                      <input arial-label="newpassword"  type="password" name="newpassword" required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base disabled:text-gray-400 text-gray-500 rounded-md" />
+                      <input arial-label="newpassword"  type="password" name="newpassword" required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-primary/5 text-sm md:text-base disabled:text-gray-400 text-gray-500 rounded-md" />
                   </label>
                   <label className="flex flex-col space-y-2">
                       <div className="text-sm md:text-base text-gray-500 font-medium flex items-center justify-between">
                         <span>Re-peat New Password</span>
                       </div>
-                      <input arial-label="rnewpassword"  type="password" name="rnewpassword" required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base disabled:text-gray-400 text-gray-500 rounded-md" />
+                      <input arial-label="rnewpassword"  type="password" name="rnewpassword" required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-primary/5 text-sm md:text-base disabled:text-gray-400 text-gray-500 rounded-md" />
                   </label>
                   
                   <div className="flex items-center justify-between space-x-2">
-                    <input type="hidden" name="nss_no" defaultValue={user?.user?.tag} />
-                    <button className="py-1 px-4 w-4/5 rounded-md bg-blue-950/70 text-white font-semibold" type="submit">Change</button>
+                    <input type="hidden" name="tag" defaultValue={user?.user?.tag} />
+                    <button className="py-1 px-4 w-4/5 rounded-md bg-primary/70 text-white font-semibold" type="submit">Change</button>
                     <button onClick={() => { if(confirm('Cancel')) navigate(-1) }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">CANCEL</button>
                   </div>
                 </div>

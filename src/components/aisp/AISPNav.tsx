@@ -14,7 +14,7 @@ function AISPNav({}: Props) {
   
   return (
     <div className="py-4 flex-1 flex flex-col space-y-1 md:space-y-3">
-        <AISPNavItem title="Dashboard" url="dash" Icon={MdOutlineDashboard} />
+        {/* <AISPNavItem title="Dashboard" url="dash" Icon={MdOutlineDashboard} /> */}
         <AISPNavItem title="My Profile" url="profile" Icon={CiUser} />
         <AISPNavItem title="Fees & Charges" url="fees" Icon={MdOutlineAddTask} />
         <AISPNavItem title="Results Statement" url="results" Icon={MdOutlineAddTask} />

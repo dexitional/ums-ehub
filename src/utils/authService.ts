@@ -5,6 +5,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import Cookies from 'universal-cookie';
 import Service from '../utils/evsService'
+import toast from 'react-hot-toast';
 
 const cookies = new Cookies(null, { path: '/' });
 const { REACT_APP_API_URL } = import.meta.env;
@@ -98,7 +99,29 @@ export const useUserStore = create<StoreState>()(
             set({ message:err.message, loading: false })
             setTimeout( async() => set({ message:null }), 4000)
           }
-        } 
+        },
+        
+        changePassword : async (tag, oldpassword, newpassword) => {
+          try {
+            set({ message:null, loading: true })
+            const res = await axios.post(`${REACT_APP_API_URL}/auth/password`, {
+               tag,oldpassword,newpassword
+            });
+            console.log(res.status,res.data.message)
+            if(res.status == 200){
+              get()?.logout()
+              // localStorage.setItem("@Auth:token", resp.token);
+              cookies.remove("@Auth:token")
+              set({ user:null, courses: [], loading: false })
+              toast.success("Password changed!")
+            } else if(res.status == 202)
+              throw new(res.data.message)
+              
+          } catch (err) {
+            set({ message:err.message, loading: false })
+            toast.error(err.message)
+          }
+      },
 
       }),
     {

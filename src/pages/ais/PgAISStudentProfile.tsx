@@ -33,6 +33,7 @@ function PgAISStudentProfile({}: Props) {
       <AISPBioCard label="Phone Number" value={data?.phone || 'Not Set'} Icon={FaPhoneAlt} />
       <AISPBioCard label="Email Address" value={data?.email?.toUpperCase() || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
       <AISPBioCard label="Residential Address" value={data?.address?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
+      <AISPBioCard label="Residential Status" value={data?.residentialStatus?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
       <AISPBioCard label="Guardian Name" value={data?.guardianName || 'Not Set'} Icon={MdOutlineFiberPin} />
       <AISPBioCard label="Guardian Contact" value={data?.guardianPhone || 'Not Set'} Icon={BsCalendarRange} />
       <AISPBioCard label="Region" value={data?.region?.title || 'Not Set'} Icon={BiMoneyWithdraw} />

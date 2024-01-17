@@ -21,7 +21,7 @@ function AISPLayout({ children }: Props) {
     <NSSRoleNav />
     <main className="w-full flex-1 flex flex-col md:overflow-y-scroll">
       <section className="md:mx-auto w-full md:max-w-7xl flex">
-         <div className="my-8 py-10 z-20 w-56 h-fit rounded-[2rem] bg-primary/80 hidden md:flex flex-col space-y-10">
+         <div className="my-8 py-10 z-20 w-56 h-fit rounded-[2rem] bg-primary/80 hidden md:flex flex-col space-y-3">
            <NSSLogoBox />
            <NSSNav />
          </div>

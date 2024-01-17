@@ -1,10 +1,7 @@
 import React from 'react'
-import Service from '../../utils/aisService'
-import { useUserStore } from '../../utils/authService';
-import toast from 'react-hot-toast';
 import RegistrationSlipItem from './RegistrationSlipItem';
 import moment from 'moment';
-import { IoPrint, IoRefreshSharp } from 'react-icons/io5';
+import { IoPrint } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 type Props = { 
@@ -38,7 +35,7 @@ function RegistrationSlipView({ title,data }: Props) {
         <span>{title}</span>
         <div className="flex space-x-2">
            <Link to="/print/registration" className="px-3 py-1 bg-primary/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoPrint className="h-6 w-6 text-white"/><span>PRINT SLIP</span></Link>
-           <button onClick={reset} className="px-3 py-1 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoRefreshSharp className="h-6 w-6 text-white"/><span>REVOKE REGISTRATION</span></button>
+           {/* <button onClick={reset} className="px-3 py-1 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold flex space-x-2 items-center justify-center rounded"><IoRefreshSharp className="h-6 w-6 text-white"/><span>REVOKE REGISTRATION</span></button> */}
         </div>
         
       </h1>

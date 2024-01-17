@@ -12,6 +12,7 @@ import { MdOutlineFiberPin, MdOutlineMarkEmailUnread } from 'react-icons/md'
 import { BiMoneyWithdraw } from 'react-icons/bi'
 import moment from 'moment'
 import AISPBioCard from '../../components/aisp/AISPBioCard'
+import { Link } from 'react-router-dom'
 
 type Props = {}
 
@@ -20,12 +21,12 @@ type Props = {}
 export async function loader({ params }){
   const user = useUserStore.getState().user;
   const data = await Service.fetchStudent(user?.user?.tag)
-  return { data }
+  return { data,user }
 }
 
 
 function PgAISPProfile({}: Props) {
-  const { data }: any = useLoaderData();
+  const { data,user }: any = useLoaderData();
   console.log(data)
 
   return (
@@ -35,9 +36,9 @@ function PgAISPProfile({}: Props) {
         <div className="min-h-fit py-1.5 px-3 md:py-2 md:px-4 bg-primary-dark/90 bg-[url('./assets/img/eagle.png')] bg-no-repeat bg-center rounded-md md:rounded-xl text-white flex items-center justify-center">
             <div className="w-full md:w-[90%] mx-auto flex items-center justify-between">
               <h1 className="md:text-2xl font-noto">My Profile</h1>
-              <div className="px-2 py-1 md:px-4 md:py-1 border border-white hover:bg-primary-accent/60 shadow-md rounded-md md:rounded-full text-[0.65rem] md:text-sm font-medium tracking-wider cursor-pointer">
+              <Link to={`/aisp/profile/${encodeURIComponent(user?.user?.tag)}/edit`} className="px-2 py-1 md:px-4 md:py-1 border border-white hover:bg-primary-accent/60 shadow-md rounded-md md:rounded-full text-[0.65rem] md:text-sm font-medium tracking-wider cursor-pointer">
                  <span>EDIT PROFILE</span>
-              </div>
+              </Link>
             </div>
         </div>
         {/* Circular Messages */}
@@ -50,6 +51,7 @@ function PgAISPProfile({}: Props) {
               <AISPBioCard label="Phone Number" value={data?.phone || 'Not Set'} Icon={FaPhoneAlt} />
               <AISPBioCard label="Email Address" value={data?.email?.toUpperCase() || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
               <AISPBioCard label="Residential Address" value={data?.address?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
+              <AISPBioCard label="Residential Status" value={data?.residentialStatus?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
               <AISPBioCard label="Guardian Name" value={data?.guardianName || 'Not Set'} Icon={MdOutlineFiberPin} />
               <AISPBioCard label="Guardian Contact" value={data?.guardianPhone || 'Not Set'} Icon={BsCalendarRange} />
               <AISPBioCard label="Region" value={data?.region?.title || 'Not Set'} Icon={BiMoneyWithdraw} />

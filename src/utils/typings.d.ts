@@ -40,6 +40,8 @@ export interface StoreState {
     logout: () => void;
     withCredential: (username:string, password: string) => void;
     withGoogle: (providerId:string, email: string) => void;
+    changePassword: (tag:string, oldpassword: string, newpassword: string) => void;
+    
 
 }
 

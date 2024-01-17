@@ -38,7 +38,6 @@ function Login() {
        e.preventDefault();
        const { username,password } = form;
        await withCredential(username,password);
-       console.log(user)
        if(user.user.group_id == 1){
          navigate('/aisp',{ replace: true })
        } else if(user.user.group_id == 3){
@@ -46,7 +45,6 @@ function Login() {
        } else {
          navigate('/dash',{ replace: true })
        }
-
     } catch (error) {
       console.log(error)
       
@@ -60,7 +58,6 @@ function Login() {
          await withGoogle(profile.googleId,profile.email)
          navigate('/dash',{ replace: true })
       }
-      
     } catch(e){
       console.log(e)
     }

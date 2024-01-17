@@ -37,7 +37,7 @@ function AISPRoleNav({}: Props) {
         {/* Mobile Navigation Slide */}
         <Menu.Items className="z-20 absolute top-13 left-0 min-h-max w-full rounded-b-[2.5rem] md:rounded-none border-b-8 border-blue-100/90 bg-primary backdrop-blur-lg backdrop-opacity-50 bg-opacity-95">
           <div className="py-4 px-6 pr-0  flex-1 flex flex-col space-y-1 md:space-y-4">
-            <Menu.Item as={AISPNavItem} title="Dashboard" url="dash" Icon={MdOutlineDashboard}></Menu.Item>
+            {/* <Menu.Item as={AISPNavItem} title="Dashboard" url="dash" Icon={MdOutlineDashboard}></Menu.Item> */}
             <Menu.Item as={AISPNavItem} title="My Profile" url="profile" Icon={CiUser}></Menu.Item>
             <Menu.Item as={AISPNavItem} title="Fees & Charges" url="fees" Icon={MdOutlineAddTask}></Menu.Item>
             <Menu.Item as={AISPNavItem} title="Results Statement" url="results" Icon={MdOutlineAddTask}></Menu.Item>

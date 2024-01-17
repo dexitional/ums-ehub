@@ -22,13 +22,13 @@ function AISPProfileCard({ data }: Props) {
             <h1 className="text-zinc-500 leading-5 md:font-medium text-base capitalize">{user?.user?.fname?.toLowerCase()} {user?.user?.mname && user?.user?.mname?.toLowerCase()+' '}{user?.user?.lname?.toLowerCase()}</h1>
             <p className="leading-5 text-sm text-primary/60 font-medium capitalize">{data?.department?.toLowerCase()}</p>
         </div>
-        <button className="px-4 py-2 bg-primary/90 text-white border shadow-lg rounded-md font-semibold tracking-wider flex items-center justify-center space-x-2">
+        <Link to="/print/registration" className="px-4 py-2 bg-primary/90 text-white border shadow-lg rounded-md font-semibold tracking-wider flex items-center justify-center space-x-2">
           <FaPrint className="h-5 w-5" />
           <span className="text-sm">Semester Registration Slip</span>
-        </button>
+        </Link>
         {/* <div className="px-4 py-1 bg-red-700 text-white border shadow-lg rounded-md font-semibold tracking-wider">Completed NSS</div> */}
         {/* <div className="px-4 py-1 bg-[#01A4A6] text-white border shadow-lg rounded-md font-semibold tracking-wider">LOGOUT</div> */}
-        <Link to={`profile/${user?.user?.tag}/edit`} className="p-2.5 md:px-4 md:py-2 w-full bg-green-600 md:bg-primary/70 flex items-center justify-center space-x-3">
+        <Link to={`/aisp/profile/${encodeURIComponent(user?.user?.tag)}/edit`} className="p-2.5 md:px-4 md:py-2 w-full bg-green-600 md:bg-primary/70 flex items-center justify-center space-x-3">
            <FiEdit className="md:h-5 md:w-5 text-white"/>
            <span className="text-white text-sm md:text-base font-medium tracking-wider">Update Student Profile</span>
         </Link>
