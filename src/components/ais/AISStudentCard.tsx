@@ -10,8 +10,8 @@ function AISStudentCard({ title,data }: Props) {
   return (
     <div className="w-full space-y-3 rounded">
     <h1 className="text-sm font-bold font-roboto tracking-wider text-primary-dark/60 flex flex-col md:flex-row justify-between">
-      <span>{title}</span>
-      <span className="px-3 py-0.5 bg-primary/70 text-xs text-white font-bold">{data?.length} STUDENTS</span>
+      <span className="px-3 py-0.5 rounded border border-primary/50">{title}</span>
+      <span className="px-3 py-0.5 rounded bg-primary/70 text-xs text-white font-bold flex items-center">{data?.length} STUDENTS</span>
     </h1>
     <div className="w-full rounded-lg shadow-md text-xs overflow-x-scroll md:overflow-hidden">
           <div className="px-3 py-2 bg-primary/10 text-primary-dark/70 font-bold grid grid-cols-9 tracking-wider">
@@ -25,7 +25,7 @@ function AISStudentCard({ title,data }: Props) {
             <div className="px-3 py-2 border-b grid grid-cols-9 font-medium text-xs text-primary/80">
                <span className="col-span-2 font-bold">{row.indexno}</span>
               <span className="col-span-2 font-bold">{row.indexno}</span>
-              <span className="col-span-3 font-medium">{row.fname} {row.mname && row.mname+''}{row.lname} </span>
+              <span className="col-span-3 font-medium">{row.fname} {row.mname && row.mname+' '}{row.lname} </span>
               <span>{row.gender == 'M' ? 'MALE':'FEMALE'}</span>
               <span className={`${row.deferStatus ? 'text-primary-accent/80':''}`}>{row.deferStatus ? 'DEFERRED':'ACTIVE'}</span>
             </div>

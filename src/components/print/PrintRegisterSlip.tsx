@@ -18,6 +18,7 @@ export async function loader({ params }) {
 function PrintRegisterSlip({}: Props) {
   const { data } :any = useLoaderData();
   const totalCredit  = data.reduce((sum,cur) => sum+cur.course.creditHour,0)
+  console.log(data)
   
   return (
     <div className="w-full flex flex-col justify-center items-center bg-white print:m-0 print:scale-90">
@@ -25,7 +26,7 @@ function PrintRegisterSlip({}: Props) {
             <PrintHeader /> 
            
             <div className="my-10 mx-auto max-w-4xl w-full flex flex-col space-y-8" style={{'font': "16px 'Arial Narrow MT Std', sans-serif" }}>
-               <h2 className="text-lg text-primary tracking-widest underline font-bold font-roboto text-center">2023/2024 SECOND SEMESTER REGISTRATION SLIP</h2>
+               <h2 className="text-lg text-primary tracking-widest underline font-bold font-roboto text-center">{data && data[0].session?.title?.toUpperCase()} REGISTRATION SLIP</h2>
                <div className="pt-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
                     <div className="px-6 pb-4 hidden md:grid print:grid grid-cols-5 place-items-center border-b border-slate-200 text-xs text-primary font-sans font-semibold uppercase tracking-widest">
                         <div className="place-self-start">Code</div>

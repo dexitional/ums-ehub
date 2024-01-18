@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/las/PageTitle'
 import Service from '../../utils/aisService'
 import { useLoaderData } from 'react-router'
@@ -12,19 +12,30 @@ export async function loader() {
   const user = useUserStore.getState().user;
   const data = await Service.fetchRegistrationMount(user?.user?.tag);
   const slip = await Service.fetchRegistration(user?.user?.tag);
+ 
   return { data,slip }
 }
 
 function PgAISPRegistrations({}: Props) {
+  
   const { data,slip } :any = useLoaderData();
+  const runDefault = () => {
+     // Update Compulsory & Locked Courses
+     const cdata = data.courses?.filter((row:any) => row.type == 'C' || (row.type == 'E' && row.lock))?.map((row:any) => row.code);
+     useUserStore.setState({ courses: cdata });
+  }
+
+  useEffect(() => {
+     runDefault()
+  },[])
+  
   return (
     <div className="md:pl-10 p-4 md:p-6 space-y-4 md:space-y-10">
       <div className="space-y-6">
         <PageTitle title="Registration" createtext="" createlink="" setView={()=> null} view={''} />
         { !slip.length 
-          ? <RegistrationListView title={"SEMESTER REGISTRATION PROCEDURE !!"} data={data}  />
-          : <RegistrationSlipView  title={"SEMESTER REGISTRATION SLIP"} data={slip}  />
-          
+          ? <RegistrationListView title={`${data.session.toUpperCase()} REGISTRATION PROCEDURE !!`} data={data}  />
+          : <RegistrationSlipView  title={`${data.session.toUpperCase()} REGISTRATION PRINTOUT`} data={slip}  />
         }
       </div>  
     </div>

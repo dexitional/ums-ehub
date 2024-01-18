@@ -9,6 +9,7 @@ import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { GrDocumentTime } from 'react-icons/gr'
 import moment from 'moment'
+import { CgCalendarDates } from 'react-icons/cg'
 
 type Props = {
   data: any;
@@ -31,17 +32,17 @@ function RegistrationCardItem({ data }: Props) {
             <span className={`${data?.student?.program?.longName ? 'text-gray-500':'text-red-500'} text-xs  font-bold capitalize`}>{data?.student?.program?.longName || 'Not assigned' }</span>
         </div>
         <div className="flex items-center space-x-4">
-            <GrDocumentTime className="h-4 w-5 text-primary/70" />
-            <span className="text-xs text-gray-500 font-semibold tracking-wider">{data?.createdAt && moment(data?.createdAt).format("MMM DD, YYYY") || 'Not Set'}</span>
+            <CgCalendarDates className="h-4 w-5 text-primary/70" />
+            <span className="text-xs text-gray-500 font-semibold tracking-wider">{data?.createdAt && moment(data?.createdAt).format("MMM DD, YYYY").toUpperCase() || 'Not Set'}</span>
         </div>
        
         <div className="flex items-center space-x-4">
             <FaFilePdf className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Courses: {data?.courses}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">Courses: {data?.courses}</span>
         </div>
         <div className="flex items-center space-x-4">
             <FaFilePdf className="h-4 w-5 text-primary/70" />
-            <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Credits: {data?.credits}</span>
+            <span className="px-2 py-0 bg-green-50 rounded border font-bold text-sm text-gray-500">Credits: {data?.credits}</span>
         </div>
         
     </div>
@@ -53,7 +54,7 @@ function RegistrationCardItem({ data }: Props) {
           </div>
         </div>
         <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center md:justify-between space-x-2 group">
-          <Link to={`${encodeURIComponent(data?.id)}/profile`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
+          <Link to={`/print/registration/${encodeURIComponent(data?.student?.id)}`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             {/* <FcViewDetails className="h-4 w-4 text-white"/> */}
             <LuFileSpreadsheet className="h-4 w-4 text-amber-200"/>
             <span className="text-sm text-white font-semibold">Slip</span>
@@ -68,7 +69,7 @@ function RegistrationCardItem({ data }: Props) {
           </Form>
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
               <span className={`${!data?.completeStatus ? 'bg-primary-dark/60':'bg-primary-accent/60'} py-0.5 px-2 rounded flex items-center space-x-1.5 text-sm text-white font-semibold`}>LEVEL</span>
-              <span className="font-semibold font-roboto text-base text-primary/60">{(Math.ceil(data?.semesterNum/2) * 100) || 'COMPLETED'}</span>
+              <span className="font-semibold font-roboto text-base text-primary/60">{(Math.ceil(data?.student?.semesterNum/2) * 100)}</span>
           </div>
         </div>
     </div>

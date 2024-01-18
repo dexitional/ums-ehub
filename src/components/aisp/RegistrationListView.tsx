@@ -24,7 +24,9 @@ function RegistrationListView({ title,data }: Props) {
   },0)
   
   const reset = () => {
-    useUserStore.setState({ courses: [] })
+    const cdata = data.courses?.filter((row:any) => row.type == 'C' || (row.type == 'E' && row.lock))?.map((row:any) => row.code);
+    useUserStore.setState({ courses: cdata });
+    // useUserStore.setState({ courses: [] })
   }
 
   const submit = async () => {

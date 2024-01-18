@@ -67,12 +67,12 @@ function App() {
   const router = createBrowserRouter([
     // Public Routes
     { path: "/", element: <Navigate to={{ pathname: isAuthenticated() ? '/dash' : '/login' }} replace />,  },
-    { path: "/login", element: isAuthenticated() ? user.user.group_id == 1 ? <Navigate to={{ pathname:'/aisp/profile'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
+    { path: "/login", element: isAuthenticated() ? user.user.group_id == 1 ? <Navigate to={{ pathname:'/aisp/registration'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
     // Protected Routes
     { 
       element: isAuthenticated() ? <Outlet/> : <Navigate to={{ pathname:'/login'}} replace />,
       children:[
-         { path: "dash", element: user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/profile'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Home /> },
+         { path: "dash", element: user?.user?.group_id == 1 ? <Navigate to={{ pathname:'/aisp/registration'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Home /> },
          // { path: "evs", element: <EVSPage /> },
          // { path: "evsmain", element: <EVSDashPage /> },
          // { path: "service/:module", element: <Home /> },
@@ -467,6 +467,10 @@ function App() {
             children: [
                // Registration Slip
                {  path:'registration', 
+                  element: <PrintRegisterSlip />,
+                  loader: printRegLoader
+               },
+               {  path:'registration/:registrationId', 
                   element: <PrintRegisterSlip />,
                   loader: printRegLoader
                },
