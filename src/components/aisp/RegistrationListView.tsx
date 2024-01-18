@@ -46,12 +46,15 @@ function RegistrationListView({ title,data }: Props) {
 
   
   return (
-    <div className="space-y-2">
+    <div className="space-y-4 md:space-y-2">
       <div className="px-3 flex flex-col md:flex-row items-center justify-between">
-        <h1 className="w-full text-sm md:text-base font-bold font-roboto tracking-wider text-primary-accent/80 flex flex-col md:flex-row justify-between">
+        <h1 className="w-full text-sm md:text-base font-bold font-roboto tracking-wider text-primary-accent/80 flex flex-col md:flex-row md:justify-between space-y-2 md:space-y-0">
           <span>{title}</span>
           { courses.length ? <button onClick={reset} className="px-3 py-0.5 bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold">RESTART SELECTION</button> : <div className="px-3 py-1 italic text-sm font-medium rounded border border-primary-accent/40">Please Choose your Courses and Submit!</div>}
         </h1>
+      </div>
+      <div className="px-3 py-1 rounded-md border border-primary/50 bg-primary/5 text-primary/70 font-medium text-xs md:text-sm">
+          <h1>Please Note that, Compulsory courses are automatically selected or chosen !!</h1>
       </div>
       <div className="pt-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
         <div className="px-6 pb-4  hidden md:grid grid-cols-6 place-items-center border-b border-slate-200 text-xs text-primary font-sans font-semibold uppercase tracking-widest">
