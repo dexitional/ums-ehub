@@ -35,7 +35,7 @@ function PgAISPRegistrations({}: Props) {
         <PageTitle title="Registration" createtext="" createlink="" setView={()=> null} view={''} />
         { !slip.length 
           ? <RegistrationListView title={`${data.session.toUpperCase()} REGISTRATION PROCEDURE !!`} data={data}  />
-          : <RegistrationSlipView  title={`${data.session.toUpperCase()} REGISTRATION PRINTOUT`} data={slip}  />
+          : <RegistrationSlipView  title={`${data.session.toUpperCase()} REGISTRATION SLIP`} data={slip}  />
         }
       </div>  
     </div>
