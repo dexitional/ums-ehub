@@ -23,7 +23,7 @@ function FeeListView({ data }: Props) {
       </div>
       <div className="grid grid-cols-1 text-[0.75rem] text-slate-600 font-roboto font-medium tracking-wider">
         { data && data?.map((row:any) => (<FeeListItem key={row.id} data={row} />))}
-        { !data && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Record ...</h1>)}
+        { !data.length && (<h1 className="w-full text-center text-gray-400 text-[0.65rem] font-semibold tracking-widest uppercase">No Record ...</h1>)}
       </div>
       { data.length ? (
       <div className={`${sum > 0 ? 'text-primary-accent/70' : 'text-primary/70'} px-6 pb-4 md:grid grid-cols-6 place-items-center border-slate-200 text-xs font-sans font-semibold uppercase tracking-widest`}>

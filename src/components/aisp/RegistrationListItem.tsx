@@ -23,7 +23,7 @@ function RegistrationListItem({ row }: Props) {
      
 
   return (
-    <div className={`px-3 md:px-6 pb-4 grid md:grid-cols-6 gap-y-1 md:gap-y-0 md:gap-x-2 md:place-items-center font-roboto font-medium text-xs text-gray-500 border-b border-slate-200 hover:bg-slate-50/50 group tracking-widest`}>
+    <div className={`px-3 md:px-6 py-4 grid md:grid-cols-6 gap-y-1 md:gap-y-0 md:gap-x-2 md:place-items-center font-roboto font-medium text-xs text-gray-500 border-b border-slate-200 hover:bg-slate-50/50 group tracking-widest`}>
         <div className="capitalize flex flex-col space-y-2 md:place-self-start">
           <ListHeading title="Code"/>
           <span className="">{row?.code}</span>
