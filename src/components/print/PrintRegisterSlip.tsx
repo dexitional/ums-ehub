@@ -26,7 +26,7 @@ function PrintRegisterSlip({}: Props) {
             <PrintHeader /> 
             <div className="my-4 w-full md:max-w-4xl mx-auto flex flex-col md:flex-row space-x-6">
                 <div className="p-2 border relative">
-                  <img src={`https://cdn.ucc.edu.gh/photos/?tag=0 `} className="h-28 object-contain" />
+                  <img src={`https://cdn.ucc.edu.gh/photos/?tag=0 `} className="h-24 object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex space-x-10"><span className="w-20">Full Name:</span> <span className="capitalize">{data[0]?.student?.fname?.toLowerCase()} {data[0]?.student?.mname?.toLowerCase()} {data[0]?.student?.lname?.toLowerCase()}</span></div>
