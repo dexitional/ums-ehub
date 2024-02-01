@@ -9,7 +9,7 @@ import Loading from '../Loader'
 import Loader from '../Loader'
 
 type Props = {
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 function AISPLayout({ children }: Props) {

@@ -88,7 +88,7 @@ function Home() {
                     desc="Manage new admission applications and new enrolments." 
                     Icon={PiStudentFill} 
                     links={[
-                      { title:'Goto Application', url:'#'},
+                      { title:'Goto Application', url:'/ams/'},
                     ]} 
                   />
                   }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 const { REACT_APP_API_URL } = import.meta.env;
 
-class DricService {
+class Service {
     
     /* STUDENT */
 
@@ -731,8 +731,76 @@ class DricService {
         }
      }
 
+     async fetchCategories(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/categories`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchMarital(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/marital`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchRelations(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/relations`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchCollectors(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/collectors`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchVendors(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/vendors`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async convertBase64(file){
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => resolve(fileReader.result)
+          fileReader.onerror = error => reject(error)
+        })
+    }
 
     
 }
 
-export default new DricService();
+export default new Service();

@@ -8,7 +8,7 @@ import { IoArrowBackCircle, IoPrint } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
 
 type Props = {
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 function PrintLayout({ children }: Props) {

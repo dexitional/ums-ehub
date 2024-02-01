@@ -8,7 +8,7 @@ import AISLogoBox from './AISLogoBox'
 import Loader from '../Loader'
 
 type Props = {
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 function AISLayout({ children }: Props) {

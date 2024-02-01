@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import SubPageTitle from '../../components/dric/SubPageTitle'
+import SubPageTitle from '../../components/ais/SubPageTitle'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import Service from '../../utils/dricService'
+import Service from '../../utils/aisService'
 
 type Props = {}
 
@@ -19,7 +19,7 @@ export async function action({ request, params }){
      resp = await Service.postRole(data);
   
    if(resp){
-     return redirect(`/dric/roles`)
+     return redirect(`/ais/roles`)
    }
 } 
 // Load Data of Single 
@@ -76,26 +76,27 @@ function PgDricRoleForm({}: Props) {
              <div className="p-3 md:py-6 md:pb-10 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
                <h1 className="py-0.5 px-2 md:px-4 w-fit text-xs md:text-base font-semibold rounded-md bg-blue-950/60 text-white tracking-widest uppercase -skew-x-6">Access & Privilege</h1>
                <div className="md:pl-6 space-y-4">
-                 
-               <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">SSO Role</span>
-                      <select arial-label="role" name="arole_id" defaultValue={data?.arole_id}  required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        <option value="18">DRIC Admin</option>
-                        <option value="20">DRIC Manager</option>
-                        <option value="20">DRIC Accountant</option>
-                        <option value="19">DRIC Clerk</option>
-                        <option value="20">DRIC Investigator</option>
-                        <option value="20">DRIC NSS</option>
-                      </select>
+                  <label className="flex flex-col space-y-2">
+                    <span className="text-sm md:text-base text-gray-500 font-medium">SSO Role</span>
+                    <select arial-label="role" name="arole_id" defaultValue={data?.arole_id}  required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <option selected disabled>-- Choose --</option>
+                      <option value="18">AIS Admin</option>
+                      <option value="20">AIS Dean</option>
+                      <option value="20">AIS HOD</option>
+                      <option value="20">AIS Accountant</option>
+                      <option value="19">AIS Registrar</option>
+                      <option value="19">AIS Clerk</option>
+                      <option value="20">AIS Assessor</option>
+                      <option value="19">AIS Sales</option>
+                    </select>
                   </label>
                   <label className="flex flex-col space-y-2">
-                      <span className="text-sm md:text-base text-gray-500 font-medium">SSO Status</span>
-                      <select arial-label="status" name="status" defaultValue={data?.status} required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
-                        <option selected disabled>-- Choose --</option>
-                        <option value="0">Disabled</option>
-                        <option value="1">Enabled</option>
-                      </select>
+                    <span className="text-sm md:text-base text-gray-500 font-medium">SSO Status</span>
+                    <select arial-label="status" name="status" defaultValue={data?.status} required className="focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <option selected disabled>-- Choose --</option>
+                      <option value="0">Disabled</option>
+                      <option value="1">Enabled</option>
+                    </select>
                   </label>
                  
                   <div className="flex items-center space-x-6">
@@ -103,10 +104,8 @@ function PgDricRoleForm({}: Props) {
                     <button className="py-1 px-4 rounded-md bg-blue-950/70 text-white font-semibold" type="submit">SAVE</button>
                     <button onClick={() => { if(confirm('Cancel')) navigate(-1) }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">CANCEL</button>
                   </div>
-                  
                 </div>
              </div>
-             
          </Form>
         
       </div>

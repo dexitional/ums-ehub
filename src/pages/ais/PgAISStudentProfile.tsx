@@ -45,6 +45,7 @@ function PgAISStudentProfile({}: Props) {
        <AISPBioCard label="Student Number" value={`${data?.id}`} Icon={ImProfile} />
       <AISPBioCard label="Index Number" value={data?.indexno || 'Not Set'} Icon={TbHomeCheck} />
       <AISPBioCard label="Programme" value={data?.program?.longName || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
+      <AISPBioCard label="Level" value={(Math.ceil(data?.semesterNum/2)*100).toString() || 'Not Set'} Icon={MdOutlineMarkEmailUnread} />
       <AISPBioCard label="Department" value={data?.program?.department?.title || 'Not Set'} Icon={FaPhoneAlt} />
       <AISPBioCard label="Institutional Email" value={data?.address?.toUpperCase() || 'Not Set'} Icon={FaRegAddressCard} />
       <AISPBioCard label="Ghana Card Number" value={data?.end_date && moment(data?.end_date).format('MMMM, YYYY').toUpperCase() || 'Not Set'} Icon={BsCalendarRange} />

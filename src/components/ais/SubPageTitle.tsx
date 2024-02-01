@@ -19,8 +19,8 @@ function SubPageTitle({ title, page, link }: Props) {
   return (
     <div className="flex items-center justify-between">
         <div className="flex flex-col md:flex-row md:items-center md:space-x-6 md:space-y-0 space-y-2">
-            <h1 className="py-0.5 px-2 w-fit bg-slate-100 border-r-8 border-primary/70 rounded-md text-[0.65rem] md:text-xs font-semibold text-primary-dark/70 uppercase">{page}</h1>
-            <h1 className="text-[0.6rem] md:text-lg font-medium text-primary-dark/70 uppercase tracking-wider">{title}</h1>
+            <h1 className="py-0.5 px-2 w-fit bg-slate-100 border-r-8 border-primary-accent/70 rounded-md text-[0.65rem] md:text-xs font-semibold text-primary-accent/70 uppercase">{page}</h1>
+            <h1 className="text-[0.6rem] md:text-lg font-medium text-primary-accent/80 uppercase tracking-wider">{title}</h1>
         </div>
         
         <div className="flex items-center space-x-2">

@@ -15,6 +15,7 @@ import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
 // import { useAuth } from '../utils/authService';
 import { GoogleLogin } from 'react-google-login'
 import { useUserStore } from '../utils/authService';
+import { PiStudentBold } from "react-icons/pi";
 // @ts-ignore
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
 
@@ -27,6 +28,7 @@ function Login() {
   
   const [ showStudentForm,setShowStudentForm ] =  useState(false)
   const [ showSSOForm,setShowSSOForm ] =  useState(false)
+  const [ showVoucherForm,setShowVoucherForm ] =  useState(false)
 
   const onChange = (e) => {
      e.preventDefault();
@@ -129,9 +131,9 @@ function Login() {
                     </div>
 
                     {/* Buttons */}
-                    <div className={`${showStudentForm || showSSOForm ? 'hidden':'flex'} mx-auto md:w-[90%] flex-col space-y-4`}>
+                    <div className={`${showStudentForm || showSSOForm || showVoucherForm ? 'hidden':'flex'} mx-auto md:w-[90%] flex-col space-y-4`}>
                         
-                        <GoogleLogin
+                        {/* <GoogleLogin
                             clientId={ REACT_APP_GOOGLE_CLIENT_ID }
                             render={renderProps => (
                               <button onClick={renderProps.onClick} disabled={renderProps.disabled} className={`${showStudentForm || showSSOForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-white font-bold tracking-wider`}>
@@ -143,31 +145,42 @@ function Login() {
                             onFailure={errorGoogle}
                             cookiePolicy={'single_host_origin'}
                             hostedDomain={'ucc.edu.gh'}
-                        />
-                        
-                        <button onClick={()=> setShowSSOForm(true)} className={`${showSSOForm || showStudentForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
+                        /> */}
+                        <button onClick={()=> setShowVoucherForm(true)} className={`${showSSOForm || showStudentForm || showVoucherForm ? 'hidden':'flex'}  py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-white font-bold tracking-wider`}>
+                            <PiStudentBold className="h-6 w-6 text-primary-dark"/>
+                            <span className="text-sm md:text-base text-primary-dark">Apply with Admission Voucher</span>
+                        </button>
+                        <button onClick={()=> setShowSSOForm(true)} className={`${showSSOForm || showStudentForm || showVoucherForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
                             <FcLock className="h-6 w-6"/>
                             <span className="text-sm md:text-base">Sign In with SSO Credentials</span>
                         </button>
-                        <button onClick={()=> setShowStudentForm(true)} className={`${showSSOForm || showStudentForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
+                        <button onClick={()=> setShowStudentForm(true)} className={`${showSSOForm || showStudentForm || showVoucherForm ? 'hidden':'flex'} py-2.5 px-4 md:px-6 w-full flex items-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider`}>
                             <ImProfile className="h-6 w-6 text-primary-dark"/>
                             <span className="text-sm md:text-base">Sign In with Student Access</span>
                         </button>
                     </div>
 
                     {/* Forms */}
-                    <form onSubmit={authenticateCredential} className={`${showStudentForm || showSSOForm ? 'flex':'hidden'} mx-auto py-4 px-3 md:p-4 md:w-[90%] rounded-xl border-[3px] border-primary-dark/30 bg-primary flex-col space-y-4 text-white text-lg`}>
-                        <div>
-                           <input type="text" name="username" value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Student Number' : 'Username' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/80 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                    <form onSubmit={authenticateCredential} className={`${showStudentForm || showSSOForm || showVoucherForm ? 'flex':'hidden'} mx-auto py-4 px-3 md:p-4 md:w-[90%] rounded-xl border-[3px] border-primary-dark/30 bg-primary flex-col space-y-4 text-white text-lg`}>
+                        <div className="shadow bg-white/10 rounded-md flex items-center justify-between">
+                           <h1 className="px-4 py-1 text-lg text-primary-dark font-semibold tracking-widest">
+                             {showStudentForm ? 'STUDENT LOGIN' : showVoucherForm ? 'APPLICANT LOGIN':'STAFF LOGIN' }
+                           </h1>
+                           <div className="relative pr-2">
+                              <img src={Logo} alt="" className="h-10"/>
+                           </div>
                         </div>
                         <div>
-                           <input type="password" name="password" value={form.password} onChange={onChange} placeholder={`Password`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                           <input type="text" name={`${showVoucherForm ? 'pin':'username'}`} value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Student Number' : showVoucherForm ? 'Serial':'Username' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/80 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                        </div>
+                        <div>
+                           <input type="password" name={`${showVoucherForm ? 'pin':'password'}`} value={form.password} onChange={onChange} placeholder={`${showVoucherForm ? 'Pin':'Password'}`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
                         </div>
                         <button type="submit" className="py-2.5 px-4 md:px-10 w-full flex items-center justify-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider">
                             <FaLock className="h-4 w-4 text-gray-800"/>
                             <span className="text-sm md:text-base text-gray-800 uppercase">Sign In</span>
                         </button>
-                        <button onClick={(e)=> { e.preventDefault(); setShowStudentForm(false); setShowSSOForm(false); }} className="py-1 px-4 mx-auto w-fit rounded-xl bg-primary-dark/70 focus:ring-0 focus:outline-none flex items-center space-x-2">
+                        <button onClick={(e)=> { e.preventDefault(); setShowStudentForm(false); setShowSSOForm(false); setShowVoucherForm(false); }} className="py-1 px-4 mx-auto w-fit rounded-xl bg-primary-dark/70 focus:ring-0 focus:outline-none flex items-center space-x-2">
                           <FaArrowLeft className="w-3 h-3 text-white/60" />
                           <span className="text-sm font-bold text-white/60">Go Back</span>
                         </button>
