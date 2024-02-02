@@ -21,7 +21,7 @@ function PgAISPRegistrations({}: Props) {
   const { data,slip } :any = useLoaderData();
   const runDefault = () => {
      // Update Compulsory & Locked Courses
-     const cdata = data.courses?.filter((row:any) => row.type == 'C' || (row.type == 'E' && row.lock))?.map((row:any) => row.code);
+     const cdata = data?.courses?.filter((row:any) => row.type == 'C' || (row.type == 'E' && row.lock))?.map((row:any) => row.code);
      useUserStore.setState({ courses: cdata });
   }
 
@@ -34,8 +34,8 @@ function PgAISPRegistrations({}: Props) {
       <div className="space-y-6">
         <PageTitle title="Registration" createtext="" createlink="" setView={()=> null} view={''} />
         { !slip.length 
-          ? <RegistrationListView title={`${data.session.toUpperCase()} REGISTRATION PROCEDURE !!`} data={data}  />
-          : <RegistrationSlipView  title={`${data.session.toUpperCase()} REGISTRATION SLIP`} data={slip}  />
+          ? <RegistrationListView title={`${data?.session?.toUpperCase()} REGISTRATION PROCEDURE !!`} data={data}  />
+          : <RegistrationSlipView  title={`${data?.session?.toUpperCase()} REGISTRATION SLIP`} data={slip}  />
         }
       </div>  
     </div>

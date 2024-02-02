@@ -24,13 +24,13 @@ function RegistrationListView({ title,data }: Props) {
   },0)
   
   const reset = () => {
-    const cdata = data.courses?.filter((row:any) => row.type == 'C' || (row.type == 'E' && row.lock))?.map((row:any) => row.code);
+    const cdata = data?.courses?.filter((row:any) => row.type == 'C' || (row.type == 'E' && row.lock))?.map((row:any) => row.code);
     useUserStore.setState({ courses: cdata });
     // useUserStore.setState({ courses: [] })
   }
 
   const submit = async () => {
-     const cdata = data.courses?.filter((row:any) => {
+     const cdata = data?.courses?.filter((row:any) => {
           const isChosen = courses.find((course:any) => course == row.code);
           return !!isChosen 
       })
@@ -50,7 +50,7 @@ function RegistrationListView({ title,data }: Props) {
       <div className="px-3 flex flex-col md:flex-row items-center justify-between">
         <h1 className="w-full text-sm md:text-base font-bold font-roboto tracking-wider text-primary-accent/80 flex flex-col md:flex-row md:justify-between space-y-2 md:space-y-0">
           <span>{title}</span>
-          { courses.length ? <button onClick={reset} className="px-3 py-0.5 rounded bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold">RESTART SELECTION</button> : <div className="px-3 py-1 italic text-sm font-medium rounded border border-primary-accent/40">Please Choose your Courses and Submit!</div>}
+          { courses?.length ? <button onClick={reset} className="px-3 py-0.5 rounded bg-primary-accent/80 text-xs md:text-sm text-white md:font-bold">RESTART SELECTION</button> : <div className="px-3 py-1 italic text-sm font-medium rounded border border-primary-accent/40">Please Choose your Courses and Submit!</div>}
         </h1>
       </div>
       <div className="px-3 py-1 rounded-md border border-primary/50 bg-primary/5 text-primary/70 font-medium text-xs md:text-sm">
@@ -71,7 +71,7 @@ function RegistrationListView({ title,data }: Props) {
         { courses && 
         <div className="px-6 pb-4 grid grid-cols-1 md:grid-cols-6 gap-y-4 md:place-items-center border-slate-200 text-xs text-primary/70 font-roboto font-semibold uppercase tracking-widest">
             <div className="pb-4 md:pb-0 border-b md:border-b-0 md:col-span-2 md:place-self-start flex items-center justify-between">
-               { courses.length ? <button onClick={submit} className="px-5 py-2 w-full bg-primary/70 rounded text-white font-roboto font-medium text-xs tracking-[0.17rem] uppercase">Submit Registration</button>: null }
+               { courses?.length ? <button onClick={submit} className="px-5 py-2 w-full bg-primary/70 rounded text-white font-roboto font-medium text-xs tracking-[0.17rem] uppercase">Submit Registration</button>: null }
             </div>
             <div className="md:col-span-2 flex items-center justify-between"><span>Chosen Credits:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">{chosenCredit}</span></span></div>
             <div className="md:col-span-2 flex items-center justify-between"><span>Maximum Credits:&nbsp;&nbsp;&nbsp;<span className="text-primary-accent text-sm">Not Set</span></span></div>
