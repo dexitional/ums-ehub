@@ -27,7 +27,7 @@ function FormTemplate({ data }: Props) {
         <PrintHeader />
         <main className="w-full print:text-[0.79rem] print:font-poppins">
            <div className="mt-0 mb-8 space-y-6">
-               <h1 className="text-center text-gray-800 underline text-lg print:text-base font-[san-serif] font-semibold uppercase">{applicant.stage.categoryId == 'CP' ? 'Certificate Program': applicant.stage.categoryId == 'DP' ? 'Diploma Program':applicant.stage.categoryId == 'UG' ? 'Undergraduate':'Postgraduate' } Online Application Form</h1>
+               <h1 className="text-center text-gray-800 underline text-lg print:text-base font-[san-serif] font-semibold uppercase">{applicant?.stage?.categoryId == 'CP' ? 'Certificate Program': applicant?.stage?.categoryId == 'DP' ? 'Diploma Program':applicant?.stage?.categoryId == 'UG' ? 'Undergraduate':'Postgraduate' } Online Application Form</h1>
                {/* <div className="space-y-6 print:space-y-3">
                     <address className="print:text-xs">
                         <p className="text-primary-dark font-semibold uppercase not-italic">REFERENCE: 240921009</p>

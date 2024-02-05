@@ -382,7 +382,7 @@ class Service {
     /* Shortlists */
     async fetchShortlists(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/ams/shorlists?keyword=${keyword}&page=${page}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/shortlists?keyword=${keyword}&page=${page}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
@@ -410,7 +410,7 @@ class Service {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record saved!")
+               toast.success("Applicant shortlisted!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -438,7 +438,7 @@ class Service {
 
     async deleteShortlist(shortlistId){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/ams/shotlists/${shortlistId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/ams/shortlists/${shortlistId}`)
             if(res.status == 200){
                toast.success("Record deleted!")
                return res.data
@@ -449,7 +449,7 @@ class Service {
             toast.error(error.message)
         }
     }
-    
+
 
     /* Matriculants */
     async fetchMatriculants(keyword,page){

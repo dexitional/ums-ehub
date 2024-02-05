@@ -23,12 +23,14 @@ function Login() {
   const navigate = useNavigate();
   //const { withCredential,withGoogle,isLoading,message,user,isAuthenticated } = useAuth();
   const { withCredential,withGoogle, message, user,isAuthenticated } = useUserStore(state => state);
-  
   const [ form,setForm ] =  useState({ username: '', password: '' })
-  
   const [ showStudentForm,setShowStudentForm ] =  useState(false)
   const [ showSSOForm,setShowSSOForm ] =  useState(false)
   const [ showVoucherForm,setShowVoucherForm ] =  useState(false)
+
+  useEffect(() => {
+    setForm({ username: '', password: '' })
+  },[showStudentForm,showSSOForm,showVoucherForm])
 
   const onChange = (e) => {
      e.preventDefault();
@@ -40,9 +42,9 @@ function Login() {
        e.preventDefault();
        const { username,password } = form;
        await withCredential(username,password);
-       if(user.user.group_id == 1){
+       if(user?.user?.group_id == 1){
          navigate('/aisp',{ replace: true })
-       } else if(user.user.group_id == 3){
+       } else if(user?.user?.group_id == 3){
          navigate('/amsp',{ replace: true })
        } else {
          navigate('/dash',{ replace: true })
@@ -171,10 +173,10 @@ function Login() {
                            </div>
                         </div>
                         <div>
-                           <input type="text" name={`${showVoucherForm ? 'pin':'username'}`} value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Student Number' : showVoucherForm ? 'Serial':'Username' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/80 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                           <input type="text" name={`username`} value={form.username} onChange={onChange} placeholder={`${showStudentForm ? 'Student Number' : showVoucherForm ? 'Serial':'Username' }`} className="px-4 py-2 w-full text-border-primary/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/80 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
                         </div>
                         <div>
-                           <input type="password" name={`${showVoucherForm ? 'pin':'password'}`} value={form.password} onChange={onChange} placeholder={`${showVoucherForm ? 'Pin':'Password'}`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
+                           <input type="password" name={`password`} value={form.password} onChange={onChange} placeholder={`${showVoucherForm ? 'Pin':'Password'}`} className="px-4 py-2 w-full text-border-blue-50/20 font-medium rounded-md border-2 border-primary/20 focus:border-primary/20 bg-primary-dark/60 focus:ring-0 focus:outline-none  placeholder:text-base md:placeholder:text-base placeholder:text-white/50 placeholder:tracking-widest placeholder:uppercase" />
                         </div>
                         <button type="submit" className="py-2.5 px-4 md:px-10 w-full flex items-center justify-center space-x-4 shadow rounded bg-primary-accent/90 font-bold tracking-wider">
                             <FaLock className="h-4 w-4 text-gray-800"/>

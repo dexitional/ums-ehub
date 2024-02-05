@@ -12,6 +12,7 @@ export async function action({ request, params }){
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
        data.dob = moment(data.dob)
+       data.semesterNum = Number(data.semesterNum)
        data.entryDate = moment(data.entryDate)
        data.completeStatus = data.completeStatus == 1
        data.deferStatus = data.deferStatus == 1
@@ -201,14 +202,16 @@ function PgAISStudentForm({}: Props) {
                   </label> */}
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Program Level</span>
-                      <select arial-label="completeStatus" name="completeStatus" defaultValue={data?.completeStatus} required className="w-full focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <select arial-label="semesterNum" name="semesterNum" defaultValue={Number(data?.semesterNum)} required className="w-full focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        <option value="1">LEVEL 100, SEMESTER 1</option>
-                        <option value="2">LEVEL 100, SEMESTER 2</option>
-                        <option value="3">LEVEL 200, SEMESTER 1</option>
-                        <option value="4">LEVEL 200, SEMESTER 2</option>
-                        <option value="5">LEVEL 300, SEMESTER 1</option>
-                        <option value="6">LEVEL 300, SEMESTER 2</option>
+                        <option value={1}>LEVEL 100, SEMESTER 1</option>
+                        <option value={2}>LEVEL 100, SEMESTER 2</option>
+                        <option value={3}>LEVEL 200, SEMESTER 1</option>
+                        <option value={4}>LEVEL 200, SEMESTER 2</option>
+                        <option value={5}>LEVEL 300, SEMESTER 1</option>
+                        <option value={6}>LEVEL 300, SEMESTER 2</option>
+                        {/* <option value={7}>LEVEL 400, SEMESTER 1</option>
+                        <option value={8}>LEVEL 400, SEMESTER 2</option> */}
                       </select>
                   </label>
                   <label className="flex flex-col space-y-2">

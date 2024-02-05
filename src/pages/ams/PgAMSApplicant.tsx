@@ -58,7 +58,7 @@ function PgAMSApplicant({}: Props) {
                 <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-1"> 
                     <span className="px-3 py-0.5 w-fit text-xs md:text-sm font-medium tracking-wider capitalize bg-primary rounded-md text-white">{applicant?.submitted ? `SUBMITTED` : 'IN-PROGRESS'}</span>
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-400 hidden md:flex"></div>
-                    <span className="tracking-wider text-xs md:text-base capitalize">{applicant.stage?.title?.toUpperCase()}</span>
+                    <span className="tracking-wider text-xs md:text-base capitalize">{applicant?.stage?.title?.toUpperCase()}</span>
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-400 hidden md:flex"></div>
                  </div>
                  <div className="flex items-center space-x-2">

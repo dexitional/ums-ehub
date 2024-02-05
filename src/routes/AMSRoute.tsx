@@ -105,8 +105,8 @@ const AMSRoute:any =  {
          action: amsVoucherRecover,
       },
 
-       /* Applicant Module */
-       { 
+      /* Applicant Module */
+      { 
          path:'applicants', 
          element: <PgAMSApplicants />,
          loader: applicantsLoader,
@@ -123,7 +123,7 @@ const AMSRoute:any =  {
          loader: applicantLoader,
       },
       { 
-         path:'applicants/:applicantId/destroy', 
+         path:'applicants/:applicantId/shortlist', 
          action: amsApplicantDestroy,
       },
       { 

@@ -53,17 +53,17 @@ function RegistrationCardItem({ data }: Props) {
               <span className="font-semibold font-roboto text-base text-primary/60">{Math.ceil(data?.student?.semesterNum/2) * 100}</span>
           </div>
         </div>
-        <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center md:justify-between space-x-2 group">
+        <div className="px-3 py-2 opacity-80 md:opacity-100 flex rounded-md border bg-white items-center space-x-2 group">
           <Link to={`/print/registration/${encodeURIComponent(data?.student?.id)}`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             {/* <FcViewDetails className="h-4 w-4 text-white"/> */}
             <LuFileSpreadsheet className="h-4 w-4 text-amber-200"/>
             <span className="text-sm text-white font-semibold">Slip</span>
           </Link>
-          <Link to={`${encodeURIComponent(data?.id)}/edit`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
+          {/* <Link to={`${encodeURIComponent(data?.id)}/edit`} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             <MdEditDocument className="h-4 w-4 text-green-200"/>
             <span className="text-sm text-white font-semibold">Edit</span>
-          </Link>
-          <Form method="post" action={`${data?.id}/destroy`} onSubmit={(e)=> { if(!confirm("Do you want to delete")) e.preventDefault(); return false; }} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary-accent/60">
+          </Link> */}
+          <Form method="post" action={`${encodeURIComponent(data?.student?.id)}/destroy`} onSubmit={(e)=> { if(!confirm("Do you want to delete")) e.preventDefault(); return false; }} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary-accent/60">
             <FaTrash className="h-3 w-4 text-pink-100" />
             <button type="submit" className="text-sm text-white font-semibold">Delete</button>
           </Form>

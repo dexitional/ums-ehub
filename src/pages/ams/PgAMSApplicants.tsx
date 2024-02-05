@@ -7,7 +7,7 @@ import ApplicantCardItem from '../../components/ams/ApplicantCardItem'
 type Props = {}
 
 export async function action({ params }) {
-  await Service.postApplicant(params.applicantId);
+  await Service.postShortlist({ serial: params.applicantId });
   return redirect("/ams/applicants");
 }
 
