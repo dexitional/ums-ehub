@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import SubPageTitle from '../../components/ais/SubPageTitle'
 import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import Service from '../../utils/amsService'
+import Helper from '../../utils/aisService'
 import moment from 'moment'
 
 type Props = {}
@@ -34,7 +35,7 @@ export async function action({ request, params }){
 // Load Data of Single 
 export async function loader({ params }){
    let data = { id: '' };
-   const sessions = await Service.fetchSessionList()
+   const sessions = await Helper.fetchSessionList()
    const letters = await Service.fetchLetterList()
 
    const id = params?.sessionId || 0;
@@ -108,10 +109,10 @@ function PgAMSSessionForm({}: Props) {
                <div className="md:pl-6 space-y-4">
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Starting Academic Session</span>
-                      <select arial-label="schemeId" name="schemeId" defaultValue={data?.schemeId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
+                      <select arial-label="sessionId" name="sessionId" defaultValue={data?.sessionId} required className="focus:ring-0 border focus:border-slate-300  border-primary-dark/10 bg-primary-dark/5 text-sm md:text-base text-gray-500 rounded-md">
                         <option selected disabled>-- Choose --</option>
-                        { letters && letters?.map((row:any) =>(
-                          <option key={row.id} value={row.id}>{row.title?.toUpperCase()}</option>
+                        { sessions && sessions?.map((row:any) =>(
+                          <option key={row.id} value={row.id}>{row.title?.toUpperCase()} {row.tag && `(${row.tag.toUpperCase()})`} {row.default && `- CURRENT`}</option>
                         ))}
                       </select>
                   </label>

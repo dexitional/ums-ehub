@@ -9,6 +9,7 @@ import { useUserStore } from './utils/authService';
 import AISPRoute from './routes/AISPRoute'
 import AISRoute from './routes/AISRoute'
 import AMSRoute from './routes/AMSRoute'
+import AMSPRoute from './routes/AMSPRoute'
 import PrintRoute from './routes/PrintRoute'
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = import.meta.env;
@@ -18,6 +19,7 @@ function App() {
   const { isAuthenticated, user } = useUserStore(state => state)
   
   const router = createBrowserRouter([
+         
     // Public Routes
     { path: "/", element: <Navigate to={{ pathname: isAuthenticated() ? '/dash' : '/login' }} replace />,  },
     { path: "/login", element: isAuthenticated() ? user.user.group_id == 1 ? <Navigate to={{ pathname:'/aisp/registration'}} replace /> : user?.user?.group_id == 3 ? <Navigate to={{ pathname:'/amsp/dash' }} replace /> : <Navigate to={{ pathname:'/dash'}} replace /> : <Login /> },
@@ -31,8 +33,10 @@ function App() {
          // { path: "service/:module", element: <Home /> },
          
          
-
-         /* STUDENT PORTAL SYSTEM ROUTE */
+         /* ADMISSION PORTAL ROUTE */
+         {...AMSPRoute },
+    
+         /* STUDENT PORTAL ROUTE */
          {...AISPRoute },
          /* ADMISSION SYSTEM ROUTE */
          {...AMSRoute },

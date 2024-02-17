@@ -4,8 +4,44 @@ const { REACT_APP_API_URL } = import.meta.env;
 
 class Service {
     
-    /* STUDENT */
+    /* Calendar */
+    async fetchSessionList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/sessions/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
 
+    async fetchSessions(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/sessions?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async fetchSession(sessionId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/session/${encodeURIComponent(sessionId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+    
+    /* STUDENT */
     async fetchStudents(keyword,page){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/ais/students?keyword=${keyword}&page=${page}`)
@@ -59,6 +95,66 @@ class Service {
             const res = await axios.get(`${REACT_APP_API_URL}/ais/students/${encodeURIComponent(studentId)}/activity`)
             if(res.status == 200 || res.status == 204)
                return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async stageStudentAccess(studentId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/students/stage`,{ studentId })
+            console.log(res.status)
+            if(res.status == 200 || res.status == 204){
+                return res.data
+            } else if(res.status == 500){
+              toast.error("Portal account already staged")
+            }
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            console.log(error?.response)
+            toast.error(error?.response?.data)
+        }
+    }
+
+    async resetStudentAccess(studentId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/students/reset`,{ studentId })
+            if(res.status == 200 || res.status == 204){
+                const data = res?.data
+                console.log(data)
+                toast(`Password changed to: \t${data?.password}`,{ className:'rounded-full bg-green-100 shadow border-4 border-white text-base text-primary-dark font-semibold', duration: 15000 })
+            }
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async changePhoto(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/auth/photos`,data)
+            if(res.status == 200 || res.status == 204){
+               toast.success("Photo updated!")
+               return res.data
+            }
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async removePhoto(tag){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/auth/photos/${encodeURIComponent(tag)}`)
+            if(res.status == 200 || res.status == 204){
+                toast.success("Photo removed!");
+                return res.data
+            }
             else throw new(res.data.message)
         
         } catch (error) {
@@ -470,7 +566,7 @@ class Service {
         }
      }
 
-      /* Registrations */
+    /* Registrations */
     async fetchRegistrationList(){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/ais/registrations/list`)
@@ -778,6 +874,7 @@ class Service {
             toast.error(error.message)
         }
      }
+
 
      async fetchVendors(){
         try {

@@ -42,10 +42,14 @@ function PgAMSApplicant({}: Props) {
             <div className="hidden md:block p-2 md:p-2 h-16 w-16 md:h-24 md:w-24 border rounded-xl shadow-lg bg-white">
               <img src={applicant?.photo || Logo} className="h-12 w-12 md:h-20 md:w-20 object-contain" />
             </div>
-            <Link to={`edit`} className="p-1 md:py-1 md:px-3 absolute right-0 top-0 bg-slate-50 hover:bg-primary-accent/5 border border-gray-200 hover:border-primary-accent/40 rounded flex items-center md:space-x-2 group">
-                <span className="text-gray-400 hidden md:flex">Shortlist</span>
+            
+            { !data?.sorted && data?.submitted ?
+            <Form method="post" action={`${data?.serial}/shortlist`} onSubmit={(e)=> { if(!confirm("Shortlist Applicant?")) e.preventDefault(); return false; }}>
+                <button type="submit" className="text-gray-400 hidden md:flex">Shortlist</button>
                 <IoCheckmarkDoneCircleSharp className="h-5 w-5 text-gray-300 group-hover:text-primary-accent/70"/>
-            </Link>
+            </Form>
+              : null
+            }
             
             <div className="flex-1 flex flex-col space-y-4 md:space-y-3">
               <div className="flex space-x-2">

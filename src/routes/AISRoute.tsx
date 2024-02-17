@@ -28,6 +28,7 @@ import PgAISSchemeForm, { action as aisSchemeFormAction, loader as aisSchemeForm
 import PgAISScheme, { loader as aisSchemeLoader } from '../pages/ais/PgAISScheme';
 import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registrationsLoader} from '../pages/ais/PgAISRegistrations';
 import PgAISRegsitration, { loader as aisRegistrationLoader } from '../pages/ais/PgAISRegsitration';
+import PgAISStudentAccount, { loader as aisStudentAccountLoader } from '../pages/ais/PgAISStudentAccount';
 import { useUserStore } from '../utils/authService';
 
 const user = useUserStore.getState().user
@@ -81,6 +82,11 @@ const AISRoute:any =  {
                path:'transcript', 
                element: <PgAISStudentTranscript />,
                loader: aisStudentTranscriptLoader,
+            },
+            {
+               path:'account', 
+               element: <PgAISStudentAccount />,
+               loader: aisStudentAccountLoader,
             },
             {
                path:'activity', 

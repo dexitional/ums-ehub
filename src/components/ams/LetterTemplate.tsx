@@ -14,8 +14,8 @@ function LetterTemplate({ data }: Props) {
         content: () => printRef.current,
     });
 
-    const dm = dummyAUCCApplicant;
-
+  const dm = data?.student ? data : dummyAUCCApplicant;
+  const template = data?.student ? data?.category?.admissionLetter[0]?.template : data?.template
   return (
     <div className="relative scale-[85%] print:scale-[85%] print:-mt-14" ref={printRef}>
         <button onClick={handlePrint} className="absolute -top-44 -left-10 print:hidden px-4 py-1 m-4 bg-primary-accent text-white font-bold uppercase">Print</button>
@@ -25,13 +25,13 @@ function LetterTemplate({ data }: Props) {
                <h1 className="text-primary-accent text-xl print:text-base font-semibold tracking-widest">OFFER OF ADMISSION</h1>
                <div className="space-y-6 print:space-y-3">
                     <address className="print:text-xs">
-                        <p className="text-primary-dark font-semibold uppercase not-italic">REFERENCE: 240921009</p>
-                        <p className="text-primary-dark font-semibold uppercase not-italic">Ebenezer Kwabena Blay Ackah</p>
+                        <p className="text-primary-dark font-semibold uppercase not-italic">REFERENCE: {data?.student?.id || '24010001'}</p>
+                        <p className="text-primary-dark font-semibold uppercase not-italic">{data?.student?.fname}{data?.student?.mname && data?.student?.mname+' '} {data?.student?.lname || 'Evans Jerry Amissah'}</p>
                     </address>
-                    <p>Dear Samuel,</p>
+                    <p>Dear {data?.student?.fname || 'Evans'},</p>
                </div>
            </div>
-           { ReactHtml(loadPlacerData(data?.template,dm)) }
+           { ReactHtml(loadPlacerData(template,dm)) }
         </main>
     </div>
   )

@@ -52,9 +52,11 @@ function SessionListItem({ data }: Props) {
                     <MdEditDocument className="h-4 w-4 text-green-100"/>
                     <span className="hidden text-sm text-white font-semibold">Edit</span>
                 </Link>
-                <Form method="post" action={`${encodeURIComponent(data?.id)}/destroy`} onSubmit={(e)=> { if(!confirm("Do you want to delete")) e.preventDefault(); return false; }} className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
-                   <FaTrash className="h-4 w-4 text-pink-100" />
-                   <button type="submit" className="hidden text-sm text-white font-semibold">Delete</button>
+                <Form method="post" action={`${encodeURIComponent(data?.id)}/destroy`} onSubmit={(e)=> { if(!confirm("Do you want to delete")) e.preventDefault(); return false; }} >
+                   <button type="submit" className="p-2 rounded-full flex items-center space-x-1.5 bg-primary/50">
+                      <FaTrash className="h-4 w-4 text-pink-100" />
+                      <span className="hidden text-sm text-white font-semibold">Delete</span>
+                   </button>
                 </Form>
             </div>
         </div>

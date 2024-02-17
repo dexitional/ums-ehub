@@ -5,6 +5,7 @@ import AMSLayout from '../components/ams/AMSLayout';
 import PgAMSSessions, { loader as sessionsLoader, action as amsSessionDestroy } from '../pages/ams/PgAMSSessions';
 import PgAMSSessionForm, { loader as amsSessionFormLoader, action as amsSessionFormAction } from '../pages/ams/PgAMSSessionForm';
 import PgAMSLetters, { loader as lettersLoader, action as amsLetterDestroy } from '../pages/ams/PgAMSLetters';
+import PgAMSLetter, { loader as amsLetterLoader } from '../pages/ams/PgAMSLetter';
 import PgAMSLetterForm, { loader as amsLetterFormLoader, action as amsLetterFormAction } from '../pages/ams/PgAMSLetterForm';
 import PgAMSVouchers, { loader as vouchersLoader, action as amsVoucherRecover } from '../pages/ams/PgAMSVouchers';
 import PgAMSVoucherForm, { loader as amsVoucherFormLoader, action as amsVoucherFormAction } from '../pages/ams/PgAMSVoucherForm';
@@ -13,9 +14,10 @@ import PgAMSApplicants, { loader as applicantsLoader, action as amsApplicantDest
 import PgAMSApplicantForm, { loader as amsApplicantFormLoader, action as amsApplicantFormAction } from '../pages/ams/PgAMSApplicantForm';
 import PgAMSApplicant, { loader as applicantLoader } from '../pages/ams/PgAMSApplicant';
 import PgAMSShortlists, { loader as shortlistsLoader, action as amsShortlistDestroy } from '../pages/ams/PgAMSShortlists';
+import PgAMSShortlist, { loader as shortlistLoader } from '../pages/ams/PgAMSShortlist';
 import PgAMSShortlistForm, { loader as amsShortlistFormLoader, action as amsShortlistFormAction } from '../pages/ams/PgAMSShortlistForm';
 import PgAMSMatriculants, { loader as matriculantsLoader, action as amsMatriculantDestroy } from '../pages/ams/PgAMSMatriculants';
-import PgAMSLetter, { loader as amsLetterLoader } from '../pages/ams/PgAMSLetter';
+import PgAMSMatriculant, { loader as amsMatriculantLoader } from '../pages/ams/PgAMSMatriculant';
 
 const user = useUserStore.getState().user
 const amsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ams')
@@ -147,11 +149,16 @@ const AMSRoute:any =  {
          action: amsShortlistFormAction
       },
       { 
+         path:'shortlists/:shortlistId', 
+         element: <PgAMSShortlist />,
+         loader: shortlistLoader,
+      },
+      { 
          path:'shortlists/:shortlistId/destroy', 
          action: amsShortlistDestroy,
       },
       { 
-         path:'shortlists/:shortlistId/edit', 
+         path:'shortlists/:shortlistId/process', 
          element: <PgAMSShortlistForm />, 
          loader: amsShortlistFormLoader,
          action: amsShortlistFormAction
@@ -162,6 +169,11 @@ const AMSRoute:any =  {
          path:'matriculants', 
          element: <PgAMSMatriculants />,
          loader: matriculantsLoader,
+      },
+      { 
+         path:'matriculants/:matriculantId', 
+         element: <PgAMSMatriculant />,
+         loader: amsMatriculantLoader,
       },
       { 
          path:'matriculants/:matriculantId/destroy', 

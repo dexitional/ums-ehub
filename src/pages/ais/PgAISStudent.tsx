@@ -2,17 +2,16 @@ import React, { useState } from 'react'
 import SubPageTitle from '../../components/ais/SubPageTitle'
 // @ts-ignore
 import Logo from '../../assets/img/logo/mlk/logo.png'
-import { MdLocationOn } from 'react-icons/md'
-import { Form, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Service from '../../utils/aisService'
 import { Outlet, redirect, useLoaderData } from 'react-router'
 import moment from 'moment'
 import { TbEdit } from 'react-icons/tb'
 import { FaNewspaper } from 'react-icons/fa6'
-import PgAISStudentProfile from './PgAISStudentProfile'
 import SubNavLink from '../../components/ais/SubNavLink'
 import { RiCommunityFill } from 'react-icons/ri'
-
+const { REACT_APP_API_URL } = import.meta.env;
+ 
 type Props = {}
 
 
@@ -37,7 +36,7 @@ function PgAISStudent({}: Props) {
       <div className="p-3 md:p-6 border bg-slate-50/50 rounded-xl md:space-y-6 space-y-4 ">
          <section className="relative flex space-x-2 md:space-x-6">
             <div className="hidden md:block p-2 md:p-2 h-16 w-16 md:h-24 md:w-24 border rounded-xl shadow-lg bg-white">
-              <img src={Logo} className="h-12 w-12 md:h-20 md:w-20 object-contain" />
+              <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="h-12 w-12 md:h-20 md:w-20 object-contain" />
             </div>
             <Link to={`edit`} className="p-1 md:py-1.5 md:px-2 absolute right-0 top-0 bg-slate-50 border border-gray-200 rounded flex">
                 {/* <span className="text-gray-400">EDIT</span> */}
@@ -46,7 +45,7 @@ function PgAISStudent({}: Props) {
             <div className="flex-1 flex flex-col space-y-4 md:space-y-3">
               <div className="flex space-x-2">
                   <div className="block md:hidden p-2 md:p-4 h-16 w-16 border rounded-xl shadow-lg bg-white">
-                    <img src={Logo} className="h-12 w-12 object-contain" />
+                    <img crossOrigin="anonymous"src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="h-12 w-12 object-contain" />
                   </div>
                   <h1 className="text-md md:text-3xl md:tracking-wide leading-5 font-semibold text-primary/70">{data?.fname} {data?.mname && data?.mname+' '}{data?.lname}</h1>
               </div>
@@ -71,8 +70,8 @@ function PgAISStudent({}: Props) {
             <SubNavLink title="PROFILE" url="profile" />
             <SubNavLink title="ACADEMIC STATEMENT" url="transcript" />
             <SubNavLink title="FINANCE STATEMENT" url="finance" />
-            {/* <SubNavLink title="ACCOUNT & ACTIVITY" url="activity" />
-            <SubNavLink title="ID CARD" url="idcard" /> */}
+            <SubNavLink title="ACCOUNT MANAGEMENT" url="account" />
+            {/* <SubNavLink title="ID CARD" url="idcard" />  */}
           </nav>
         </section>
          <section className="gap-y-2">

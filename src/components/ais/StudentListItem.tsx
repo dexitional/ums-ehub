@@ -6,6 +6,7 @@ import { MdEditDocument } from 'react-icons/md'
 import Logo from '../../assets/img/logo/mlk/logo.png';
 import { Form, Link } from 'react-router-dom';
 import ListHeading from './ListHeading';
+const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {
     data: any;
@@ -17,7 +18,7 @@ function StudentListItem({ data }: Props) {
         <div className="md:col-span-2 md:place-self-start flex flex-col space-y-2">
             <ListHeading title="Project" />
             <div className="px-2 flex items-center space-x-3 md:space-x-4">
-                <img src={Logo} className="h-5 w-5 object-contain"/>
+                <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="h-5 w-5 object-contain"/>
                 <span>{(data.fname+' '+(data.mname && data.mname+' ')+data.lname).toUpperCase()}</span>
             </div>
         </div>

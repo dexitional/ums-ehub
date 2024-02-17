@@ -15,7 +15,6 @@ export async function loader({ request }) {
   const search = new URL(request.url).searchParams.get('search') || '';
   const page = new URL(request.url).searchParams.get('page') || 1;
   const data = await Service.fetchStudents(search,page);
-  console.log(data,search,page)
   return { data, search, page }
 }
 

@@ -37,7 +37,7 @@ function PgAISStudentProfile({}: Props) {
       <AISPBioCard label="Guardian Name" value={data?.guardianName || 'Not Set'} Icon={MdOutlineFiberPin} />
       <AISPBioCard label="Guardian Contact" value={data?.guardianPhone || 'Not Set'} Icon={BsCalendarRange} />
       <AISPBioCard label="Region" value={data?.region?.title || 'Not Set'} Icon={BiMoneyWithdraw} />
-      <AISPBioCard label="Country" value={data?.country.longName || 'Not Set'} Icon={RiCommunityLine} />
+      <AISPBioCard label="Country" value={data?.country?.longName || 'Not Set'} Icon={RiCommunityLine} />
     </div>
     <div className="flex-1 space-y-2">
        <AISPBioCard label="Religion" value={data?.religion?.title || 'Not Set'} Icon={BiMoneyWithdraw} />

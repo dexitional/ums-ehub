@@ -1,17 +1,14 @@
 import React from 'react'
-import { FaEnvelope, FaGlobe, FaPhone, FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { GiTimeBomb } from 'react-icons/gi'
-import { IoTimer } from 'react-icons/io5'
-import { MdCategory, MdEditDocument, MdLocationOn } from 'react-icons/md'
+import { FaEnvelope, FaPhone, FaTrash } from 'react-icons/fa'
+import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
-import ProgressBar from './ProgressBar'
 // @ts-ignore
 import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaCreditCard, FaFilePdf, FaFolder } from 'react-icons/fa6'
+import { FaFilePdf, FaFolder } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { AiOutlineFieldNumber } from 'react-icons/ai'
+const { REACT_APP_API_URL } = import.meta.env;
 
 type Props = {
   data: any;
@@ -26,7 +23,7 @@ function StudentCardItem({ data }: Props) {
           <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data.fname+' '+(data.mname && data.mname+' ')+data.lname).toUpperCase()}</div>
           <div className="py-0.5 px-2 text-sm rounded bg-primary/60 text-white font-bold">{data?.gender}</div>
       </div>
-      <img src={`https://cdn.ucc.edu.gh/photos/?tag=${data?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
+      <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
     </div>
     <div className="space-y-1 font-roboto">
         <div className="flex items-center space-x-4">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaEnvelope, FaGlobe, FaPhone, FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
+import { FcApprove, FcViewDetails } from 'react-icons/fc'
 import { GiTimeBomb } from 'react-icons/gi'
 import { IoCheckmarkDoneCircleSharp, IoTimer } from 'react-icons/io5'
 import { MdCategory, MdEditDocument, MdLocationOn } from 'react-icons/md'
@@ -9,10 +9,10 @@ import ProgressBar from './ProgressBar'
 // @ts-ignore
 import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaCreditCard, FaFilePdf, FaFolder } from 'react-icons/fa6'
+import { FaCircleCheck, FaCreditCard, FaFilePdf, FaFolder } from 'react-icons/fa6'
 import { HiMiniAcademicCap } from 'react-icons/hi2'
 import { AiOutlineFieldNumber, AiOutlineFileDone } from 'react-icons/ai'
-import { CgTemplate } from 'react-icons/cg'
+import { CgNotes, CgTemplate } from 'react-icons/cg'
 
 type Props = {
   data: any;
@@ -53,12 +53,16 @@ function ApplicantCardItem({ data }: Props) {
         <div className="flex items-center space-x-4">
             <span className="px-2 py-0.5 bg-green-50 rounded border text-xs font-semibold font-roboto text-gray-500 tracking-wide">{data.applyType?.title?.toUpperCase()}</span>
         </div>
+        <div className="flex items-center space-x-2">
+            <CgNotes className="h-4 w-5 text-primary-accent/70" />
+            <span className="px-2 py-0.5 bg-amber-50 rounded border text-xs font-semibold font-roboto text-gray-500 tracking-wide uppercase">{data?.stage?.category?.title}</span>
+        </div>
         
     </div>
     <div className="flex flex-col space-y-1">
         <div className="px-3 py-2 opacity-80 md:opacity-100 md:hidden flex rounded-md border bg-blue-50/30 items-center md:justify-between space-x-2 md:group">
           <div className="flex group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`${!data?.completeStatus ? 'bg-primary-dark/60':'bg-primary-accent/60'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
+              <span className={`${data?.sorted ? 'bg-primary-dark/60':'bg-primary-accent/70'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
               <span className="font-semibold font-roboto text-sm text-primary/60">{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
           </div>
         </div>
@@ -72,14 +76,17 @@ function ApplicantCardItem({ data }: Props) {
             <IoCheckmarkDoneCircleSharp className="h-4 w-4 text-green-200"/>
             <span className="text-sm text-white font-semibold">Shortlist</span>
           </Link> */}
+          { !data?.sorted && data?.submitted ?
           <Form method="post" action={`${data?.serial}/shortlist`} onSubmit={(e)=> { if(!confirm("Shortlist Applicant?")) e.preventDefault(); return false; }} className="py-0.5 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
             <IoCheckmarkDoneCircleSharp className="h-4 w-4 text-green-200"/>
             <button type="submit" className="text-sm text-white font-semibold">Shortlist</button>
-          </Form>
+          </Form>: null
+          }
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`${!data?.completeStatus ? 'bg-primary-dark/60':'bg-primary-accent/60'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
-              <span className="font-semibold font-roboto text-sm text-primary/60">{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
+              <span className={`${data?.sorted ? 'bg-primary-dark/60':'bg-primary-accent/70'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
+              <span className={`${data?.sorted ? 'text-primary-dark/60':'text-primary-accent/70'} font-semibold font-roboto text-sm `}>{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
           </div>
+          { data?.sorted ? <FaCircleCheck className="w-10 h-6 text-primary/60"/>: null}
         </div>
     </div>
     
