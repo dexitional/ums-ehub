@@ -5,6 +5,7 @@ import PrintHeader from './PrintHeader';
 import RegistrationSlipItem from '../aisp/RegistrationSlipItem';
 import { useLoaderData } from 'react-router';
 import moment from 'moment';
+const { REACT_APP_API_URL } = import.meta.env;
 
 
 type Props = {}
@@ -26,7 +27,7 @@ function PrintRegisterSlip({}: Props) {
             <PrintHeader /> 
             <div className="my-4 p-3 print:px-2 print:py-2 w-full md:max-w-4xl mx-auto border rounded-xl flex flex-col md:flex-row print:flex-row space-x-6">
                 <div className="p-2 w-36 h-36 print:w-24 print:h-24 border rounded-lg relative flex items-center justify-center">
-                  <img src={`https://cdn.ucc.edu.gh/photos/?tag=0 `} className="h-32 w-32 print:w-20 print:h-20 object-contain" />
+                  <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data[0]?.student?.id}`} className="h-32 w-32 print:w-20 print:h-20 object-contain" />
                 </div>
                 <div className="print:leading-4 space-y-1 print:space-y-0 text-sm print:text-[0.6rem] font-medium font-roboto uppercase">
                   <div className="flex space-x-10"><span className="w-32 tracking-widest text-gray-400">Full Name</span> <span className="uppercase text-primary/90 font-poppins">{data[0]?.student?.fname?.toLowerCase()} {data[0]?.student?.mname?.toLowerCase()} {data[0]?.student?.lname?.toLowerCase()}</span></div>

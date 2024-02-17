@@ -35,8 +35,8 @@ function PgAISStudent({}: Props) {
       <SubPageTitle title={``} page="STUDENT PROFILE" />
       <div className="p-3 md:p-6 border bg-slate-50/50 rounded-xl md:space-y-6 space-y-4 ">
          <section className="relative flex space-x-2 md:space-x-6">
-            <div className="hidden md:block p-2 md:p-2 h-16 w-16 md:h-24 md:w-24 border rounded-xl shadow-lg bg-white">
-              <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="h-12 w-12 md:h-20 md:w-20 object-contain" />
+            <div className="hidden md:flex items-center justify-center p-2 md:p-1 h-16 w-16 md:h-28 md:w-28 border rounded-lg shadow-lg bg-white">
+              <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${data?.id}` || Logo} className="h-12 w-12 md:h-[6.5rem] md:w-[6.5rem] object-contain rounded-md" />
             </div>
             <Link to={`edit`} className="p-1 md:py-1.5 md:px-2 absolute right-0 top-0 bg-slate-50 border border-gray-200 rounded flex">
                 {/* <span className="text-gray-400">EDIT</span> */}
