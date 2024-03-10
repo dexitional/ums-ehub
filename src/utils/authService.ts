@@ -21,7 +21,7 @@ export const useUserStore = create<StoreState>()(
         lasChosen: null,
         search: '',
         courses: [],
-
+ 
         loadUserData: async() => {  
           const storageToken = cookies.get("@Auth:token")
           if (storageToken) {
@@ -59,7 +59,6 @@ export const useUserStore = create<StoreState>()(
                 username: username,
                 password: password,
               });
-              console.log(res.data);
               const resp = res.data
               if(resp.success){
                 // localStorage.setItem("@Auth:token", resp.token);

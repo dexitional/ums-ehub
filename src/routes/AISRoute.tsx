@@ -30,6 +30,10 @@ import PgAISRegistrations, { action as aisRegistrationDestroy, loader as registr
 import PgAISRegsitration, { loader as aisRegistrationLoader } from '../pages/ais/PgAISRegsitration';
 import PgAISStudentAccount, { loader as aisStudentAccountLoader } from '../pages/ais/PgAISStudentAccount';
 import { useUserStore } from '../utils/authService';
+import PgAISStudentIDCard, { loader as aisStudentIDCardLoader } from '../pages/ais/PgAISStudentIDCard';
+import PgAISCalendars,{ loader as calendarsLoader, action as aisCalendarDestroy } from '../pages/ais/PgAISCalendars';
+import PgAISCalendarForm, { loader as aisCalendarFormLoader, action as aisCalendarFormAction } from '../pages/ais/PgAISCalendarForm';
+import PgAISCalendar, { loader as aisCalendarLoader } from '../pages/ais/PgAISCalendar';
 
 const user = useUserStore.getState().user
 const aisRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')
@@ -45,7 +49,6 @@ const AISRoute:any =  {
       },
       {  path:'reports', 
          element: <PgAISReport />,
-         //loader: lasRoleLoader,
          index:true
       },
 
@@ -95,8 +98,8 @@ const AISRoute:any =  {
             },
             {
                path:'idcard', 
-               element: <PgAISStudentProfile />,
-               loader: studentLoader,
+               element: <PgAISStudentIDCard />,
+               loader: aisStudentIDCardLoader,
             }
          ]
       },
@@ -247,6 +250,34 @@ const AISRoute:any =  {
          element: <PgAISStructureForm />, 
          loader: aisCurriculumFormLoader,
          action: aisCurriculumFormAction
+      },
+
+      /* Calendars */
+      { 
+         path:'calendars', 
+         element: <PgAISCalendars />,
+         loader: calendarsLoader,
+      },
+      { 
+         path:'calendars/create', 
+         element: <PgAISCalendarForm />,
+         loader: aisCalendarFormLoader,
+         action: aisCalendarFormAction
+      },
+      { 
+         path:'calendars/:calendarId', 
+         element: <PgAISCalendar />,
+         loader: aisCalendarLoader,
+      },
+      { 
+         path:'calendars/:calendarId/destroy', 
+         action: aisCalendarDestroy,
+      },
+      { 
+         path:'calendars/:calendarId/edit', 
+         element: <PgAISCalendarForm />, 
+         loader: aisCalendarFormLoader,
+         action: aisCalendarFormAction
       },
 
       /* Scheme Module */

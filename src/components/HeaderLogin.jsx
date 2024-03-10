@@ -9,7 +9,6 @@ function HeaderLogin() {
   
   const navigate = useNavigate()
  
-
   return (
     <header className="w-full">
         <div className="w-full bg-blue-950">

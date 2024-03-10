@@ -31,12 +31,58 @@ class Service {
 
     async fetchSession(sessionId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/ais/session/${encodeURIComponent(sessionId)}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/sessions/${encodeURIComponent(sessionId)}`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
         
         } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async postSession(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/sessions`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async updateSession(sessionId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/sessions/${encodeURIComponent(sessionId)}`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async deleteSession(sessionId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/sessions/${encodeURIComponent(sessionId)}`)
+            if(res.status == 200){
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
             toast.error(error.message)
         }
     }
@@ -161,6 +207,39 @@ class Service {
             toast.error(error.message)
         }
     }
+
+    async generateIndex(studentId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/students/indexgen`, { studentId },{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Index number generated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async pardonStudent(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/students/pardon`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Student pardon activated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
 
     async postStudent(data){
         try {

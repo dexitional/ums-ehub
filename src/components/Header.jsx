@@ -1,16 +1,13 @@
 import React from 'react'
 import Logo from '../assets/img/logo/mlk/logo.png'
-//import { useAuth } from '../utils/authService';
 import { useNavigate } from 'react-router';
 import { MdLogout, MdSpaceDashboard } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { useUserStore } from '../utils/authService';
 
-function Header() {
+function Header({ user,logout }) {
   
   const navigate = useNavigate()
   // const { logout,user } = useAuth();
-  const { logout, user } = useUserStore(state => state);
   const signout = async () => {
      const ok = window.confirm("Log Out?")
      if(ok){

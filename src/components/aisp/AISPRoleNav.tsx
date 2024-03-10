@@ -16,13 +16,12 @@ import { CiUser } from 'react-icons/ci';
 import { PiLockKey } from 'react-icons/pi';
 import AISPNavItem from './AISPNavItem';
 
-type Props = {}
+type Props = {
+  user:any;
+}
 
-function AISPRoleNav({}: Props) {
-
-  const { user } = useUserStore(state => state)
+function AISPRoleNav({ user }: Props) {
   const hrsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'hrs')
-
   return (
     <Menu as='div' className="relative">
         <div className="px-4 p-2 md:hidden flex items-center justify-between border-b-2 border-slate-200/50 bg-slate-100 text-gray-400">

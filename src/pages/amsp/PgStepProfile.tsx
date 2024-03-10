@@ -4,6 +4,7 @@ import Service from '../../utils/amsService'
 import Helper from '../../utils/aisService'
 import Asterix from '../../components/aisp/Asterix'
 import { useUserStore } from '../../utils/authService'
+import moment from 'moment'
 
 type Props = {}
 
@@ -13,8 +14,10 @@ export async function action({ request, params }){
    const serial = user?.user?.tag
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
+       data.serial = serial;
+       data.dob = moment(data.dob);
  
-   let resp = await Service.saveStepProfile(serial,data);
+   let resp = await Service.saveStepProfile(data);
    if(resp){
      return redirect(`/amsp/apply`)
    }
@@ -32,6 +35,7 @@ export async function loader({ params }){
   const titles = await Helper.fetchTitles()
   const marital = await Helper.fetchMarital()
   const data = await Service.fetchStepProfile(serial)
+  console.log(user)
   return { data,regions,countries,religions,disabilities,titles,marital }
 }
 
@@ -103,7 +107,7 @@ function PgStepProfile({}: Props) {
                   </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Date of Birth <Asterix /></span>
-                      <input arial-label="dob" type="date" name="dob" defaultValue={data?.dob} required className="uppercase focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md" />
+                      <input arial-label="dob" type="date" name="dob" defaultValue={moment(data?.dob).format("YYYY-MM-DD")} required className="uppercase focus:ring-0 border focus:border-slate-300  border-slate-200 bg-blue-500/5 text-sm md:text-base text-gray-500 rounded-md" />
                   </label>
                   <label className="flex flex-col space-y-2">
                       <span className="text-sm md:text-base text-gray-500 font-medium">Gender <Asterix /></span>
@@ -144,7 +148,6 @@ function PgStepProfile({}: Props) {
                  
                   <hr className="hidden md:block border-dashed" />
                   <div className="hidden md:flex items-center space-x-4">
-                    <input type="hidden" name="id" defaultValue={data?.id} />
                     <button onClick={() => { if(confirm('Cancel')) navigate('/login') }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">PREVIOUS</button>
                     <button className="py-1 px-4 md:w-96 rounded-md bg-primary/70 text-white font-semibold" type="submit">NEXT</button>
                     <button onClick={() => { if(confirm('Cancel')) navigate('/login') }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">EXIT</button>

@@ -7,6 +7,7 @@ import NSSLogoBox from './AISPLogoBox'
 import NSSNav from './AISPNav'
 import Loading from '../Loader'
 import Loader from '../Loader'
+import { useUserStore } from '../../utils/authService'
 
 type Props = {
     children?: React.ReactNode
@@ -15,15 +16,17 @@ type Props = {
 function AISPLayout({ children }: Props) {
   const navigation = useNavigation();
   const loading = navigation.state === "loading";
+  const { logout, user } = useUserStore(state => state);
+
   return (
     <div className="w-full h-screen flex flex-col justify-between">
-    <Header />
-    <NSSRoleNav />
+    <Header user={user} logout={logout}  />
+    <NSSRoleNav user={user} />
     <main className="w-full flex-1 flex flex-col md:overflow-y-scroll">
       <section className="md:mx-auto w-full md:max-w-7xl flex">
          <div className="my-8 py-10 z-20 w-56 h-fit rounded-[2rem] bg-primary/80 hidden md:flex flex-col space-y-3">
            <NSSLogoBox />
-           <NSSNav />
+           <NSSNav user={user} />
          </div>
          <div className={`${loading && 'overflow-hidden'} flex-1`}>
            { loading && <Loader /> }

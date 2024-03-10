@@ -625,7 +625,7 @@ class Service {
         }
     }
 
-    async saveStepProfile(serial,data){
+    async saveStepProfile(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/ams/step/profile`, data,{
                headers: { "Content-Type" : "application/json" }

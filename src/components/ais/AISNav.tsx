@@ -4,17 +4,16 @@ import { GrDashboard } from 'react-icons/gr'
 import { useUserStore } from '../../utils/authService'
 import AISNavItem from './AISNavItem'
 
-type Props = {}
+type Props = {
+  user:any
+}
 
-function AISNav({}: Props) {
-
-  const { user } = useUserStore(state => state)
+function AISNav({ user }: Props) {
   const aisRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'hrs')
-  
   return (
     <div className="py-2 px-2 flex flex-col space-y-1 md:space-y-2 h-[75vh] overflow-y-scroll scrollbar-hide">
         {['hrs techlead','hrs admin'].includes(aisRole?.role_name?.toLowerCase()) && <AISNavItem title="System Reports" url="reports" Icon={FaChartBar} /> }
-        {/* <AISNavItem title="Calendar Module" url="calendar" Icon={GrDashboard} />  */}
+        <AISNavItem title="Calendar Module" url="calendars" Icon={GrDashboard} /> 
         <AISNavItem title="Student Module" url="students" Icon={GrDashboard} /> 
         <AISNavItem title="Course Module" url="courses" Icon={GrDashboard} /> 
         {/* <AISNavItem title="Major Module" url="major" Icon={GrDashboard} />  */}

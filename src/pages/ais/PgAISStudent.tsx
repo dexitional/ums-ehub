@@ -10,6 +10,7 @@ import { TbEdit } from 'react-icons/tb'
 import { FaNewspaper } from 'react-icons/fa6'
 import SubNavLink from '../../components/ais/SubNavLink'
 import { RiCommunityFill } from 'react-icons/ri'
+import { MdNumbers } from 'react-icons/md'
 const { REACT_APP_API_URL } = import.meta.env;
  
 type Props = {}
@@ -61,7 +62,19 @@ function PgAISStudent({}: Props) {
                     <span className="text-xs md:text-base tracking-wider font-medium capitalize">{data?.program?.longName}</span>
                 </div>
               </div>
-              <p className="text-gray-400 md:text-gray-500 text-xs md:text-sm font-noto">{data?.department?.longName}</p>
+              <div className="w-full flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2 text-zinc-400 text-lg">
+                <div className="flex items-center space-x-2"> 
+                    {/* <span className="px-3 py-0.5 text-xs md:text-sm font-semibold tracking-wider capitalize bg-primary/20 rounded-md text-primary-dark/70">{data?.indexno}</span> */}
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+                    <span className="tracking-wider text-xs md:text-sm capitalize font-semibold">{data?.indexno}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+                 </div>
+                 <div className="flex items-center space-x-1">
+                    <MdNumbers className="md:h-5 md:w-5 text-primary/70" />
+                    <span className="text-xs md:text-base tracking-wider font-medium capitalize">Student ID:  {data?.id}</span>
+                </div>
+              </div>
+              {/* <p className="text-gray-400 md:text-gray-500 text-xs md:text-sm font-noto">{data?.id}</p> */}
             </div>
          </section>
 
@@ -71,7 +84,7 @@ function PgAISStudent({}: Props) {
             <SubNavLink title="ACADEMIC STATEMENT" url="transcript" />
             <SubNavLink title="FINANCE STATEMENT" url="finance" />
             <SubNavLink title="ACCOUNT MANAGEMENT" url="account" />
-            {/* <SubNavLink title="ID CARD" url="idcard" />  */}
+            <SubNavLink title="ID CARD" url="idcard" /> 
           </nav>
         </section>
          <section className="gap-y-2">
@@ -79,29 +92,6 @@ function PgAISStudent({}: Props) {
                 <Outlet />
              </div>
          </section>
-
-         { data?.projects?.length ? (
-         <section>
-            {/* Project History */}
-            <div className="p-2 md:py-4 md:px-6 flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-10 border rounded-md md:rounded-xl bg-white">
-               <h1 className="py-0.5 px-2 md:px-3 w-fit text-xs md:text-base font-semibold rounded-md bg-blue-950/60 text-white tracking-widest uppercase -skew-x-6">PROJECTS FUNDED</h1>
-               <div className="md:pl-6 space-y-4">
-                { data?.projects?.map((row:any) => (
-                  <div key={row.id} className="flex md:items-center space-x-6">
-                      <FaNewspaper className="w-3 h-3 md:h-5 md:w-6 text-primary/70" />
-                      <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-2">
-                         <pre className="text-xs md:text-base text-gray-500">{row.title}</pre>
-                         <span className="py-0.5 px-2 w-fit bg-slate-200 font-semibold text-[0.6rem] md:text-xs text-gray-500 rounded uppercase">START - { moment(row.start).format('MMM DD, YYYY') }</span>
-                         <span className="py-0.5 px-2 w-fit bg-slate-200 font-semibold text-[0.6rem] md:text-xs text-gray-500 rounded uppercase">END - { moment(row.end).format('MMM DD, YYYY') }</span>
-                      </div>
-                  </div>
-                ))}
-                </div>
-             </div>
-         </section>
-         ): null }
-         
-        
       </div>
     </main>
   )

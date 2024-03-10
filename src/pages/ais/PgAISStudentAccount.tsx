@@ -7,15 +7,16 @@ import AISAccountCard from '../../components/ais/AISAccountCard';
 type Props = {}
 
 export async function loader({ params }){
-   return { params }
+  const data = await Service.fetchStudent(params.studentId)
+   return { data }
 }
 
 function PgAISStudentAccount({}: Props) {
-  const { params } :any = useLoaderData();
+  const { data } :any = useLoaderData();
   
   return (
     <div className="flex w-full flex-1 flex-col space-y-8 md:space-y-8 ">
-       <AISAccountCard data={{ id: params.studentId}} />
+       <AISAccountCard data={data} />
     </div>
   )
 }

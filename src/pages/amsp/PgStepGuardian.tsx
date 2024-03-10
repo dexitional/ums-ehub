@@ -20,7 +20,7 @@ export async function action({ request, params }){
        data.nss_form   = formData.get('nss_form');
        data.photo      = formData.get('photo');
 
-   let resp = await Service.saveStepProfile(serial,data);
+   let resp = await Service.saveStepProfile(data);
    if(resp){
      return redirect(`/amsp/apply`)
    }

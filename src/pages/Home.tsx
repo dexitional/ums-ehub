@@ -2,30 +2,24 @@ import React, { useEffect } from 'react'
 // @ts-ignore
 import Logo from '../assets/img/logo_portalbr_.png'
 import { MdMeetingRoom, MdOutlineSupportAgent } from 'react-icons/md'
-import { GiHouseKeys, GiHumanTarget, GiLetterBomb, GiLockedDoor, GiVote } from 'react-icons/gi'
+import { GiLetterBomb, GiVote } from 'react-icons/gi'
 import AppCard from '../components/AppCard'
 import { ImProfile } from 'react-icons/im'
-import { FaFileContract } from 'react-icons/fa'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ServiceCard from '../components/ServiceCard'
-import { LiaVoteYeaSolid } from "react-icons/lia";
-// import { useAuth } from '../utils/authService'
 import { useUserStore } from '../utils/authService'
 import { FaUsersViewfinder } from 'react-icons/fa6'
-import { IoStatsChart } from 'react-icons/io5'
 import { SiCashapp } from 'react-icons/si'
 import { HiAcademicCap } from "react-icons/hi2";
 import { PiStudentFill } from 'react-icons/pi'
 
 function Home() {
+  const { user, logout } = useUserStore(state => state)
   
-  // const { user } = useAuth();
-  const { user } = useUserStore(state => state)
-  console.log(user)
   return (
     <div className="w-full h-screen flex flex-col justify-between">
-        <Header />
+        <Header user={user} logout={logout} />
         <main className="w-full flex-1 flex flex-col overflow-y-scroll">
           <section className="mx-auto py-6 w-full max-w-6xl space-y-2">
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Services</h1>

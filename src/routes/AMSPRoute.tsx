@@ -4,7 +4,7 @@ import { useUserStore } from '../utils/authService';
 import AMSPLayout from '../components/amsp/AMSPLayout';
 import AMSPPager from '../components/amsp/AMSPPager';
 import PgAMSPDash from '../pages/amsp/PgAMSPDash';
-import AMSPSwitcher from '../components/amsp/AMSPSwitcher';
+import AMSPSwitcher, { loader as switchLoader } from '../components/amsp/AMSPSwitcher';
 import PgStepProfile, { loader as stepProfileLoader, action as stepProfileAction } from '../pages/amsp/PgStepProfile';
 import PgStepConfigure, { loader as stepConfigureLoader,action as stepConfigureAction     } from '../pages/amsp/PgStepConfigure';
 
@@ -26,9 +26,15 @@ const AMSPRoute:any =  {
     //       }
     //     ] 
     //   },
+      {
+        path:'dash',
+        element: <div>This is Admission Portal</div>
+
+      },
       { 
         path:'apply',
         element: <AMSPSwitcher />,
+        loader: switchLoader,
         children: [
           {  
              index:true,

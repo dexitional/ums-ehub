@@ -5,11 +5,11 @@ import { FaChartBar } from 'react-icons/fa';
 import { useUserStore } from '../../utils/authService';
 import { GrDashboard } from 'react-icons/gr';
 import AISNavItem from './AISNavItem';
-type Props = {}
+type Props = {
+  user: any;
+}
 
-function AISRoleNav({}: Props) {
-
-  const { user } = useUserStore(state => state)
+function AISRoleNav({ user }: Props) {
   const aisRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')
   
   return (

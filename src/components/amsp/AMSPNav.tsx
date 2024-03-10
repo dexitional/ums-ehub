@@ -5,11 +5,11 @@ import { PiLockKey } from "react-icons/pi";
 import { useUserStore } from '../../utils/authService'
 import AISPNavItem from './AMSPNavItem'
 
-type Props = {}
+type Props = {
+  user: any
+}
 
-function AMSPNav({}: Props) {
-
-  const { user } = useUserStore(state => state)
+function AMSPNav({ user }: Props) {
   const lasRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'las')
   
   return (

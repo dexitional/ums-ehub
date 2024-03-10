@@ -2,17 +2,16 @@ import React from 'react'
 import { Menu } from '@headlessui/react'
 import { CgMenuGridO } from "react-icons/cg";
 import { VscAccount } from 'react-icons/vsc';
-import { useUserStore } from '../../utils/authService';
 import { MdOutlineAddTask } from 'react-icons/md';
 import { CiUser } from 'react-icons/ci';
 import { PiLockKey } from 'react-icons/pi';
 import AMSPNavItem from './AMSPNavItem';
 
-type Props = {}
+type Props = {
+  user: any
+}
 
-function AMSPRoleNav({}: Props) {
-
-  const { user } = useUserStore(state => state)
+function AMSPRoleNav({ user }: Props) {
   const hrsRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'hrs')
 
   return (

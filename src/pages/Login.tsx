@@ -42,13 +42,14 @@ function Login() {
        e.preventDefault();
        const { username,password } = form;
        await withCredential(username,password);
-       if(user?.user?.group_id == 1){
-         navigate('/aisp',{ replace: true })
-       } else if(user?.user?.group_id == 3){
-         navigate('/amsp',{ replace: true })
-       } else {
-         navigate('/dash',{ replace: true })
-       }
+      //  if(user?.user?.group_id == 1){
+      //    navigate('/aisp',{ replace: true })
+      //  } else if(user?.user?.group_id == 3){
+      //    navigate('/dash',{ replace: true })
+      //  } else {
+      //    navigate('/dash',{ replace: true })
+      //  }
+      navigate("/")
     } catch (error) {
       console.log(error)
       
@@ -74,9 +75,9 @@ function Login() {
     // }
   }
 
-  useEffect(() => {
-     if(isAuthenticated()) navigate('/dash')
-  },[])
+  // useEffect(() => {
+  //    if(isAuthenticated()) navigate('/dash')
+  // },[])
   
   return (
     <div className="w-full h-full bg-primary">
