@@ -6,6 +6,7 @@ import Loader from '../Loader'
 import { useReactToPrint } from 'react-to-print';
 import { IoArrowBackCircle, IoPrint } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
+import { useUserStore } from '../../utils/authService'
 
 type Props = {
     children?: React.ReactNode
@@ -17,6 +18,7 @@ function PrintLayout({ children }: Props) {
   const navigate = useNavigate();
   const loading = navigation.state === "loading";
   const printRef:any = useRef();
+  const { logout, user } = useUserStore(state => state);
   
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
@@ -25,7 +27,7 @@ function PrintLayout({ children }: Props) {
 
   return (
     <div className="w-full h-screen flex flex-col justify-between">
-    <Header />
+    <Header user={user} logout={logout} />
     <main className="w-full flex-1 flex flex-col md:overflow-y-scroll">
       <section className="md:mx-auto w-full md:max-w-7xl flex">
          <div ref={printRef} className={`${loading && 'overflow-hidden'} flex-1`}>

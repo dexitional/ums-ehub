@@ -1,6 +1,32 @@
 import moment from "moment";
 import { ToWords } from "to-words";
 
+export const awardClasses = [
+  { id: 1, title: 'First Class' }, 
+  { id: 2, title: 'Second Class (Upper Division)' }, 
+  { id: 3, title: 'Second Class (Lower Division)' }, 
+  { id: 4, title: 'Third Class' }, 
+  { id: 5, title: 'Pass' }, 
+  { id: 6, title: 'Fail' }, 
+  { id: 7, title: 'Distinction' }, 
+  { id: 8, title: 'N/A' }, 
+]
+
+export const monthList = [
+  { id: 1, title: 'January' },
+  { id: 2, title: 'February' },
+  { id: 3, title: 'March' },
+  { id: 4, title: 'April' },
+  { id: 5, title: 'May' },
+  { id: 6, title: 'June' },
+  { id: 7, title: 'July' },
+  { id: 8, title: 'August' },
+  { id: 9, title: 'September' },
+  { id: 10, title: 'October' },
+  { id: 11, title: 'November' },
+  { id: 12, title: 'December' },
+]
+
 export const defaultLetterTemplate = `
     <p><strong><u>ADMISSION TO THE ::program_name PROGRAMME (::admission_title)</u></strong></p><p><br></p><p>Congratulations!</p><p><br></p><p>I am pleased to inform you that, upon review of your application and, on the basis of your ::cert_condition, you have been offered admission to Level ::start_level of the <strong>::program_name</strong> programme for the ::session_year Academic year.</p><p><strong>Holders of Diploma/HND are to submit original copies of their certificate for verification, after which they may be exempted from the university of Ghana required course (offered at AUCC) for one semester. All other applicants will have to pass those required courses to complete their admission.</strong></p><p><br></p><p>Your field of specialisation will be confirmed at the end of Level 200 following an orientation session where you will learn about all the available specialisations and the possible career opportunities available in each specialisation.</p><p><br></p><p>The programme fee per semester is <strong>::fee_amount.</strong> However, with a discount of 15%, you are to pay <strong>::discount_amount</strong>. Please note that, the discount is for one academic year only. The fee must be paid through Cal Bank in the name of the <strong>African University College of Communications (AUCC) into account number ::bank_account at any branch of Cal Bank.</strong> After payment, the pay-in-slip must first be presented to the Accounts Officer at AUCC who will issue a receipt, a copy of which must be presented to the appropriate Secretariat of AUCC towards registration.</p><p><br></p><p><strong>Please note that registration will be on ::register_start to ::register_end, and lectures will begin on ::lecture_start. Orientation is on ::orient_start.</strong></p><p><br></p><p>Should you decide to withdraw from the programme within three weeks of registration, the University shall refund your fees to you less an administrative fee of 30%. No refunds will be made for withdrawals after the third week of registration.</p><p>All students are required to obey the rules and regulations of AUCC. A copy of the Student Handbook will be provided to you. Kindly note that AUCCs <strong>Weekend School is held on Fridays and Saturdays</strong>, and Management reserves the right to change sessions and courses when class sizes are not economically viable.</p><p><br></p><p>All correspondence in relation to your admission should be addressed to the Registrar and should include your reference number as above.</p><p>Congratulations once again. We look forward to personally welcoming you to our campus!</p><p><br></p><p>Yours faithfully,</p><p>::signature</p><p>::signatory</p>
 `;

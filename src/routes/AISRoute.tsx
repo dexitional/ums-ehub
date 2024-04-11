@@ -34,6 +34,21 @@ import PgAISStudentIDCard, { loader as aisStudentIDCardLoader } from '../pages/a
 import PgAISCalendars,{ loader as calendarsLoader, action as aisCalendarDestroy } from '../pages/ais/PgAISCalendars';
 import PgAISCalendarForm, { loader as aisCalendarFormLoader, action as aisCalendarFormAction } from '../pages/ais/PgAISCalendarForm';
 import PgAISCalendar, { loader as aisCalendarLoader } from '../pages/ais/PgAISCalendar';
+import PgAISStaffs, { loader as staffsLoader } from '../pages/ais/PgAISStaffs';
+import PgAISStaff, { loader as staffLoader } from '../pages/ais/PgAISStaff';
+import PgAISStaffForm,{ loader as aisStaffFormLoader, action as aisStaffFormAction } from '../pages/ais/PgAISStaffForm';
+import PgAISStaffProfile from '../pages/ais/PgAISStaffProfile';
+import PgAISStaffIDCard from '../pages/ais/PgAISStaffIDCard';
+import PgAISStaffAccount, { loader as aisStaffAccountLoader } from '../pages/ais/PgAISStaffAccount';
+import PgAISStaffRole, { loader as aisStaffRoleLoader, action as aisStaffRoleDestroy } from '../pages/ais/PgAISStaffRole';
+import PgAISStaffRoleForm, { loader as aisStaffRoleFormLoader, action as aisStaffRoleFormAction } from '../pages/ais/PgAISStaffRoleForm';
+import Error from '../pages/Error';
+import PgAISJobs, { action as aisJobDestroy, loader as jobsLoader } from '../pages/ais/PgAISJobs';
+import PgAISJobForm, { action as aisJobFormAction, loader as aisJobFormLoader } from '../pages/ais/PgAISJobForm';
+import PgAISJob, { loader as aisJobLoader } from '../pages/ais/PgAISJob';
+import PgAISUnits, { action as aisUnitDestroy, loader as unitsLoader } from '../pages/ais/PgAISUnits';
+import PgAISUnitForm, { action as aisUnitFormAction, loader as aisUnitFormLoader } from '../pages/ais/PgAISUnitForm';
+import PgAISUnit, { loader as aisUnitLoader } from '../pages/ais/PgAISUnit';
 
 const user = useUserStore.getState().user
 const aisRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')
@@ -41,6 +56,7 @@ const aisRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')
 const AISRoute:any =  {
    path: "ais",
    element: <AISLayout />,
+   errorElement: <Error />,
    // action: chosenAction,
    children: [
       {  element: <PgAISDash />},
@@ -336,6 +352,125 @@ const AISRoute:any =  {
          loader: aisSchemeFormLoader,
          action: aisSchemeFormAction
       },
+
+      /* Staff Module */
+      { 
+         path:'staff', 
+         element: <PgAISStaffs />,
+         loader: staffsLoader,
+      },
+      { 
+         path:'staff/create', 
+         element: <PgAISStaffForm />,
+         loader: aisStaffFormLoader,
+         action: aisStaffFormAction
+      },
+      { 
+         path:'staff/:staffId', 
+         element: <PgAISStaff />,
+         loader: staffLoader,
+         children: [
+            {
+               path:'profile', 
+               element: <PgAISStaffProfile />,
+               loader: staffLoader,
+               index: true
+            },
+            {
+               path:'roles', 
+               element: <PgAISStaffRole />,
+               loader: aisStaffRoleLoader,
+            },
+            {
+               path:'roles/create', 
+               element: <PgAISStaffRoleForm />,
+               loader: aisStaffRoleFormLoader,
+               action: aisStaffRoleFormAction,
+            },
+            {
+               path:'roles/:roleId/destroy', 
+               action: aisStaffRoleDestroy,
+            },
+            {
+               path:'account', 
+               element: <PgAISStaffAccount />,
+               loader: aisStaffAccountLoader,
+            },
+            {
+               path:'idcard', 
+               element: <PgAISStaffIDCard />,
+               loader: aisStudentIDCardLoader,
+            }
+         ]
+      },
+      { 
+         path:'staff/:staffId/destroy', 
+         // action: nssMainDestroy,
+      },
+      { 
+         path:'staff/:staffId/edit', 
+         element: <PgAISStaffForm />, 
+         loader: aisStaffFormLoader,
+         action: aisStaffFormAction
+      },
+
+       /* Job Designation Module */
+       { 
+         path:'jobs', 
+         element: <PgAISJobs />,
+         loader: jobsLoader,
+      },
+      { 
+         path:'jobs/create', 
+         element: <PgAISJobForm />,
+         loader: aisJobFormLoader,
+         action: aisJobFormAction
+      },
+      { 
+         path:'jobs/:jobId', 
+         element: <PgAISJob />,
+         loader: aisJobLoader,
+      },
+      { 
+         path:'jobs/:jobId/destroy', 
+         action: aisJobDestroy,
+      },
+      { 
+         path:'jobs/:jobId/edit', 
+         element: <PgAISJobForm />, 
+         loader: aisJobFormLoader,
+         action: aisJobFormAction
+      },
+
+
+       /* Units Module */
+       { 
+         path:'units', 
+         element: <PgAISUnits />,
+         loader: unitsLoader,
+      },
+      { 
+         path:'units/create', 
+         element: <PgAISUnitForm />,
+         loader: aisUnitFormLoader,
+         action: aisUnitFormAction
+      },
+      { 
+         path:'units/:unitId', 
+         element: <PgAISUnit />,
+         loader: aisUnitLoader,
+      },
+      { 
+         path:'units/:unitId/destroy', 
+         action: aisUnitDestroy,
+      },
+      { 
+         path:'units/:unitId/edit', 
+         element: <PgAISUnitForm />, 
+         loader: aisUnitFormLoader,
+         action: aisUnitFormAction
+      },
+
    ]
 }
 

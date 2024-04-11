@@ -489,6 +489,20 @@ class Service {
         }
     }
 
+    /* MAJORS */
+    async fetchMajorList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/programs/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+
     /* CURRICULUMS */
    
      async fetchCurriculums(keyword,page){
@@ -773,6 +787,19 @@ class Service {
      }
 
      /* UNITS */
+
+     async fetchUnitList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/units/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+     
      async fetchUnits(keyword,page){
         try {
             const res = await axios.get(`${REACT_APP_API_URL}/ais/units?keyword=${keyword}&page=${page}`)
@@ -842,6 +869,335 @@ class Service {
             toast.error(error.message)
         }
      }
+
+
+      /* JOBS */
+
+      async fetchJobList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/jobs/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+     
+     async fetchJobs(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/jobs?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchJob(jobId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/jobs/${encodeURIComponent(jobId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+     }
+
+     async postJob(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/jobs`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async updateJob(jobId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/jobs/${encodeURIComponent(jobId)}`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async deleteJob(jobId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/jobs/${encodeURIComponent(jobId)}`)
+            if(res.status == 200){
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+
+     /* USER */
+     async isUser(staffId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/checkuser`, { userId: staffId })
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+      
+     /* USER ROLES */
+
+     async fetchUserRolesById(staffId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/uroles/list`, { staffId })
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+     
+     async fetchUserRoles(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/uroles?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async fetchUserRole(roleId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/uroles/${encodeURIComponent(roleId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+     }
+
+     async postUserRole(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/uroles`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("New User Role Created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
+        }
+     }
+
+     async updateUserRole(roleId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/uroles/${encodeURIComponent(roleId)}`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async deleteUserRole(roleId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/uroles/${encodeURIComponent(roleId)}`)
+            if(res.status == 200){
+               toast.success("User Role Removed!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+     async checkUser(userId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/checkuser`, { userId },{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+        } catch (error) { 
+            console.error(error.message)
+        }
+     }
+
+
+      /* APP ROLES */
+
+      async fetchAppRoleList(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/aroles/list`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
+
+      /* STAFF */
+    async fetchStaffs(keyword,page){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/staff?keyword=${keyword}&page=${page}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async fetchStaff(staffId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/staff/${encodeURIComponent(staffId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async fetchStaffRole(staffId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/staff/role`,{ staffId })
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+
+    async stageStaffAccess(staffId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/staff/stage`,{ staffId })
+            console.log(res.status)
+            if(res.status == 200 || res.status == 204){
+                return res.data
+            } else if(res.status == 500){
+              toast.error("User account already staged")
+            }
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            console.log(error?.response)
+            toast.error(error?.response?.data)
+        }
+    }
+
+    async resetStaffAccess(staffId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/staff/reset`,{ staffId })
+            if(res.status == 200 || res.status == 204){
+                const data = res?.data
+                console.log(data)
+                toast(`Password changed to: \t${data?.password}`,{ className:'rounded-full bg-green-100 shadow border-4 border-white text-base text-primary-dark font-semibold', duration: 15000 })
+            }
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async postStaff(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ais/staff`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async updateStaff(staffId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/ais/staff/${encodeURIComponent(staffId)}`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async deleteStaff(staffId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/ais/staff/${encodeURIComponent(staffId)}`)
+            if(res.status == 200){
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    
 
 
 
@@ -967,6 +1323,18 @@ class Service {
         }
      }
 
+     async fetchAppRoles(){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ais/approles`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+     }
+
      async convertBase64(file){
         return new Promise((resolve, reject) => {
           const fileReader = new FileReader();
@@ -974,7 +1342,11 @@ class Service {
           fileReader.onload = () => resolve(fileReader.result)
           fileReader.onerror = error => reject(error)
         })
-    }
+     }
+
+     async base64ToUrl(base64){
+       return base64;
+     }
 
     
 }

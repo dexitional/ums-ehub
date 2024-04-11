@@ -8,7 +8,7 @@ type Props = {}
 
 // Save Form
 export async function action({ request, params }){
-   const id = params?.programId || 0;
+   const id = params?.calendarId || 0;
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
        data.semesterTotal = +data.semesterTotal

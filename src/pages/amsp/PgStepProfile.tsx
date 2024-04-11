@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import { Form, Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import Service from '../../utils/amsService'
 import Helper from '../../utils/aisService'
 import Asterix from '../../components/aisp/Asterix'
@@ -10,23 +10,21 @@ type Props = {}
 
 // Save Form
 export async function action({ request, params }){
-   const user = useUserStore.getState()?.user;
+   const { user, stepUrl } = useUserStore.getState() ?? null;
    const serial = user?.user?.tag
    const formData = await request.formData()
    let data = Object.fromEntries(formData)
        data.serial = serial;
        data.dob = moment(data.dob);
- 
    let resp = await Service.saveStepProfile(data);
    if(resp){
-     return redirect(`/amsp/apply`)
-   }
-   return null
+     return redirect(stepUrl.nextUrl)
+   } return null
 } 
 
 // Load Data of Single 
 export async function loader({ params }){
-  const user = useUserStore.getState()?.user;
+  const { user, stepUrl } = useUserStore.getState() ?? null;
   const serial = user?.user?.tag
   const regions = await Helper.fetchRegions()
   const countries = await Helper.fetchCountries()
@@ -35,14 +33,13 @@ export async function loader({ params }){
   const titles = await Helper.fetchTitles()
   const marital = await Helper.fetchMarital()
   const data = await Service.fetchStepProfile(serial)
-  console.log(user)
-  return { data,regions,countries,religions,disabilities,titles,marital }
+  return { data,regions,countries,religions,disabilities,titles,marital,stepUrl }
 }
 
 function PgStepProfile({}: Props) {
   
   const navigate = useNavigate()
-  const { data,regions,countries,religions,disabilities,titles,marital }: any = useLoaderData();
+  const { data,regions,countries,religions,disabilities,titles,marital,stepUrl }: any = useLoaderData();
  
   return (
     <main className="p-2">
@@ -148,7 +145,7 @@ function PgStepProfile({}: Props) {
                  
                   <hr className="hidden md:block border-dashed" />
                   <div className="hidden md:flex items-center space-x-4">
-                    <button onClick={() => { if(confirm('Cancel')) navigate('/login') }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">PREVIOUS</button>
+                    <Link to={stepUrl?.prevUrl} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600">PREVIOUS</Link>
                     <button className="py-1 px-4 md:w-96 rounded-md bg-primary/70 text-white font-semibold" type="submit">NEXT</button>
                     <button onClick={() => { if(confirm('Cancel')) navigate('/login') }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">EXIT</button>
                   </div>
@@ -242,8 +239,7 @@ function PgStepProfile({}: Props) {
                    */}
                   <hr className="md:hidden border-dashed" />
                   <div className="md:hidden flex items-center space-x-4">
-                    <input type="hidden" name="id" defaultValue={data?.id} />
-                    <button onClick={() => { if(confirm('Cancel')) navigate('/login') }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">PREVIOUS</button>
+                    <Link to={stepUrl?.prevUrl} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600">PREVIOUS</Link>
                     <button className="py-1 px-4 md:w-96 rounded-md bg-primary/70 text-white font-semibold" type="submit">NEXT</button>
                     <button onClick={() => { if(confirm('Cancel')) navigate('/login') }} className="py-1 px-4 rounded-md  bg-slate-50 border text-sm text-gray-600" type="button">EXIT</button>
                   </div>

@@ -6,7 +6,7 @@ type Props = {}
 
 function PrintHeader({}: Props) {
   return (
-    <div className="flex flex-col">
+    <div className="hidden print:flex md:flex flex-col">
                 <span className="m-0 p-0 text-[2.44rem] print:text-[1.8rem] text-primary-dark font-serif font-semibold tracking-wider leading-[2.2rem] text-center">MARTIN LUTHER HEALTH TRAINING SCHOOL</span>
                 <span className="m-0 p-0 text-[1.75rem] print:text-xl text-primary-accent font-bold font-serif tracking-wider text-center leading-0">OFFICE OF ACADEMIC AFFAIRS</span>
                 <div className="my-8 mx-auto print:my-4 w-full max-w-4xl flex flex-row justify-center">

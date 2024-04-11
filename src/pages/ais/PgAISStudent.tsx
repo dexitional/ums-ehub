@@ -66,7 +66,7 @@ function PgAISStudent({}: Props) {
                 <div className="flex items-center space-x-2"> 
                     {/* <span className="px-3 py-0.5 text-xs md:text-sm font-semibold tracking-wider capitalize bg-primary/20 rounded-md text-primary-dark/70">{data?.indexno}</span> */}
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
-                    <span className="tracking-wider text-xs md:text-sm capitalize font-semibold">{data?.indexno}</span>
+                    <span className="tracking-wider text-xs md:text-sm capitalize font-semibold">{data?.indexno || 'No Index Number'}</span>
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
                  </div>
                  <div className="flex items-center space-x-1">

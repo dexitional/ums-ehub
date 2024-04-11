@@ -12,7 +12,7 @@ import PgAMSVoucherForm, { loader as amsVoucherFormLoader, action as amsVoucherF
 import PgAMSVoucherSellForm, { loader as amsVoucherSellFormLoader, action as amsVoucherSellFormAction } from '../pages/ams/PgAMSVoucherSellForm';
 import PgAMSApplicants, { loader as applicantsLoader, action as amsApplicantDestroy } from '../pages/ams/PgAMSApplicants';
 import PgAMSApplicantForm, { loader as amsApplicantFormLoader, action as amsApplicantFormAction } from '../pages/ams/PgAMSApplicantForm';
-import PgAMSApplicant, { loader as applicantLoader } from '../pages/ams/PgAMSApplicant';
+import PgAMSApplicant, { loader as applicantLoader, action as amsApplicantShortlist } from '../pages/ams/PgAMSApplicant';
 import PgAMSShortlists, { loader as shortlistsLoader, action as amsShortlistDestroy } from '../pages/ams/PgAMSShortlists';
 import PgAMSShortlist, { loader as shortlistLoader } from '../pages/ams/PgAMSShortlist';
 import PgAMSShortlistForm, { loader as amsShortlistFormLoader, action as amsShortlistFormAction } from '../pages/ams/PgAMSShortlistForm';
@@ -126,7 +126,7 @@ const AMSRoute:any =  {
       },
       { 
          path:'applicants/:applicantId/shortlist', 
-         action: amsApplicantDestroy,
+         action: amsApplicantShortlist,
       },
       { 
          path:'applicants/:applicantId/edit', 

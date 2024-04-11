@@ -16,7 +16,7 @@ import { PiStudentFill } from 'react-icons/pi'
 
 function Home() {
   const { user, logout } = useUserStore(state => state)
-  
+  console.log(user?.roles)
   return (
     <div className="w-full h-screen flex flex-col justify-between">
         <Header user={user} logout={logout} />
@@ -41,7 +41,7 @@ function Home() {
              <h1 className="px-6 md:px-0 text-zinc-400 font-medium md:font-semibold md:text-xl">Browse By Apps</h1>
              <div className="p-3 md:p-6 w-full bg-slate-50 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                  
-                  { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'evs') &&
+                  { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'evs') &&
                   <AppCard 
                       title="Electa Voting System"
                       desc="Elect leaders, decide on issues by voting and referendum." 
@@ -53,7 +53,7 @@ function Home() {
                   />
                   }
 
-                  { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'desk') &&
+                  { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'desk') &&
                   <AppCard 
                       title="Helpdesk & Support System"
                       desc="Advanced support system for staff, students & public." 
@@ -64,7 +64,7 @@ function Home() {
                   />
                   }
 
-                  { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'clock') &&
+                  { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'clock') &&
                   <AppCard 
                       title="Staff Attendance system"
                       desc="Staff daily attendance, clocking and duty logs." 
@@ -76,19 +76,19 @@ function Home() {
                   }
                   
                   { ([4].includes(user?.user?.group_id) ||
-                     user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ams')) &&
+                     user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ams')) &&
                   <AppCard 
                     title="Admission Management System &reg;"
                     desc="Manage new admission applications and new enrolments." 
                     Icon={PiStudentFill} 
                     links={[
-                      { title:'Goto Application', url:'/ams/'},
+                      { title:'Goto Application', url:'/ams/sessions'},
                     ]} 
                   />
                   }
 
                   { ([4].includes(user?.user?.group_id) ||
-                    user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'ais')) &&
+                    user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'ais')) &&
                  <AppCard 
                     title="Academic Management System &reg;"
                     desc="Manage academic records, registration, assessment & graduation." 
@@ -100,7 +100,7 @@ function Home() {
                  }
 
                  { ([4].includes(user?.user?.group_id) ||
-                   user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'fms')) &&
+                   user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'fms')) &&
                  <AppCard 
                     title="Finance Management System &reg;"
                     desc="Manage student financial records, payments, bills, charges and other transactions." 
@@ -111,7 +111,7 @@ function Home() {
                  />
                  }
 
-                 { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'hrs') &&
+                 { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'hrs') &&
                  <AppCard 
                     title="HR Management System &reg;"
                     desc="Manage staff records, leave, promotions & reports." 
@@ -122,7 +122,7 @@ function Home() {
                  />
                  }
                 
-                { user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'leta') &&
+                { user?.roles?.find(r => r?.appRole?.app?.tag?.toLowerCase() == 'leta') &&
                  <AppCard 
                     title="LetaCabin &reg;"
                     desc="Manage organisation's letters and files efficiently." 

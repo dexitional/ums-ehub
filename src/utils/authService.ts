@@ -21,6 +21,7 @@ export const useUserStore = create<StoreState>()(
         lasChosen: null,
         search: '',
         courses: [],
+        stepUrl: {},
  
         loadUserData: async() => {  
           const storageToken = cookies.get("@Auth:token")

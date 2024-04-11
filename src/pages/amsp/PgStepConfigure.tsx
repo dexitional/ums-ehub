@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import { Form, Link, NavLink, Outlet, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import Service from '../../utils/amsService'
 import Helper from '../../utils/aisService'
 import Asterix from '../../components/aisp/Asterix'
@@ -7,13 +7,14 @@ import { useUserStore } from '../../utils/authService'
 import Logo from '../../assets/img/logo.png'
 import None from '../../assets/img/add_photo.png'
 import toast from 'react-hot-toast'
+import moment from 'moment'
 
 type Props = {}
 
 // Save Form
 export async function action({ request, params }){
    const user = useUserStore.getState()?.user;
-   const serial = "24010001" /* user?.user?.tag ||  */
+   const serial = user?.user?.tag;
    const formData = await request.formData()
    const photo = formData.get('photo');
    
@@ -27,7 +28,8 @@ export async function action({ request, params }){
       if(photo?.size) data.photo = await Helper.convertBase64(photo) // Base64 conversion
       if(!photo?.size) delete data.photo;
    
-   let resp = await Service.saveStepApplicant("24010001",data);
+   let resp = await Service.saveStepApplicant(data);
+   console.log(resp)
    if(resp){
      const url: any = await Service.getNextPageUrl(serial)
      return redirect(url?.nextUrl)
@@ -38,22 +40,23 @@ export async function action({ request, params }){
 // Load Data of Single 
 export async function loader({ params }){
   const user = useUserStore.getState()?.user;
-  // const serial = user?.user?.tag
-  const serial = "24010001"
+  const serial = user?.user?.tag
   const stages = await Service.fetchStages()
   const applytypes = await Service.fetchApplytypes()
   const voucher = await Service.fetchVoucher(serial)
+  const sorted = await Service.fetchShortlist(serial)
   const data = await Service.fetchStepApplicant(serial)
- 
-  return { data,stages,applytypes,voucher }
+  return { data,stages,applytypes,voucher,sorted }
 }
 
 function PgStepConfigure({}: Props) {
   
   const photoRef:any = useRef(null);
-  const { data,stages,applytypes,voucher }: any = useLoaderData();
+  const { data,stages,applytypes,voucher,sorted }: any = useLoaderData();
   const [ file, setFile ] = useState(data?.photo || null);
   const [ form, setForm ]:any = useState(data);
+  const [ show, setShow ]:any = useState(data?.submitted == 0);
+  
   const photoChange = async (e) => {
     const f = e.target.files[0];
     if (f && f.type.match("image.*")) {
@@ -65,26 +68,27 @@ function PgStepConfigure({}: Props) {
       }
     }
   } 
-
-  const formChange = async (e) => {
-    setForm({ ...form,[e.target.name]: e.target.value })
-  } 
+  const formChange = async (e) => setForm({ ...form,[e.target.name]: e.target.value })
+  const updateForm = () => setShow(true)
  
   return (
     <main className="p-2">
       <div className="p-3 border bg-slate-50/50 rounded-xl space-y-4">
          <section className="px-3 py-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-            <div className="flex-1 flex flex-col space-y-6">
-              <h1 className="px-3 py-1 rounded-md border md:border-0 text-base md:text-2xl tracking-wide font-semibold text-primary/80 uppercase">Configure Application Mode </h1>
-              <div className="flex flex-col space-y-3 md:space-y-1 text-zinc-500 text-base">
-                 <span className="text-lg md:tracking-wider">To start your application procedure, you are required to choose admission group and application type for your defined application form..</span>
+            <div className="flex-1 flex flex-col space-y-4">
+              <h1 className="px-3 py-1 rounded-md border md:border-0 text-base md:text-3xl tracking-wide font-semibold text-primary/80">Welcome to the Applicant Portal </h1>
+              <div className="px-2 md:px-6 flex flex-col space-y-3 md:space-y-3 text-zinc-500 text-base">
+                 {/* <span className="text-lg md:tracking-wider">To start your application procedure, you are required to choose admission group and application type for your defined application form..</span> */}
+                 <h1 className="px-3 md:px-4 py-1 w-fit bg-primary text-white rounded text-lg md:text-2xl font-medium md:tracking-wider">{voucher?.admission?.title}</h1>
+                 <div className="text-lg md:tracking-wider">Please choose an action from the list of services below.</div>
+                 <ul className="list-inside list-disc accent-red-700">
+                  <li>Applications are currently <b>{ voucher.admission.applyPaused ? 'halted temporarily': moment(voucher.admission.applyEnd).isAfter(moment()) ? 'closed': 'opened and on-going' }.</b></li>
+                  <li>Please complete your application before midnight of <b>{moment(voucher.admission.applyEnd).format("LL")}.</b></li>
+                 </ul>
               </div>
             </div>
-            {/* <div className="relative h-28 w-28 rounded-2xl overflow-hidden">
-              <img src={Logo} className="object-cover object-center" />
-            </div> */}
-          </section>
-
+         </section>
+         { show && (
          <Form method="post" onChange={formChange} encType="multipart/form-data" className="w-full grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 md:gap-x-2">
              {/* Record */}
              <div className="p-3 md:py-6 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
@@ -99,7 +103,6 @@ function PgStepConfigure({}: Props) {
                   </div>
                 </div>
              </div>
-
              <div className="p-3 md:py-6 md:pb-10 md:px-6 border rounded-lg md:rounded-xl bg-white space-y-3 md:space-y-6">
                 <div className="px-2 space-y-4">
                   <label className="flex flex-col space-y-2">
@@ -131,8 +134,20 @@ function PgStepConfigure({}: Props) {
                   <button disabled={!file || !form?.stageId || !form?.applyTypeId} className="px-2 py-1 md:py-2 md:px-4 w-full rounded-md disabled:bg-primary/30 bg-primary/70 text-sm md:text-lg text-white font-semibold tracking-wider" type="submit">GOTO APPLICATION</button>
                 </div>
              </div>
-             
          </Form>
+         )}
+        { !show && (
+         <>
+         <section className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 bg-white">
+            { sorted?.admitted && (<NavLink to={`/amsp/dash/letter`} className={({ isActive, isPending }) =>  isPending ? "pending" : isActive ? "hidden my-6 mx-3 px-6 py-3 flex-1 bg-primary/90 text-white font-medium tracking-widest text-center" : "my-6 mx-6 px-6 py-3 flex-1 border bg-slate-100 text-gray-600 font-medium tracking-widest text-center"}>Print Admission Letter</NavLink>)}
+            { !sorted?.admitted && (<NavLink to={`/amsp/dash/form`} className={({ isActive, isPending }) =>  isPending ? "pending" : isActive ? "hidden my-6 mx-3 px-6 py-3 flex-1 bg-primary/90 text-white font-medium tracking-widest text-center" : "my-6 mx-6 px-6 py-3 flex-1 border bg-slate-100 text-gray-600 font-medium tracking-widest text-center"}>Print Applicant Form</NavLink>)}
+            { !sorted && (<button onClick={updateForm} className="my-6 mx-3 px-6 py-3 flex-1 bg-slate-100 text-gray-600 font-medium tracking-widest text-center">Update Submitted Form</button>)}
+         </section>
+         <section>
+            <Outlet />
+         </section>
+         </>
+        )}
       </div>
     </main>
   )

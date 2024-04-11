@@ -32,7 +32,7 @@ function StudentListItem({ data }: Props) {
         </div>
         <div className="capitalize flex flex-col space-y-2">
             <ListHeading title="Level" />
-            <span className="px-2">{Math.ceil(data?.semesterNum/2) * 100}</span>
+            <span className="px-2">{ Math.ceil(data?.semesterNum/2) * 100 ? Math.ceil(data?.semesterNum/2) * 100 : 'COMPLETED'}</span>
         </div>
         <div className="capitalize flex flex-col space-y-2">
             <ListHeading title="Contact" />

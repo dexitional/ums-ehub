@@ -441,7 +441,7 @@ class Service {
         try {
             const res = await axios.delete(`${REACT_APP_API_URL}/ams/shortlists/${shortlistId}`)
             if(res.status == 200){
-               toast.success("Record deleted!")
+               toast.success("Applicant unlisted!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -467,7 +467,7 @@ class Service {
 
     async fetchMatriculant(matriculantId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/ams/matriculants/${matriculantId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/matriculants/${matriculantId}`,)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
@@ -576,7 +576,7 @@ class Service {
         }
     }
 
-    async saveStepApplicant(serial,data){
+    async saveStepApplicant(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/ams/step/applicant`, data,{
                headers: { "Content-Type" : "application/json" }
@@ -594,7 +594,7 @@ class Service {
 
     async getNextPageUrl(serial,tag = 'configure'){
         try {
-            if(tag == 'configure') return { prevUrl: null, nextUrl: `/amsp/apply/profile` }
+            if(tag == 'configure') return { prevUrl: null, nextUrl: `/amsp/profile` }
             
             const res = await axios.get(`${REACT_APP_API_URL}/ams/step/applicant/${encodeURIComponent(serial)}`)
             if(res.status == 200 || res.status == 204){
@@ -602,7 +602,7 @@ class Service {
                const currentStepMeta = data?.meta?.find(r => r?.tag == tag);
                const nextStepMeta = data?.meta?.find(r => r?.num == (Math.min(data?.meta?.length,currentStepMeta?.num+1)));
                const prevStepMeta = data?.meta?.find(r => r?.num == (Math.max(1,currentStepMeta?.num-1)));
-               return { prevUrl: `/amsp/apply/${prevStepMeta?.tag}`, nextUrl: `/amsp/apply/${nextStepMeta?.tag}` }
+               return { prevUrl: `/amsp/${prevStepMeta?.tag}`, nextUrl: `/amsp/${nextStepMeta?.tag}` }
             
             }  else throw new(res.data.message)
         
@@ -631,7 +631,7 @@ class Service {
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record saved!")
+               //toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -655,13 +655,13 @@ class Service {
         }
     }
 
-    async saveStepGuardian(serial,data){
+    async saveStepGuardian(data){
         try {
             const res = await axios.post(`${REACT_APP_API_URL}/ams/step/guardian`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record saved!")
+               //toast.success("Record saved!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -671,34 +671,197 @@ class Service {
         }
     }
 
-    // Guardian
-    // async fetchStepGuardian(serial){
-    //     try {
-    //         const res = await axios.get(`${REACT_APP_API_URL}/ams/step/guardian/${serial}`)
-    //         if(res.status == 200 || res.status == 204)
-    //            return res.data
-    //         else throw new(res.data.message)
+    // Education
+    async fetchStepEducation(serial){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/step/education/${serial}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
         
-    //     } catch (error) {
-    //         toast.error(error.message)
-    //     }
-    // }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
-    // async saveStepGuardian(serial,data){
-    //     try {
-    //         const res = await axios.patch(`${REACT_APP_API_URL}/ams/step/guardian/${serial}`, data,{
-    //            headers: { "Content-Type" : "application/json" }
-    //         })
-    //         if(res.status == 200){
-    //            toast.success("Record saved!")
-    //            return res.data
-    //         } 
-    //         else throw new(res.data.message)
+    async saveStepEducation(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/education`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
         
-    //     } catch (error) { 
-    //         toast.error(error.message)
-    //     }
-    // }
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    // Education
+    async fetchStepResult(serial){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/step/result/${serial}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async saveStepResult(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/result`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    // Choice
+    async fetchStepChoice(serial){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/step/choice/${serial}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async saveStepChoice(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/choice`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    // Documents
+    async fetchStepDocument(serial){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/ams/step/document/${serial}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async saveStepDocument(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/document`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+    // Review & Completion
+   
+    async saveStepReview(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/ams/step/review`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+    /* Admission helpers */
+    async fetchInstituteCategories(){
+      try {
+        const res = await axios.get(`${REACT_APP_API_URL}/ams/institutes/list`)
+        if(res.status == 200 || res.status == 204)
+            return res.data
+        else throw new(res.data.message)
+    
+      } catch (error) { 
+        toast.error(error.message)
+      }
+    }
+
+    async fetchCertCategories(){
+        try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ams/certificates/list`)
+          if(res.status == 200 || res.status == 204)
+              return res.data
+          else throw new(res.data.message)
+      
+        } catch (error) { 
+          toast.error(error.message)
+        }
+    }
+
+    async fetchDocumentCategories(){
+        try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ams/documents/list`)
+          if(res.status == 200 || res.status == 204)
+              return res.data
+          else throw new(res.data.message)
+      
+        } catch (error) { 
+          toast.error(error.message)
+        }
+    }
+
+    async fetchGradeWeights(){
+        try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ams/gradeweights/list`)
+          if(res.status == 200 || res.status == 204)
+              return res.data
+          else throw new(res.data.message)
+      
+        } catch (error) { 
+          toast.error(error.message)
+        }
+    }
+
+    async fetchSubjects(){
+        try {
+          const res = await axios.get(`${REACT_APP_API_URL}/ams/subjects/list`)
+          if(res.status == 200 || res.status == 204)
+              return res.data
+          else throw new(res.data.message)
+      
+        } catch (error) { 
+          toast.error(error.message)
+        }
+    }
 
 }
 

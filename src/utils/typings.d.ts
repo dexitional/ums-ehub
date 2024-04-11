@@ -30,6 +30,7 @@ export interface StoreState {
     search: any;
     loading: boolean;
     courses: any;
+    stepUrl: any;
     isLoggedIn: boolean;
     isAuthenticated : () => boolean;
     lasChosen: any|null;

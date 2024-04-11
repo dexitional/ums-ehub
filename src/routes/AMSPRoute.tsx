@@ -1,47 +1,52 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom';
 import { useUserStore } from '../utils/authService';
 import AMSPLayout from '../components/amsp/AMSPLayout';
-import AMSPPager from '../components/amsp/AMSPPager';
 import PgAMSPDash from '../pages/amsp/PgAMSPDash';
 import AMSPSwitcher, { loader as switchLoader } from '../components/amsp/AMSPSwitcher';
-import PgStepProfile, { loader as stepProfileLoader, action as stepProfileAction } from '../pages/amsp/PgStepProfile';
 import PgStepConfigure, { loader as stepConfigureLoader,action as stepConfigureAction     } from '../pages/amsp/PgStepConfigure';
+import PgStepProfile, { loader as stepProfileLoader, action as stepProfileAction } from '../pages/amsp/PgStepProfile';
+import PgStepGuardian, { loader as stepGuardianLoader, action as stepGuardianAction } from '../pages/amsp/PgStepGuardian';
+import PgStepEducation, { loader as stepEducationLoader, action as stepEducationAction } from '../pages/amsp/PgStepEducation';
+import PgStepResult, { loader as stepResultLoader, action as stepResultAction } from '../pages/amsp/PgStepResult';
+import PgStepChoice, { loader as stepChoiceLoader, action as stepChoiceAction } from '../pages/amsp/PgStepChoice';
+import PgStepDocument, { loader as stepDocumentLoader, action as stepDocumentAction } from '../pages/amsp/PgStepDocument';
+import PgStepReview, { loader as stepReviewLoader, action as stepReviewAction } from '../pages/amsp/PgStepReview';
+import PgStepPrintForm from '../pages/amsp/PgStepPrintForm';
+import PgStepPrintLetter, { loader as stepPrintLetterLoader } from '../pages/amsp/PgStepPrintletter';
+import PgStepNotice, { loader as stepNoticeLoader } from '../pages/amsp/PgStepNotice';
 
 const user = useUserStore.getState().user
 // const dricRole = user?.roles?.find(r => r?.app_tag?.toLowerCase() == 'dric')
 
 const AMSPRoute:any =  { 
-    path: "amsp",
+   path: "amsp",
    element: <AMSPLayout />,
-   //action: chosenAction,
    children: [
-    //   {  
-    //     element: <AMSPPager />,
-    //     children: [
-    //       {  
-    //         path:'dash',
-    //         element: <PgAMSPDash />, 
-    //         loader: null,
-    //       }
-    //     ] 
-    //   },
-      {
-        path:'dash',
-        element: <div>This is Admission Portal</div>
-
-      },
       { 
-        path:'apply',
         element: <AMSPSwitcher />,
         loader: switchLoader,
         children: [
-          {  
-             index:true,
-             //path:'configure',
+          {  path:"dash",
              element: <PgStepConfigure />, 
              loader: stepConfigureLoader,
              action: stepConfigureAction,
+             children: [
+               {
+                // element: <PgStepNotice />, 
+                // loader: stepNoticeLoader,
+                index: true
+               },
+               {
+                path:'form',
+                element: <PgStepPrintForm />, 
+                loader: stepReviewLoader,
+               },
+               {
+                path:'letter',
+                element: <PgStepPrintLetter />, 
+                loader: stepPrintLetterLoader,
+               }
+             ]
              
           },
           {  
@@ -52,18 +57,21 @@ const AMSPRoute:any =  {
           },
           {  
             path:'guardian',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepGuardian />, 
+            loader: stepGuardianLoader,
+            action: stepGuardianAction,
           },
           {  
             path:'education',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepEducation />, 
+            loader: stepEducationLoader,
+            action: stepEducationAction,
           },
           {  
             path:'result',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepResult />, 
+            loader: stepResultLoader,
+            action: stepResultAction,
           },
           {  
             path:'referee',
@@ -72,13 +80,15 @@ const AMSPRoute:any =  {
           },
           {  
             path:'document',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepDocument />, 
+            loader: stepDocumentLoader,
+            action: stepDocumentAction,
           },
           {  
             path:'choice',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepChoice />, 
+            loader: stepChoiceLoader,
+            action: stepChoiceAction,
           },
           {  
             path:'employment',
@@ -87,98 +97,13 @@ const AMSPRoute:any =  {
           },
           {  
             path:'review',
-            element: <PgAMSPDash />, 
-            loader: null,
+            element: <PgStepReview />, 
+            loader: stepReviewLoader,
+            action: stepReviewAction,
           }
         ] 
       },
       
-      // Preview
-    //   {  path:'preview', 
-    //      element: <PgAISPProfile />,
-    //      loader: aispProfileLoader,
-    //      index:true
-    //   },
-    //   { 
-    //      path:'profile/:profileId/edit', 
-    //      element: <PgAISPProfileForm />, 
-    //      loader: aispProfileFormLoader,
-    //      action: aispProfileAction
-    //   },
-
-    //   // Notices
-    //   {  path:'notices', 
-    //      element: <PgAISPNotices />,
-    //      loader: nssNoticesLoader,
-    //   },
-    //   { 
-    //      path:'notices/:noticeId', 
-    //      element: <PgAISPNotice />,
-    //      loader: nssNoticeLoader
-    //   },
-      
-    //   // Fees & Charges
-    //   {  path:'fees', 
-    //      element: <PgAISPFees />,
-    //      loader: aispFeesLoader,
-    //   },
-    //   { 
-    //      path:'fees/:noticeId', 
-    //      element: <PgAISPNotice />,
-    //      loader: nssNoticeLoader
-    //   },
-
-    //   // Results
-    //   {  path:'results', 
-    //      element: <PgAISPResults />,
-    //      loader: aispResultsLoader,
-    //   },
-    //   // { 
-    //   //    path:'results/:resultsId', 
-    //   //    element: <PgAISPNotice />,
-    //   //    loader: aispResultLoader
-    //   // },
-    //    // Results
-    //   {  path:'registration', 
-    //      element: <PgAISPRegistrations />,
-    //      loader: aispRegistrationsLoader,
-    //   },
-
-
-    //   // Services
-    //   {  path:'services', 
-    //      element: <PgAISPServices />,
-    //      loader: nssServicesLoader,
-    //   },
-    //   { 
-    //      path:'services/:serviceId', 
-    //      element: <PgAISPService />,
-    //      loader: nssServiceLoader
-    //   },
-    //   { 
-    //      path:'services/create', 
-    //      element: <PgAISPServiceForm />,
-    //      loader: nssServiceFormLoader,
-    //      action: nssServiceFormAction
-    //   },
-    //   { 
-    //      path:'services/:serviceId/edit/', 
-    //      element: <PgAISPServiceForm />, 
-    //      loader: nssServiceFormLoader,
-    //      action: nssServiceFormAction
-    //   },
-    //   { 
-    //      path:'services/:serviceId/destroy', 
-    //      //action: lasRolesDestroy,
-    //   },
-
-    //   // Password Change
-    //   {  path:'changepwd', 
-    //      element: <PgAISPPasswordForm />,
-    //      action: nssPasswordFormAction
-    //   },
-      
-
    ]
 }
 

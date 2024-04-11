@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import { Outlet, useLoaderData, useLocation, useNavigate, useNavigation, useParams } from 'react-router'
 import { useUserStore } from '../../utils/authService';
 import { TbSquareRoundedNumber1, TbSquareRoundedNumber1Filled, TbSquareRoundedNumber2, TbSquareRoundedNumber2Filled, TbSquareRoundedNumber3, TbSquareRoundedNumber3Filled, TbSquareRoundedNumber4, TbSquareRoundedNumber4Filled, TbSquareRoundedNumber5, TbSquareRoundedNumber5Filled, TbSquareRoundedNumber6, TbSquareRoundedNumber6Filled, TbSquareRoundedNumber7, TbSquareRoundedNumber7Filled, TbSquareRoundedNumber8, TbSquareRoundedNumber8Filled, TbSquareRoundedNumber9, TbSquareRoundedNumber9Filled } from 'react-icons/tb';
@@ -10,21 +10,23 @@ export async function loader({ params }){
   const user = useUserStore.getState()?.user;
   const serial = user?.user?.tag
   const data = await Service.fetchApplicant(serial)
-  const { meta } = data; 
-  console.log("META DATA:",data)
-  return { data,meta }
+  return { data }
 }
 
 function AMSPSwitcher({}: Props) {
-  const { data,meta }:any = useLoaderData();
+  const { data }:any = useLoaderData();
   const location:any = useLocation()
   const { pathname }:any = location;
   const tag = pathname?.replaceAll("/amsp/","")?.replaceAll("apply/","");
-  const currentMeta = meta?.find(r => r.tag == tag );
-  const metaNo = meta.length - 2;
+  const currentMeta = data?.meta?.find(r => r.tag == tag );
+  const metaNo = data?.meta?.length - 2;
   const currentNo = currentMeta?.num;
-  const prevUrl = `${meta?.find(r => r.num == Math.max(1,currentNo-1)).tag}`;
-  const nextUrl = '';
+  const prevUrl = `/amsp/${data?.meta?.find(r => r.num == Math.max(0,currentNo-1))?.tag || ''}`;
+  const nextUrl = `/amsp/${data?.meta?.find(r => r.num == Math.min(data?.meta?.length,currentNo+1))?.tag || 'review'}`;
+  useLayoutEffect(() => {
+    useUserStore.setState({ stepUrl: { prevUrl,nextUrl }})
+  },[currentNo])
+  
 
   return (
     <main className="p-2 md:py-6 max-w-6xl w-full space-y-4">
@@ -50,15 +52,6 @@ function AMSPSwitcher({}: Props) {
             { 8 <= metaNo && currentNo == 8 && <TbSquareRoundedNumber8Filled  className="h-7 w-7 md:h-10 md:w-10 text-primary/80 bg-white rounded-2xl" />}
             { 9 <= metaNo && currentNo != 9 && <TbSquareRoundedNumber9  className="h-7 w-7 md:h-10 md:w-10 text-primary/80 bg-white rounded-2xl" />}
             { 9 <= metaNo && currentNo == 9 && <TbSquareRoundedNumber9Filled  className="h-7 w-7 md:h-10 md:w-10 text-primary/80 bg-white rounded-2xl" />}
-            
-            {/* <TbSquareRoundedNumber1Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" />
-            <TbSquareRoundedNumber2Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" />
-            <TbSquareRoundedNumber3Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" />
-            <TbSquareRoundedNumber4Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" />
-            <TbSquareRoundedNumber5Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" />
-            <TbSquareRoundedNumber6Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" />
-            <TbSquareRoundedNumber7Filled className="h-10 w-10 text-primary/80 bg-white rounded-2xl" /> */}
-            
           </div>
           }
           { tag == 'apply' && 

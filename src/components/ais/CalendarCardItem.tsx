@@ -25,22 +25,30 @@ function CalendarCardItem({ data }: Props) {
       </div>
     </div>
     <div className="space-y-1 font-roboto">
+        { data.registerStart && 
         <div className="flex items-center space-x-4">
             <IoIosTime className="h-4 w-5 text-primary/70" />
             <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Registration Opens: &nbsp;&nbsp;&nbsp;<b>{moment(data.registerStart).format("MMM DD, YY")}</b></span>
         </div>
+        }
+        { data.registerEnd && 
         <div className="flex items-center space-x-4">
             <IoIosTime className="h-4 w-5 text-primary/70" />
             <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Registration Closes:&nbsp;&nbsp;&nbsp;<b>{moment(data.registerEnd).format("MMM DD, YY")}</b></span>
         </div>
+        } 
+        { data.registerEndLate && 
         <div className="flex items-center space-x-4">
             <IoIosTime className="h-4 w-5 text-primary/70" />
             <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Registration Extends:&nbsp;<b>{moment(data.registerEndLate).format("MMM DD, YY")}</b></span>
         </div>
+        }
+        { data.progressStudent && 
         <div className="flex items-center space-x-4">
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
             <span className={`${data?.progressStudent ? 'text-gray-500':'text-red-400'} indent-2 text-xs  font-bold capitalize`}>{data?.progressStudent ? 'STUDENT LEVELS PROGRESSED':'LEVELS NOT PROGRESSED'}</span>
         </div>
+        }
         { data?.assignLateSheet && 
         <div className="flex items-center space-x-4">
             <HiMiniAcademicCap className="shrink-0 h-5 w-5 text-primary/70" />
