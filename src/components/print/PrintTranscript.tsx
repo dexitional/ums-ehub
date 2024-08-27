@@ -3,7 +3,6 @@ import React from 'react';
 import { useLoaderData } from 'react-router';
 import Service from '../../utils/aisService';
 import { useUserStore } from '../../utils/authService';
-import PrintHeader from './PrintHeader';
 import PrintHeaderMlk from './PrintHeaderMlk';
 const { REACT_APP_API_URL } = import.meta.env;
 
@@ -50,11 +49,18 @@ function PrintTranscript({}: Props) {
       <h1 className="w-full text-center text-gray-400 text-lg font-semibold tracking-widest uppercase">NO ASSESSMENT </h1>
     </div>
   )
-  
+
+  console.log("DATA: ",data[0])
+
   // Student Bio Profile
-  const [_,mdata] = data && data[1];
+  const [_,mdata] = data && data[0];
   const student = mdata && mdata[0]?.student;
+
+  console.log("MDATA: ",mdata)
   
+  
+  
+
   return (
     <div className="w-full flex flex-col justify-center items-center bg-white print:m-0 print:scale-[85%]">
         <div className="my-20 mx-auto px-16 py-20 w-full rounded border shadow-sm shadow-slate-300 print:px-6 print:py-8 print:m-0 print:w-full print:max-w-screen print:shadow-none print:border-0 print:scale-100">
@@ -75,10 +81,10 @@ function PrintTranscript({}: Props) {
            
             <div className="my-10 mx-auto max-w-4xl w-full flex flex-col space-y-8 font-[times]">
               { data?.map((row:any, i:number) => { 
-                  const mdata = row[1];
-                  const title = `LEVEL ${Math.ceil(mdata[0]?.semesterNum/2) * 100 } SEMESTER ${mdata[0]?.semesterNum%2 == 0 ? 2: 1 }`
-                  const credit = mdata.reduce((sum,cur) => cur.credit+sum, 0);
-                  const gradepoint = mdata.reduce((sum,cur) => (cur.credit*cur.gradepoint)+sum,0);
+                  const vdata = row[1];
+                  const title = `LEVEL ${Math.ceil(vdata[0]?.semesterNum/2) * 100 } SEMESTER ${vdata[0]?.semesterNum%2 == 0 ? 2: 1 }`
+                  const credit = vdata.reduce((sum,cur) => cur.credit+sum, 0);
+                  const gradepoint = vdata.reduce((sum,cur) => (cur.credit*cur.gradepoint)+sum,0);
                   const gpa = isNaN(gradepoint/credit) ? '0.0' : (gradepoint/credit).toFixed(2);
                   const gpt_ = gpt[i];
                   const crt_ = crt[i];
@@ -86,10 +92,10 @@ function PrintTranscript({}: Props) {
                 
                 return (
                   <div key={i} className="grid grid-cols-1 gap-y-0.5">
-                        <div className="md:flex print:flex text-base text-primary uppercase tracking-wide">
+                        <div className="md:flex print:flex text-base text-gray-800 uppercase tracking-wide">
                             <h2 className="flex-1 text-center font-medium">{title}</h2>
                         </div>
-                        <div className="pt-0.5 pb-3 hidden md:flex print:flex border-t border-b border-gray-600 font-semibold text-[0.94rem] text-primary uppercase tracking-wide">
+                        <div className="pt-0.5 pb-3 hidden md:flex print:flex border-t border-b border-gray-600 font-semibold text-[0.94rem] text-gray-800 uppercase tracking-wide">
                             <div className="w-32">COURSE CODE</div>
                             <div className="flex-1">COURSE TITLE</div>
                             <div className="w-24 text-center">CREDITS</div>
@@ -98,7 +104,7 @@ function PrintTranscript({}: Props) {
                         </div>
                         <div className="space-y-0.5 text-[0.9rem]">
                            { mdata?.map((sc:any) => 
-                            <div key={sc.courseId} className="hidden md:flex print:flex text-primary tracking-wide">
+                            <div key={sc.courseId} className="hidden md:flex print:flex text-gray-800 tracking-wide">
                                 <div className="w-32 text-base">{sc.courseId}</div>
                                 <div className="flex-1">{sc.course?.title?.toUpperCase()}</div>
                                 <div className="w-24 text-center text-base">{sc.credit}</div>
@@ -108,7 +114,7 @@ function PrintTranscript({}: Props) {
                            )}
 
                             
-                            <div className="hidden md:flex print:flex text-primary tracking-wide">
+                            <div className="hidden md:flex print:flex text-gray-800 tracking-wide">
                                 <div className="w-32 font-semibold"><br/>CPA: {gpa}</div>
                                 <div className="flex-1 font-semibold"><br/>CGPA: {cgpa_}</div>
                                 <div className="w-24 text-center border-t-2 border-gray-500">

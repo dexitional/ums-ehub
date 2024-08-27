@@ -38,7 +38,6 @@ function AISAccountCard({ data }: Props) {
     const formData = new FormData();
           formData.append('photo',file);
           formData.append('tag',data?.id);
-    console.log(`ais/student/${encodeURIComponent(data?.id)}/profile`)
     const resp = await Service.changePhoto(formData);
     if(resp) navigate(0)
   }
@@ -158,7 +157,7 @@ function AISAccountCard({ data }: Props) {
             <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate Student Email</span>
           </button>
           {/* Generate Transcript  */}
-          <Link to={`/print/transwift/${data?.id?.trim()}/statement`} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+          <Link to={`/print/transwift/${encodeURIComponent(data?.id?.trim())}/statement`} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
             <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
             <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate Transcript</span>
           </Link>
