@@ -78,7 +78,7 @@ function PrintTranscript({}: Props) {
                   </div>
                 </div>
             </div>
-           
+                
             <div className="my-10 mx-auto max-w-4xl w-full flex flex-col space-y-8 font-[times]">
               { data?.map((row:any, i:number) => { 
                   const vdata = row[1];
