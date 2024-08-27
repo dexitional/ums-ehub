@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { redirect, useLoaderData } from 'react-router'
 import BacklogCardItem from '../../components/ais/BacklogCardItem'
-import BacklogListView from '../../components/ais/BacklogListView'
 import PageTitle from '../../components/ais/PageTitle'
 import Service from '../../utils/aisService'
 type Props = {}
@@ -33,9 +32,9 @@ function PgAISBacklogs({}: Props) {
             </div>
           )}
 
-         { view == 'list' && (
+         {/* { view == 'list' && (
            <BacklogListView data={data} />
-         )}
+         )} */}
       </div>
     </div>
   )
