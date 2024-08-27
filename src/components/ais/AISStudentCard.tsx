@@ -28,10 +28,10 @@ function AISStudentCard({ title,data }: Props) {
                 <img crossOrigin="anonymous" src={`${REACT_APP_API_URL}/auth/photos/?tag=${row?.id}`} className="h-8 w-8 border rounded-md bg-white object-contain" />
                 <span>{row?.id}</span>
                </span>
-              <span className="col-span-2 font-bold">{row.indexno}</span>
-              <span className="col-span-3 font-medium">{(row.fname+' '+(row.mname && row.mname+' ')+row.lname).toUpperCase()} </span>
-              <span>{row.gender == 'M' ? 'MALE':'FEMALE'}</span>
-              <span className={`${row.deferStatus ? 'text-primary-accent/80':''}`}>{row.deferStatus ? 'DEFERRED':'ACTIVE'}</span>
+              <span className="col-span-2 font-bold self-center">{row.indexno}</span>
+              <span className="col-span-3 w-[90%] font-medium self-center truncate">{(row.fname+' '+(row.mname ? row.mname+' ':'')+row.lname).toUpperCase()} </span>
+              <span className='self-center'>{row.gender == 'M' ? 'MALE':'FEMALE'}</span>
+              <span className={`${row.deferStatus ? 'text-primary-accent/80 self-center':'self-center'}`}>{row.deferStatus ? 'DEFERRED':'ACTIVE'}</span>
             </div>
           ))}
           {/* Totals */}

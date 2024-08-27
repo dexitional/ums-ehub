@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import FeeListItem from './FeeListItem';
 
 type Props = { 
@@ -13,7 +13,7 @@ function FeeListView({ data }: Props) {
   }, 0) 
 
   return (
-    <div className="py-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl">
+    <div className="py-6 grid grid-cols-1 gap-y-4 border bg-slate-50/50 rounded-xl shadow-[0px_0px_8px_#ddd_inset]">
       <div className="px-6 pb-4  hidden md:grid grid-cols-6 place-items-center   border-b border-slate-200 text-xs text-primary font-sans font-semibold uppercase tracking-widest">
           <div className="col-span-2 place-self-start">Narrative</div>
           <div>Amount</div>
@@ -28,7 +28,7 @@ function FeeListView({ data }: Props) {
       { data.length ? (
       <div className={`${sum > 0 ? 'text-primary-accent/70' : 'text-primary/70'} px-6 pb-4 md:grid grid-cols-6 place-items-center border-slate-200 text-xs font-sans font-semibold uppercase tracking-widest`}>
           <div className="place-self-start">&nbsp;</div>
-          <div className="col-span-5 place-self-start flex items-center justify-between"><span>NET NET { sum > 0 ? 'DEBT':'BALANCE'}:</span>&nbsp;&nbsp;&nbsp;<span>{data && data[0]?.currency} { Math.abs(sum) }</span></div>
+          <div className="col-span-5 place-self-start flex items-center justify-between"><span>NET { sum > 0 ? 'DEBT':'BALANCE'}:</span>&nbsp;&nbsp;&nbsp;<span>{data && data[0]?.currency} { !isNaN ? Math.abs(sum) : 0 }</span></div>
       </div>
       ): null }
         

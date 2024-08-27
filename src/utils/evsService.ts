@@ -1,28 +1,16 @@
 import axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 import toast from 'react-hot-toast';
 const { REACT_APP_API_URL } = import.meta.env;
 
-
-/* Filter Routes */
-// this.router.get('/colleges', this.controller.fetchColleges);
-// this.router.get('/colleges/:collegeId/faculties', this.controller.fetchFaculties);
-// this.router.get('/colleges/:collegeId/faculties/:facultyId/departments', this.controller.fetchDepartments);
-// this.router.get('/colleges/:collegeId/faculties/:facultyId/departments/:  deptId/candidates', this.controller.fetchCandidates);
-// this.router.get('/search', this.controller.fetchCandidate);
-
-// /* Submission Routes */
-// this.router.get('/votes', this.controller.fetchVotes);
-// this.router.get('/votes/:regno', this.controller.fetchVote);
-// this.router.post('/votes', this.controller.postVote);
-// this.router.patch('/votes/:regno', this.controller.updateVote);
+// const instance = Axios.create(); 
+// const axios = setupCache(instance)
 
 class EvsService {
     
-    ////**** BEST LECTURER SYSTEM  ****////
-
-    async fetchColleges(){
+    async fetchElectionsAll(keyword,page){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/colleges`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/search?keyword=${encodeURIComponent(keyword)}&page=${encodeURIComponent(page)}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
@@ -32,99 +20,173 @@ class EvsService {
         }
     }
 
-    async fetchFaculties(collegeId){
+    async fetchElections(){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/colleges/${collegeId}/faculties`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
-    async fetchDepartments(facultyId){
+    async fetchMyElections(tag){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/faculties/${facultyId}/departments`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/my/${encodeURIComponent(tag)}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
-    async fetchCandidates(deptId){
+    async fetchElection(electionId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/departments/${deptId}/candidates`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
-    async fetchCandidate(keyword){
+    async sendElectionPins(electionId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/search?keyword=${keyword}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/pins`)
+            if(res.status == 200){
+              toast.success("Pins Sent!",{ className:'font-bold text-lg text-green-600'})
+              return res.data
+            }
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.log(error.message)
+            //toast.error(error.message)
+        }
+    }
+
+    async fetchVotes(electionId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/data`)
             if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
+        }
+    }
+
+    async postVotes(electionId,data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/data`, data,{
+               headers: { "Content-Type" : "application/json" }
+            })
+            console.log(res)
+            if(res.status == 200){
+               toast.success("Voted successfully!",{ className:'font-bold text-lg text-green-600'})
                return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
-
-    async fetchVotes(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/votes`)
-            if(res.status == 200 || res.status == 204)
-              return res.data
-            else throw new(res.data.message)
-        
+            }
+            else if(res.status == 203 && res?.data?.message.toLowerCase() == 'elector already voted'){
+               toast.error(res.data.message,{ className:'font-bold text-lg text-red-500'})
+               return res?.data;
+            }
+            else return toast.error(res.data.message,{ className:'font-bold text-lg text-red-500'})
         } catch (error) { 
             toast.error(error.message)
         }
     }
 
-    async fetchVoters(){
+    async fetchPortfolios(electionId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/voters`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/portfolios`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
-
-    async fetchVote(regno){
+    async fetchVoters(electionId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/votes/${encodeURIComponent(regno)}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/voters`)
             if(res.status == 200 || res.status == 204)
-               return res.data
+              return res.data
             else throw new(res.data.message)
         
-        } catch (error) {
-            toast.error(error.message)
+        } catch (error) { 
+            console.error(error.message)
         }
     }
 
-    async postVote(data){
+    async fetchVoter(electionId,tag){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/evs/votes`, data,{
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/voters/${encodeURIComponent(tag)}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            console.error(error.message)
+        }
+    }
+
+    async postVoter(electionId,data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/voters`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record created!")
+               return res.data
+            } 
+            else return toast.error(res?.data?.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async deleteVoter(electionId,tag){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/voters/${tag}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+    async fetchReceipt(electionId,tag){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}/receipt/${encodeURIComponent(tag)}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async postElection(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/elections`, data,{
+               headers: { "Content-Type" : "multipart/form-data" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
                return res.data
             } 
             else return toast.error(res.data.message)
@@ -134,13 +196,13 @@ class EvsService {
         }
     }
 
-    async updateVote(regno,data){
+    async updateElection(electionId,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/evs/votes/${encodeURIComponent(regno)}`, data,{
-               headers: { "Content-Type" : "application/json" }
+            const res = await axios.patch(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}`, data,{
+               headers: { "Content-Type" : "multipart/form-data" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("System updated!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -150,8 +212,70 @@ class EvsService {
         }
     }
 
+    async deleteElection(electionId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/evs/elections/${encodeURIComponent(electionId)}`)
+            if(res.status == 200 || res.status == 204)
+              return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    /* ACTIONS */
+    async resetElection(electionId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/action/reset`, { electionId },{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Election Reset Success!")
+               return res.data
+            } 
+            else return toast.error(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async updateAdmin(electionId,tag){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/action/admin`,{ electionId,tag },{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Admin users updated!")
+               return res.data
+            } 
+            else return toast.error(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+    async stageVoters(electionId){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/action/voters`, { electionId },{
+               headers: { "Content-Type" : "application/json" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else return toast.error(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
    
-    /* ROLES */
+    /* PORTFOLIOS */
 
     async fetchRoles(){
         try {
@@ -165,82 +289,21 @@ class EvsService {
         }
     }
 
-    async fetchRole(roleId){
+    async fetchPortfolioList(electionId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/roles/${roleId}`)
-            if(res.status == 200 || res.status == 204)
-               return res.data
-            else throw new(res.data.message)
-        
-        } catch (error) {
-            toast.error(error.message)
-        }
-    }
-
-    async postRole(data){
-        try {
-            const res = await axios.post(`${REACT_APP_API_URL}/evs/roles`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record created successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async updateRole(roleId,data){
-        try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/evs/roles/${roleId}`, data,{
-               headers: { "Content-Type" : "application/json" }
-            })
-            if(res.status == 200){
-               toast.success("Record updated successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-    async deleteRole(roleId){
-        try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/evs/roles/${roleId}`)
-            if(res.status == 200){
-               toast.success("Record deleted successfully!")
-               return res.data
-            } 
-            else throw new(res.data.message)
-        
-        } catch (error) { 
-            toast.error(error.message)
-        }
-    }
-
-
-     /* SETTINGS */
-
-     async fetchSettings(){
-        try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/settings`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/portfolios/list?electionId=${encodeURIComponent(electionId)}`)
             if(res.status == 200 || res.status == 204)
               return res.data
             else throw new(res.data.message)
         
         } catch (error) { 
-            toast.error(error.message)
+            console.error(error.message)
         }
     }
 
-    async fetchSetting(settingId){
+    async fetchPortfolio(portfolioId){
         try {
-            const res = await axios.get(`${REACT_APP_API_URL}/evs/settings/${settingId}`)
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/portfolios/${encodeURIComponent(portfolioId)}`)
             if(res.status == 200 || res.status == 204)
                return res.data
             else throw new(res.data.message)
@@ -250,13 +313,14 @@ class EvsService {
         }
     }
 
-    async postSetting(data){
+
+    async postPortfolio(data){
         try {
-            const res = await axios.post(`${REACT_APP_API_URL}/evs/settings`, data,{
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/portfolios`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record created successfully!")
+               toast.success("Record created!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -266,13 +330,13 @@ class EvsService {
         }
     }
 
-    async updateSetting(settingId,data){
+    async updatePortfolio(portfolioId,data){
         try {
-            const res = await axios.patch(`${REACT_APP_API_URL}/evs/settings/${settingId}`, data,{
+            const res = await axios.patch(`${REACT_APP_API_URL}/evs/portfolios/${encodeURIComponent(portfolioId)}`, data,{
                headers: { "Content-Type" : "application/json" }
             })
             if(res.status == 200){
-               toast.success("Record updated successfully!")
+               toast.success("Record updated!")
                return res.data
             } 
             else throw new(res.data.message)
@@ -282,11 +346,85 @@ class EvsService {
         }
     }
 
-    async deleteSetting(settingId){
+    async deletePortfolio(portfolioId){
         try {
-            const res = await axios.delete(`${REACT_APP_API_URL}/evs/settings/${settingId}`)
+            const res = await axios.delete(`${REACT_APP_API_URL}/evs/portfolios/${encodeURIComponent(portfolioId)}`)
             if(res.status == 200){
-               toast.success("Record deleted successfully!")
+               toast.success("Record deleted!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+
+     /* CANDIDATES */
+
+     async fetchCandidates(portfolioId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/portfolios/${encodeURIComponent(portfolioId)}/candidates`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    async fetchCandidate(candidateId){
+        try {
+            const res = await axios.get(`${REACT_APP_API_URL}/evs/candidates/${encodeURIComponent(candidateId)}`)
+            if(res.status == 200 || res.status == 204)
+               return res.data
+            else throw new(res.data.message)
+        
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+
+    async postCandidate(data){
+        try {
+            const res = await axios.post(`${REACT_APP_API_URL}/evs/candidates`, data,{
+                headers: { "Content-Type" : "multipart/form-data" }
+            })
+            if(res.status == 200){
+               toast.success("Record created!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async updateCandidate(candidateId,data){
+        try {
+            const res = await axios.patch(`${REACT_APP_API_URL}/evs/candidates/${encodeURIComponent(candidateId)}`, data,{
+               headers: { "Content-Type" : "multipart/form-data" }
+            })
+            if(res.status == 200){
+               toast.success("Record updated!")
+               return res.data
+            } 
+            else throw new(res.data.message)
+        
+        } catch (error) { 
+            toast.error(error.message)
+        }
+    }
+
+    async deleteCandidate(candidateId){
+        try {
+            const res = await axios.delete(`${REACT_APP_API_URL}/evs/candidates/${encodeURIComponent(candidateId)}`)
+            if(res.status == 200){
+               toast.success("Record deleted!")
                return res.data
             } 
             else throw new(res.data.message)

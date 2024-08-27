@@ -1,8 +1,6 @@
 import React from 'react'
 import { FaChartBar } from 'react-icons/fa'
 import { GrDashboard } from 'react-icons/gr'
-import AISNavItem from './FMSNavItem'
-import AMSNavItem from './FMSNavItem'
 import FMSNavItem from './FMSNavItem'
 
 type Props = {
@@ -21,8 +19,9 @@ function FMSNav({ user }: Props) {
         <FMSNavItem title="Fees Payments" url="payments" Icon={GrDashboard} /> 
         <FMSNavItem title="Other Payments" url="transacts" Icon={GrDashboard} />
         <FMSNavItem title="Voucher Sales" url="vsales" Icon={GrDashboard} /> 
-        <FMSNavItem title="Voucher Costs" url="vcosts" Icon={GrDashboard} /> 
+        <FMSNavItem title="Voucher Prices" url="vcosts" Icon={GrDashboard} /> 
         <FMSNavItem title="Service Costs" url="services" Icon={GrDashboard} /> 
+        
     </div>
   )
 }

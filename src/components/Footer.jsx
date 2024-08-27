@@ -9,7 +9,7 @@ function Footer() {
             <div>Privacy Policy</div>
             <div>Terms of Use</div>
             <div>Security</div>
-            <div>&copy;2023 MLK</div>
+            <div>&copy;{new Date().getFullYear()} AUCC</div>
         </div>
         </div>
     </footer>

@@ -1,8 +1,7 @@
-import React from 'react'
-import { Menu } from '@headlessui/react'
+import { Menu } from '@headlessui/react';
+import React from 'react';
 import { CgMenuGridO } from "react-icons/cg";
 import { FaChartBar } from 'react-icons/fa';
-import { useUserStore } from '../../utils/authService';
 import { GrDashboard } from 'react-icons/gr';
 import AISNavItem from './AISNavItem';
 type Props = {
@@ -31,7 +30,16 @@ function AISRoleNav({ user }: Props) {
             <Menu.Item as={AISNavItem} title="Course Module" url="courses" Icon={GrDashboard}></Menu.Item>
             <Menu.Item as={AISNavItem} title="Program Module" url="programs" Icon={GrDashboard}></Menu.Item>
             <Menu.Item as={AISNavItem} title="Department Module" url="departments" Icon={GrDashboard}></Menu.Item>
-            <Menu.Item as={AISNavItem} title="Faculty Module" url="faculties" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Scheme Module" url="schemes" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Registration Module" url="registrations" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Progression Module" url="progression" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Scoresheets Module" url="sheets" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="MySheets&reg; Module" url="mysheets" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Backlogs Module" url="backlogs" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Deferment Module" url="deferments" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Staff Module" url="staff" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Jobs Module" url="jobs" Icon={GrDashboard}></Menu.Item>
+            <Menu.Item as={AISNavItem} title="Units Module" url="units" Icon={GrDashboard}></Menu.Item>
           </div>
         </Menu.Items>
     </Menu>

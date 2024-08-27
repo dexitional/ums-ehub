@@ -1,16 +1,10 @@
 import React from 'react'
-import { FaEnvelope, FaGlobe, FaPhone, FaTrash } from 'react-icons/fa'
-import { FcViewDetails } from 'react-icons/fc'
-import { GiTimeBomb } from 'react-icons/gi'
-import { IoTimer } from 'react-icons/io5'
-import { MdCategory, MdEditDocument, MdLocationOn } from 'react-icons/md'
+import { FaTrash } from 'react-icons/fa'
+import { MdEditDocument } from 'react-icons/md'
 import { Form, Link } from 'react-router-dom'
-import ProgressBar from './ProgressBar'
 // @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaFilePdf } from 'react-icons/fa6'
-import { IoIosTime } from "react-icons/io";
+import { IoIosTime } from "react-icons/io"
 
 type Props = {
   data: any;
@@ -19,22 +13,26 @@ type Props = {
 function CourseCardItem({ data }: Props) {
   return (
     <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
-    <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.id}</h2>
+    <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase tracking-wider">{data?.id}</h2>
     <div className="w-full flex items-center justify-between space-x-2">
       <div className="flex items-center space-x-2">
-          <div className="flex-1 text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.title).toUpperCase()}</div>
+          <div className="flex-1 text-sm md:text-sm text-primary-dark/70 font-medium font-roboto capitalize">{(data?.title).toUpperCase()}</div>
           <div className="py-0.5 px-2 w-fit text-xs rounded bg-primary/60 text-white font-bold">{data?.creditHour} CR</div>
       </div>
     </div>
     <div className="space-y-1 font-roboto">
+       { data.practicalHour ? 
         <div className="flex items-center space-x-4">
             <IoIosTime className="h-4 w-5 text-primary/70" />
             <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Practicals: &nbsp;&nbsp;&nbsp;<b>{data.practicalHour}</b> Credits</span>
-        </div>
+        </div>: null
+       }
+       { data.theoryHour ? 
         <div className="flex items-center space-x-4">
             <IoIosTime className="h-4 w-5 text-primary/70" />
             <span className="px-2 py-0 bg-green-50 rounded border text-sm text-gray-500">Theory: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{data.theoryHour}</b> Credits</span>
-        </div>
+        </div>: null
+       }
         
     </div>
     <div className="flex flex-col space-y-1">

@@ -1,24 +1,33 @@
-import React from 'react'
-import { FaEnvelope, FaGlobe, FaPhone, FaTrash } from 'react-icons/fa'
-import { FcApprove, FcViewDetails } from 'react-icons/fc'
-import { GiTimeBomb } from 'react-icons/gi'
-import { IoCheckmarkDoneCircleSharp, IoTimer } from 'react-icons/io5'
-import { MdCategory, MdEditDocument, MdLocationOn } from 'react-icons/md'
-import { Form, Link } from 'react-router-dom'
-import ProgressBar from './ProgressBar'
-// @ts-ignore
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment'
-import { FaCircleCheck, FaCreditCard, FaFilePdf, FaFolder } from 'react-icons/fa6'
-import { HiMiniAcademicCap } from 'react-icons/hi2'
-import { AiOutlineFieldNumber, AiOutlineFileDone } from 'react-icons/ai'
+import React from 'react'
+import { AiOutlineFileDone } from 'react-icons/ai'
 import { CgNotes, CgTemplate } from 'react-icons/cg'
+import { FaPhone } from 'react-icons/fa'
+import { FaCircleCheck } from 'react-icons/fa6'
+import { HiOutlineSwitchHorizontal } from 'react-icons/hi'
+import { HiMiniAcademicCap } from 'react-icons/hi2'
+import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5'
+import { Form, Link } from 'react-router-dom'
+import None from '../../assets/img/none.png'
+import { useUserStore } from '../../utils/authService'
 
 type Props = {
   data: any;
 }
 
 function ApplicantCardItem({ data }: Props) {
+  const { switchUser,user,message } = useUserStore(state => state);
+  const switchAccount = async (e) => {
+    try {
+        e.preventDefault();
+        await switchUser(data?.serial);
+        window.location.href = '/'
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
+
   return (
   <div className="p-4 md:p-6 min-h-max border border-primary/20 rounded-xl bg-slate-50/50 hover:bg-slate-100 space-y-4 md:group">
     <h2 className="text-base md:text-lg font-semibold font-noto text-gray-500 uppercase">{data?.serial}</h2>
@@ -27,7 +36,7 @@ function ApplicantCardItem({ data }: Props) {
           <div className="text-sm md:text-sm text-primary-dark/70 font-bold font-roboto capitalize">{(data?.profile?.fname+' '+(data?.profile?.mname ? data?.profile?.mname+' ':'')+data?.profile?.lname).toUpperCase()}</div>
           <div className="py-0.5 px-2 text-sm rounded bg-primary/60 text-white font-bold">{data?.profile?.gender}</div>
       </div>
-      <img src={data?.photo || Logo} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
+      <img src={data?.photo || None} className="p-1 h-12 w-12 border rounded-md bg-white object-contain" />
     </div>
     <div className="space-y-1.5 font-roboto">
         <div className="flex items-center space-x-2">
@@ -82,9 +91,13 @@ function ApplicantCardItem({ data }: Props) {
             <button type="submit" className="text-sm text-white font-semibold">Shortlist</button>
           </Form>: null
           }
+          <button onClick={switchAccount} className="py-1 px-2 rounded flex md:hidden group-hover:flex items-center space-x-1.5 bg-primary/60">
+            <HiOutlineSwitchHorizontal className="h-4 w-4 text-amber-200"/>
+          </button>
+          
           <div className="hidden md:flex md:group-hover:hidden items-center justify-center space-x-3 text-center">
-              <span className={`${data?.sorted ? 'bg-primary-dark/60':'bg-primary-accent/70'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
-              <span className={`${data?.sorted ? 'text-primary-dark/60':'text-primary-accent/70'} font-semibold font-roboto text-sm `}>{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
+              <span className={`${data?.sorted ? 'bg-primary-dark/60':'bg-primary-dark/70'} py-1 px-3 rounded flex items-center space-x-1.5 text-xs text-white font-semibold`}>FILED ON</span>
+              <span className={`${data?.sorted ? 'text-primary-dark/60':'text-primary-dark/70'} font-semibold font-roboto text-sm `}>{moment(data?.createdAt).format("MMM DD, YYYY")?.toUpperCase()}</span>
           </div>
           { data?.sorted ? <FaCircleCheck className="w-10 h-6 text-primary/60"/>: null}
         </div>

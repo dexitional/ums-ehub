@@ -1,12 +1,10 @@
-import React, { Fragment, useRef } from 'react'
-import PrintHeader from '../print/PrintHeader'
-import { useReactToPrint } from "react-to-print";
-import ReactHtml from "html-react-parser";
-import { dummyAUCCApplicant, loadPlacerData } from '../../utils/util';
-import Logo from '../../assets/img/logo/mlk/logo.png'
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useRef } from 'react';
 import { FaFilePdf } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useReactToPrint } from "react-to-print";
+import Logo from '../../assets/img/logo/aucc/logo.png';
+import PrintHeader from '../print/PrintHeader';
 
 type Props = {
     data: any;
@@ -15,6 +13,7 @@ type Props = {
 function FormTemplate({ data }: Props) {
   
   const { applicant, data: formData } = data;
+  console.log(applicant)
   const printRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
@@ -22,11 +21,11 @@ function FormTemplate({ data }: Props) {
   
   return (
     <div className="relative md:scale-[85%] print:scale-[78%] md:-mt-32 print:-mt-14" ref={printRef}>
-        <button onClick={handlePrint} className="w-full md:w-fit md:absolute md:-top-[7rem] md:-left-10 print:hidden px-6 py-1 flex md:flex-none items-center justify-center space-x-2 rounded bg-primary-accent text-white font-bold uppercase"><span>Print</span> <span className="flex md:hidden">Applicant Form</span></button>
+        <button onClick={handlePrint} className="w-full md:w-fit md:absolute md:-top-[5rem] md:-left-24 print:hidden px-6 py-1 flex md:flex-none items-center justify-center space-x-2 rounded bg-primary-accent text-white font-bold uppercase"><span>Print</span> <span className="flex md:hidden">Applicant Form</span></button>
         <PrintHeader />
         <main className="hidden print:block md:block w-full print:text-[0.79rem] print:font-poppins">
            <div className="mt-0 mb-8 space-y-6">
-               <h1 className="text-center text-gray-800 underline text-lg print:text-base font-[san-serif] font-semibold uppercase">{applicant?.stage?.categoryId == 'CP' ? 'Certificate Program': applicant?.stage?.categoryId == 'DP' ? 'Diploma Program':applicant?.stage?.categoryId == 'UG' ? 'Undergraduate':'Postgraduate' } Online Application Form</h1>
+               <h1 className="text-center text-gray-800 underline text-2xl print:text-xl font-[san-serif] font-semibold uppercase">{applicant?.stage?.categoryId == 'CP' ? 'Certificate Program': applicant?.stage?.categoryId == 'DP' ? 'Diploma Program':applicant?.stage?.categoryId == 'UG' ? 'Undergraduate':'Postgraduate' } Online Application Form</h1>
                {/* <div className="space-y-6 print:space-y-3">
                     <address className="print:text-xs">
                         <p className="text-primary-dark font-semibold uppercase not-italic">REFERENCE: 240921009</p>
@@ -65,7 +64,7 @@ function FormTemplate({ data }: Props) {
                             </tr>
                             <tr>
                                 <td className="shead">Study Mode:</td>
-                                <td className="sbody uppercase">{applicant?.sessionMode  || 'N/A'}</td>
+                                <td className="sbody uppercase">{(applicant?.profile?.studyMode == 'E'?'Evening': applicant?.profile?.studyMode == 'W' ? 'Weekend':'Morning')  || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td colSpan={2}><hr className='pt-4'/></td>
@@ -94,7 +93,7 @@ function FormTemplate({ data }: Props) {
                             </tr>
                             <tr>
                                 <td className="shead">Marital Status:</td>
-                                <td className="sbody uppercase">{applicant?.profile?.mstatus || 'N/A'}</td>
+                                <td className="sbody uppercase">{applicant?.profile?.marital?.title || 'N/A'}</td>
                             </tr>
                             <tr>
                                 <td className="shead">Home Region:</td>
@@ -182,7 +181,7 @@ function FormTemplate({ data }: Props) {
                             
                             {/* Education */}
                             <tr><td colSpan={4}>&nbsp;</td></tr>
-                            { formData.education.map((row,i) => 
+                            { formData?.education?.map((row,i) => 
                              <Fragment key={i}> 
                               { row?.instituteCategory?.title?.toLowerCase() == 'tertiary' ?
                               <Fragment>
@@ -284,7 +283,7 @@ function FormTemplate({ data }: Props) {
                                   <td className="sbody">Employer Address</td>
                                   <td className="sbody">Duration</td>
                               </tr>
-                              { applicant.employment.map((row,i) => 
+                              { formData?.employment?.map((row,i) => 
                               <tr>
                                   <td className="shead uppercase">{row?.employerName || 'N/A'}</td>
                                   <td className="shead uppercase">{row?.jobTitle || 'N/A'}</td>

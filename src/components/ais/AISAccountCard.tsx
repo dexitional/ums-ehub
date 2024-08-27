@@ -1,11 +1,13 @@
-import React, { useRef } from 'react'
-import { HiUserAdd } from "react-icons/hi";
+import React, { useRef } from 'react';
+import toast from 'react-hot-toast';
+import { FaMoneyCheckDollar } from 'react-icons/fa6';
 import { GoPasskeyFill } from "react-icons/go";
-import { FaMoneyCheckDollar, FaRegIdCard } from 'react-icons/fa6';
-import Service from '../../utils/aisService'
-import { useUserStore } from '../../utils/authService';
+import { HiUserAdd } from "react-icons/hi";
 import { TbPhotoCancel, TbPhotoEdit } from 'react-icons/tb';
-import { redirect, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import Service from '../../utils/aisService';
+import { useUserStore } from '../../utils/authService';
 
 type Props = {
     data?: any;
@@ -14,6 +16,8 @@ type Props = {
 function AISAccountCard({ data }: Props) {
   const navigate = useNavigate()
   const fileRef:any = useRef(null)
+  const { switchUser,user,message } = useUserStore(state => state);
+  
   
   const stageAccess = async () => {
     const ok = window.confirm("Setup Student Portal Access ?")
@@ -25,7 +29,7 @@ function AISAccountCard({ data }: Props) {
   const resetAccess = async () => {
     const ok = window.confirm("Reset Student Portal Password ?")
     if(ok){
-      await Service.resetStudentAccess(data?.id);
+      await Service.resetStudentAccess(data?.id,data?.instituteEmail);
     }
   }
 
@@ -60,6 +64,42 @@ function AISAccountCard({ data }: Props) {
     if(ok){
       const resp = await Service.updateStudent(data?.id, { flagPardon: true });
       if(resp) navigate(0)
+    }
+  }
+
+  const generateEmail = async () => {
+    const ok = window.confirm("Generate Student Mail ?")
+    if(ok){
+      try {
+        const resp = await Service.generateEmail(data?.id);
+        if(resp) navigate(0)
+      } catch (error) {
+        toast.error("Mail already exists !")
+      }
+    }
+  }
+
+  const progressStudent = async () => {
+    const ok = window.confirm("Progress Student for Academic Session ?")
+    if(ok){
+      try {
+        const resp = await Service.progressStudent({ indexno: data?.indexno });
+        if(resp) navigate(0)
+      } catch (error) {
+        toast.error("Student already progressed !")
+      }
+    }
+  }
+
+  const switchAccount = async (e) => {
+    try {
+        e.preventDefault();
+        await switchUser(data?.id);
+        window.location.href = '/'
+        //navigate("/")
+    } catch (error) {
+      console.log(error)
+      
     }
   }
   
@@ -104,6 +144,28 @@ function AISAccountCard({ data }: Props) {
           <button onClick={!data?.flagPardon ? activatePardon : undefined } className={`p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 ${data?.flagPardon ? 'bg-primary/5 border-primary/20 cursor-not-allowed':'bg-primary-accent/5 border-primary-accent/20' } border shadow`}>
             <FaMoneyCheckDollar className={`${data?.flagPardon ? 'text-primary/60 border-primary/20':'text-primary-accent/60 border-primary-accent/20'} h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 rounded-full`} />
             <span className={`font-semibold text-sm md:text-base ${data?.flagPardon ? 'text-primary/50':'text-primary-accent/70'} font-noto`}>{data?.flagPardon ? 'Pardon Activated':'Registration Pardon'}</span>
+          </button>
+
+          {/* Switch Account */}
+          <button onClick={switchAccount} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+            <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Switch User Access</span>
+          </button>
+
+          {/* Generate Institutional Email  */}
+          <button onClick={generateEmail} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+            <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate Student Email</span>
+          </button>
+          {/* Generate Transcript  */}
+          <Link to={`/print/transwift/${data?.id?.trim()}/statement`} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+            <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Generate Transcript</span>
+          </Link>
+          {/* Progress Student  */}
+          <button onClick={progressStudent} className="p-1.5 md:py-1 md:px-1 rounded-full flex items-center space-x-4 bg-primary-accent/5 border border-primary-accent/20 shadow">
+            <GoPasskeyFill className="text-primary-accent/60 h-8 w-8 md:h-10 md:w-10 p-1 md:p-1.5 bg-white border-2 md:border-4 border-primary-accent/20 rounded-full" />
+            <span className="font-semibold text-sm md:text-base text-primary-accent/70 font-noto">Progress Student</span>
           </button>
        </section>
     </div>
