@@ -33,9 +33,9 @@ function PgAISBacklogs({}: Props) {
             </div>
           )}
 
-         {/* { view == 'list' && (
+         { view == 'list' && (
            <BacklogListView data={data} />
-         )} */}
+         )}
       </div>
     </div>
   )
