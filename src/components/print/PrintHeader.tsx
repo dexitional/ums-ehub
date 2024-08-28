@@ -2,7 +2,9 @@ import React from 'react';
 import Ctvet from '../../assets/img/ctvetlogo.png';
 import Logo from '../../assets/img/logo/mlk/logo.png';
 
-type Props = {}
+type Props = {
+  
+}
 
 function PrintHeader({}: Props) {
 
