@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo2 from '../../assets/img/ctvet.png';
+import Ctvet from '../../assets/img/ctvet.png';
 import Logo from '../../assets/img/logo/mlk/logo.png';
 
 type Props = {}
@@ -10,7 +10,7 @@ function PrintHeaderMlk({}: Props) {
         <span className="m-0 p-0 text-[2.5rem] print:text-[2rem] text-[#008e46] font-[san-serif] font-semibold  md:leading-[4rem] text-center">MARTIN LUTHER HEALTH TRAINING  COLLEGE </span>
         <div className="my-8 mx-auto print:my-4 print:w-full md:w-[90%] max-w-4xl flex flex-row justify-center">
             <div className="w-48 print:w-48 flex item-center justify-center">
-                <img className="h-32 print:h-[7rem]" src={Logo2} />
+                <img className="h-32 print:h-[7rem]" src={Ctvet} />
             </div>
             <div className="flex-1 space-y-10 print:space-y-4 print:text-xs">
                 <div className="flex justify-center text-slate-900 tracking-wider">
