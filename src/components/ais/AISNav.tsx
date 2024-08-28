@@ -19,7 +19,7 @@ function AISNav({ user }: Props) {
         {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Program Module" url="programs" Icon={GrDashboard} /> } 
         {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Department Module" url="departments" Icon={GrDashboard} /> } 
         {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Faculty Module" url="faculties" Icon={GrDashboard} /> } 
-        {/* {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Curriculum Module" url="curriculums" Icon={GrDashboard} /> }  */}
+        {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Curriculum Module" url="curriculums" Icon={GrDashboard} /> } 
         {['ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Scheme Module" url="schemes" Icon={GrDashboard} /> } 
         {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Registration Module" url="registrations" Icon={GrDashboard} /> } 
         {['ais registrar','ais techlead','ais admin'].includes(aisRole?.appRole?.title?.toLowerCase()) && <AISNavItem title="Progression Module" url="progression" Icon={GrDashboard} /> } 
