@@ -56,10 +56,6 @@ function PrintTranscript({}: Props) {
   const [_,mdata] = data && data[0];
   const student = mdata && mdata[0]?.student;
 
-  console.log("MDATA: ",mdata)
-  
-  
-  
 
   return (
     <div className="w-full flex flex-col justify-center items-center bg-white print:m-0 print:scale-[85%]">
