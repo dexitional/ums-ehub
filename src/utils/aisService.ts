@@ -214,7 +214,7 @@ class Service {
             if(res.status == 200 || res.status == 202){
                 return res.data
             } else if(res.status == 500){
-              console.error("Portal account already staged")
+              toast.error("Portal account already staged")
             }
             else throw new(res.data.message)
         
@@ -232,7 +232,7 @@ class Service {
             if(res.status == 200 || res.status == 202){
                 const data = res?.data
                 console.log(data)
-                toast(`Password changed to: \t${data?.password} for ${email}`,{ className:'rounded-full bg-green-100 shadow border-4 border-white text-base text-primary-dark font-semibold', duration: 15000 })
+                toast(`Password changed to: \t${data?.password} for ${email ?? studentId }`,{ className:'rounded-full bg-green-100 shadow border-4 border-white text-base text-primary-dark font-semibold', duration: 15000 })
             }
             else throw new(res.data.message)
         
